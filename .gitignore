@@ -1,4 +1,4 @@
 node_modules
 
 # Generated files. Remove these lines after generation
-models
+./src/models

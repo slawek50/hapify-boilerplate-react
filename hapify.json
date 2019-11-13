@@ -44,7 +44,7 @@
   ],
   "templates": [
     {
-      "path": "models/{kebab}/hello.js",
+      "path": "src/models/{kebab}.js",
       "engine": "hpf",
       "input": "one"
     }

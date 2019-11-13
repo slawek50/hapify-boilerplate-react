@@ -1,0 +1,52 @@
+{
+  "version": "1",
+  "validatorPath": "hapify/validator.js",
+  "name": "hapify-react-dashboard",
+  "description": "React Dashboard",
+  "project": "5dcc601ed4d153001014f7e1",
+  "defaultFields": [
+    {
+      "name": "_id",
+      "type": "string",
+      "subtype": null,
+      "reference": null,
+      "primary": true,
+      "unique": false,
+      "label": false,
+      "nullable": false,
+      "multiple": false,
+      "embedded": false,
+      "searchable": false,
+      "sortable": false,
+      "hidden": false,
+      "internal": true,
+      "restricted": false,
+      "ownership": false
+    },
+    {
+      "name": "created at",
+      "type": "datetime",
+      "subtype": null,
+      "reference": null,
+      "primary": false,
+      "unique": false,
+      "label": false,
+      "nullable": false,
+      "multiple": false,
+      "embedded": false,
+      "searchable": false,
+      "sortable": true,
+      "hidden": false,
+      "internal": true,
+      "restricted": false,
+      "ownership": false
+    }
+  ],
+  "templates": [
+    {
+      "path": "models/{kebab}/hello.js",
+      "engine": "hpf",
+      "input": "one"
+    }
+  ]
+}

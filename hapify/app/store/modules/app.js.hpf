@@ -1,0 +1,35 @@
+import { accountsActionsHandlers } from './accounts';
+import { optionsActionsHandlers } from './options';
+import { modelsActionsHandlers } from './models';
+import { uploadContentsActionsHandlers } from './uploadContents';
+import { postsActionsHandlers } from './posts';
+import initialState from '../initialState';
+ 
+<<@ M /pMHd m>>
+import { <<m aA>>sActionsHandlers } from './entities/<<m aA>>s';
+<<@>>
+ 
+import { uploadsActionsHandlers } from './uploads';
+import { socketActionsHandlers } from './socket';
+import { globalsActionsHandlers } from './globals';
+ 
+const actionsHandlers = {
+  ...accountsActionsHandlers,
+  ...optionsActionsHandlers,
+  ...uploadsActionsHandlers,
+  ...modelsActionsHandlers,
+ 
+  <<@ M /pMHd m>>
+  ...<<m aA>>sActionsHandlers,
+  <<@>>
+ 
+  ...uploadContentsActionsHandlers,
+  ...postsActionsHandlers,
+  ...socketActionsHandlers,
+  ...globalsActionsHandlers,
+};
+ 
+export default function reducer (state = initialState, action) {
+  const reduceFn = actionsHandlers[action.type];
+  return reduceFn ? reduceFn(state, action) : state;
+}

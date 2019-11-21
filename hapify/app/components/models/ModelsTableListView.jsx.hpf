@@ -1,0 +1,162 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withRouter, NavLink } from 'react-router-dom';
+<<? F tE/hd/pr>>
+import { connect } from 'react-redux';
+<<?>>
+import { capitalize<<? F tE/hd/pr>>, get<<?>><<? F ml/hd>>, map<<?>> } from 'lodash';
+<<? F tD/hd/pr>>
+import moment from 'moment';
+<<?>>
+import { ButtonConfirmModal } from 'react-components';
+
+<<= getImportConstants() >>
+ 
+import TableListView from '../shared/TableListView';
+ 
+const <<M AA>>sTableListView = ({
+  history: { push }, <<M aA>>s, baseUrl, onClickDelete<<@ D /em d>>, <<d aA>>s<<@>>,
+}) => (
+  <TableListView
+    title="Table de <<M A>>s"
+    className=""
+    data={<<M aA>>s}
+    cols={{
+    <<@ F /hd f>>
+      <<f a_a>>: {
+        label: '<<f A>>',
+        className: 'col_sm-12',
+        render: <<= renderProp(f) >>,
+      },
+    <<@>>
+    }}
+    <<= getSearch(root.fields)>>
+    searchLabel="Rechercher un <<M A>>"
+    <<= getSort(root.fields)>>
+    buttons={(
+      <div>
+        <NavLink className="btn" to={`${baseUrl}/new`}>
+          Créer un <<M A>>
+        </NavLink>
+      </div>
+    )}
+    rowButtons={(<<M aA>>) => (
+      <div className="col-2_sm-12">
+        <div className="td td-buttons">
+          {<<M aA>> && (
+            <NavLink className="btn" to={`${baseUrl}/${<<M aA>>.<<P R>>}/edit`}>
+              <i className="far fa-pencil" />
+            </NavLink>
+          )}
+          {<<M aA>> && (
+            <ButtonConfirmModal
+              onConfirmationButton={() => onClickDelete(<<M aA>>.<<P R>>)}
+              message="Voulez-vous vraiment effacer le modèle ?"
+            >
+              <button className="btn" type="button">
+                <i className="far fa-trash" />
+              </button>
+            </ButtonConfirmModal>
+          )}
+        </div>
+      </div>
+    )}
+    onClickRow={(<<M aA>>) => push(`${baseUrl}/${<<M aA>>.<<P R>>}`)}
+  />
+);
+ 
+<<M AA>>sTableListView.propTypes = {
+  <<M aA>>s: PropTypes.objectOf(PropTypes.shape({
+    <<@ F /hd f>>
+    <<f a_a>>: PropTypes.<<= getPropsType(f) >><<? f /nu>>.isRequired<<?>>,
+    <<@>>
+  })).isRequired,
+  <<? F tE/hd/pr>>
+ 
+  <<@ D /em d>>
+  <<d aA>>s: PropTypes.objectOf(PropTypes.shape()),
+  <<@>>
+  <<?>>
+ 
+  baseUrl: PropTypes.string.isRequired,
+  onClickDelete: PropTypes.func,
+ 
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
+ 
+export default <<? F tE>>\
+connect(
+  (state) => ({
+    <<@ D /em d>>
+    <<d aA>>s: state.data.entities.<<d aA>>s,
+    <<@>>
+  }),
+)\
+(<<?>>withRouter(<<M AA>>sTableListView)<<? F tE>>)<<?>>;
+
+<<<
+function hasType(type) {
+    return root.fields.list.filter(f => f.type === type || f.subtype === type).length > 0;
+}
+ 
+function getImportConstants() {
+    const imports = new Set([]);
+    if (hasType('datetime')) imports.add('DATE_FORMAT');
+    if (hasType('file')) imports.add('UPLOADS_URL');
+
+    return imports.size > 0
+        ? `\rimport { ${[...imports].join(', ')} } from '../../configs/Constants';`
+        : '';
+}
+
+function getPropsType(field) {
+    var customPropsTypes = {
+        datetime: 'number',
+        boolean: 'bool',
+        entity: 'string',
+        file: 'string',
+    };
+
+    const component = customPropsTypes[field.subtype] || customPropsTypes[field.type] || field.type;
+    if (field.multiple) {
+        return `arrayOf(PropTypes.${component}${field.nullable ? '' : '.isRequired'})`;
+    }
+    return component;
+}
+
+function renderProp(field) {
+    let render = 'capitalize';
+    if (field.type === 'file') {
+        render = `(img) => <a href={\`\${UPLOADS_URL}/\${img}\`} target="_blank" rel="noopener noreferrer">{img}</a>`;
+    } else if (field.type === 'entity' && !field.embedded) {
+        render = `(id) => get(${field.model.names.camel}s, \`\${id}.${field.model.fields.lb[0] ? field.model.fields.lb[0].names.snake : field.model.fields.primary.names.raw}\`)`;
+    } else if (field.type === 'entity' && field.embedded) {
+        render = `(${field.names.camel}) => capitalize(${field.names.camel}.${field.model.fields.lb[0] ? field.model.fields.lb[0].names.snake : field.model.fields.primary.names.raw})`;
+    } else if (field.type === 'datetime') {
+        render = `(date) => moment(date).format(DATE_FORMAT)`;
+    }
+    if (field.multiple) {
+        return `(multipleItems) => map(multipleItems, ${render}).join(', ')`;
+    }
+    return render;
+}
+
+function getSearch(fields) {
+    if (fields.lb && fields.lb.length > 1) {
+        return `search={['${fields.lb.map((lb) => lb.names.snake).join("', '")}']}`;
+    } else if (fields.lb && fields.lb.length === 1) {
+        return `search="${fields.lb[0].names.snake}"`;
+    }
+    return '';
+}
+
+function getSort(fields) {
+    if (fields.lb && fields.lb.length > 0) {
+        return `sortByDefault="${fields.lb[0].names.snake}"
+    sortOrderDefault="desc"`;
+    }
+    return '';
+}
+>>>

@@ -1,0 +1,174 @@
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import classNames from 'classnames';
+import { IconButton } from 'react-components';
+ 
+import { setConfig } from '../../store/modules/globals';
+import { logout } from '../../store/modules/auth';
+ 
+import { isAdmin } from '../../utils/RolesUtils';
+ 
+const Header = ({
+  menuIsOpen, menuIsTiny, account, setConf, doLogout,
+}) => (
+  <header className="header">
+    <div className={classNames('header-menu', { tiny: menuIsTiny })}>
+      <div className="container">
+        <a href="/" className="logo-block">
+          <img src="" alt="Logo" className="logo" />
+        </a>
+        <nav
+          className={classNames(
+            'main-nav',
+            { 'animated opened': menuIsOpen === true },
+            { 'animated closed': menuIsOpen === false },
+          )}
+        >
+          <div href="/" className="mobile-logo-block">
+            <img src="" alt="Logo" className="mobile-logo" />
+          </div>
+          { isAdmin(account) && (
+            <div className="menu-title">Administrateurs :</div>
+          )}
+          { isAdmin(account) && (
+            <ul>
+              <li>
+                <NavLink
+                  to="/admin/accounts"
+                  onClick={menuIsOpen === true ? () => setConf('menuIsOpen', false) : null}
+                  exact
+                  activeClassName="active"
+                >
+                  <i className="item-icon fal fa-users" />
+                  <span>Utilisateurs</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/admin/models"
+                  onClick={menuIsOpen === true ? () => setConf('menuIsOpen', false) : null}
+                  exact
+                  activeClassName="active"
+                >
+                  <i className="item-icon fal fa-archive" />
+                  <span>Gestion des modèles</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/admin/models/table"
+                  onClick={menuIsOpen === true ? () => setConf('menuIsOpen', false) : null}
+                  exact
+                  activeClassName="active"
+                >
+                  <i className="item-icon fal fa-table" />
+                  <span>Tableaux</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/admin/models/cards"
+                  onClick={menuIsOpen === true ? () => setConf('menuIsOpen', false) : null}
+                  exact
+                  activeClassName="active"
+                >
+                  <i className="item-icon fal fa-id-badge" />
+                  <span>Cards</span>
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink
+                  to="/admin/uploadContents"
+                  onClick={menuIsOpen === true ? () => setConf('menuIsOpen', false) : null}
+                  exact
+                  activeClassName="active"
+                >
+                  <i className="item-icon fal fa-cloud-upload" />
+                  <span>Uploads</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/admin/options"
+                  onClick={menuIsOpen === true ? () => setConf('menuIsOpen', false) : null}
+                  exact
+                  activeClassName="active"
+                >
+                  <i className="item-icon fal fa-wrench" />
+                  <span>Paramètres</span>
+                </NavLink>
+              </li>
+              <<@ M /pMHd m>>
+              <li>
+                <NavLink
+                  to="/admin/<<m aA>>s/table"
+                  onClick={menuIsOpen === true ? () => setConf('menuIsOpen', false) : null}
+                  exact
+                  activeClassName="active"
+                >
+                  <i className="item-icon fal fa-wrench" />
+                  <span><<m A>></span>
+                </NavLink>
+              </li>
+              <<@>>
+            </ul>
+          )}
+          <div className="user-block">
+            <div className="user-profil">
+              <div className="user-avatar-block">
+                <div className="user-avatar"><img src="//www.gravatar.com/avatar/60d44261bab4309c41da7218addde9db?d=404" alt="NL" /></div>
+              </div>
+              <div className="user-name">{account.name}</div>
+            </div>
+            <div className="user-actions">
+              <NavLink
+                to="/user/account"
+                onClick={menuIsOpen === true ? () => setConf('menuIsOpen', false) : null}
+                exact
+                activeClassName="active"
+                className="btn"
+              >
+                <i className="item-icon fal fa-cog" />
+              </NavLink>
+              <IconButton title="Déconnexion" fontIcon="fal fa-sign-out" onClick={doLogout} />
+            </div>
+          </div>
+        </nav>
+        <button
+          type="button"
+          className={classNames(
+            'menu-mask',
+            { 'animated opened': menuIsOpen === true },
+            { 'animated closed': menuIsOpen === false },
+          )}
+          onClick={() => setConf('menuIsOpen', false)}
+          aria-label="Menu"
+        />
+        <IconButton onClick={() => setConf('menuIsOpen', true)} fontIcon="far fa-bars" title="Menu" className={classNames('menu-button', { 'menu-opened': menuIsOpen })} />
+      </div>
+    </div>
+  </header>
+);
+ 
+Header.propTypes = {
+  menuIsOpen: PropTypes.bool,
+  menuIsTiny: PropTypes.bool,
+  account: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+ 
+  setConf: PropTypes.func.isRequired,
+  doLogout: PropTypes.func,
+};
+ 
+export default connect(
+  (state) => ({
+    menuIsOpen: state.data.config.menuIsOpen,
+    menuIsTiny: state.data.config.menuIsTiny,
+    account: state.auth.user,
+  }),
+  { setConf: setConfig, doLogout: logout },
+)(Header);

@@ -1,0 +1,6 @@
+node_modules/**
+test/**
+static/*
+scripts/*
+karma.conf.js
+server.js

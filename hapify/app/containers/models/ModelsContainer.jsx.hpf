@@ -1,0 +1,209 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import Modal from 'react-modal';
+import { withRouter, Switch, Route } from 'react-router-dom';
+import { keys<<? F em>>, map, get<<?>> } from 'lodash';
+ 
+import { createOrUpdate<<M AA>>, delete<<M AA>> } from '../../store/modules/entities/<<M aA>>s';
+ 
+import BaseLayout from '../shared/BaseLayout';
+ 
+import <<M AA>>DetailView from '../../components/<<M aA>>s/<<M AA>>DetailView';
+import <<M AA>>EditForm from '../../components/<<M aA>>s/<<M AA>>EditForm';
+import <<M AA>>sTableListView from '../../components/<<M aA>>s/<<M AA>>sTableListView';
+import <<M AA>>sCardListView from '../../components/<<M aA>>s/<<M AA>>sCardListView';
+ 
+import modalDefaultClass from '../../utils/ModalDefaultClass';
+ 
+const RenderEditDetailsModalsRouter = ({
+  url, edit<<M AA>>, del<<M AA>>, push, <<M aA>>s,
+}) => (
+  <Switch>
+    <Route
+      exact
+      path={`${url}/new`}
+      render={() => (
+        <Modal {...modalDefaultClass} isOpen onRequestClose={() => push(url)}>
+          <<<M AA>>EditForm
+            initialValues={{}}
+            onSubmit={(v) => {
+              edit<<M AA>>(v)
+              .then(() => push(url));
+            }}
+            baseUrl={url}
+          />
+        </Modal>
+      )}
+    />
+    <Route
+      exact
+      path={`${url}/:<<M aA>>Id/edit`}
+      render={(subProps) => (
+        <Modal {...modalDefaultClass} isOpen onRequestClose={() => push(url)}>
+          <<<M AA>>EditForm
+            enableReinitialize
+            initialValues={<<= getInitialValues('subProps.match') >>}
+            onSubmit={(v) => {
+              edit<<M AA>>(v)
+              .then(() => push(url));
+            }}
+            baseUrl={url}
+          />
+        </Modal>
+      )}
+    />
+    <Route
+      exact
+      path={`${url}/:<<M aA>>Id`}
+      render={(subProps) => (
+        <Modal {...modalDefaultClass} isOpen onRequestClose={() => push(url)}>
+          <<<M AA>>DetailView
+            <<M aA>>={<<M aA>>s[subProps.match.params.<<M aA>>Id]}
+            baseUrl={url}
+            onClickDelete={() => {
+              del<<M AA>>(subProps.match.params.<<M aA>>Id)
+              .then(() => push(url));
+            }}
+          />
+        </Modal>
+      )}
+    />
+  </Switch>
+);
+ 
+RenderEditDetailsModalsRouter.propTypes = {
+  url: PropTypes.string.isRequired,
+  edit<<M AA>>: PropTypes.func.isRequired,
+  del<<M AA>>: PropTypes.func.isRequired,
+  push: PropTypes.func.isRequired,
+  <<M aA>>s: PropTypes.objectOf(PropTypes.shape()).isRequired,
+};
+ 
+const <<M AA>>sContainer = ({
+  match: { url }, history: { push }, <<M aA>>s, ...props
+}) => (
+  <BaseLayout title="<<M AA>>sContainer">
+    <Switch>
+      <Route
+        path={`${url}/cards`}
+        render={({ match }) => (
+          <>
+            <<<M AA>>sCardListView
+              <<M aA>>s={<<M aA>>s}
+              baseUrl={match.url}
+              onClickDelete={(<<M aA>>Id) => {
+                props.delete<<M AA>>(<<M aA>>Id)
+                .then(() => push(match.url));
+              }}
+            />
+            <RenderEditDetailsModalsRouter
+              url={match.url}
+              edit<<M AA>>={props.createOrUpdate<<M AA>>}
+              del<<M AA>>={props.delete<<M AA>>}
+              push={push}
+              <<M aA>>s={<<M aA>>s}
+            />
+          </>
+        )}
+      />
+      <Route
+        path={`${url}/table`}
+        render={({ match }) => (
+          <>
+            <<<M AA>>sTableListView
+              <<M aA>>s={<<M aA>>s}
+              baseUrl={match.url}
+              onClickDelete={(<<M aA>>Id) => {
+                props.delete<<M AA>>(<<M aA>>Id)
+                .then(() => push(match.url));
+              }}
+            />
+            <RenderEditDetailsModalsRouter
+              url={match.url}
+              edit<<M AA>>={props.createOrUpdate<<M AA>>}
+              del<<M AA>>={props.delete<<M AA>>}
+              push={push}
+              <<M aA>>s={<<M aA>>s}
+            />
+          </>
+        )}
+      />
+      <Route
+        exact
+        path={`${url}/new`}
+        render={() => (
+          <<<M AA>>EditForm
+            initialValues={{}}
+            onSubmit={(v) => {
+              props.createOrUpdate<<M AA>>(v)
+              .then(({ response }) => push(`${url}/${keys(response.entities.<<M aA>>s)[0]}`));
+            }}
+            baseUrl={url}
+          />
+        )}
+      />
+      <Route
+        exact
+        path={`${url}/:<<M aA>>Id/edit`}
+        render={({ match }) => (
+          <<<M AA>>EditForm
+            enableReinitialize
+            initialValues={<<= getInitialValues('match') >>}
+            onSubmit={(v) => {
+              props.createOrUpdate<<M AA>>(v)
+              .then(() => push(`${url}/${match.params.<<M aA>>Id}`));
+            }}
+            baseUrl={url}
+          />
+        )}
+      />
+      <Route
+        exact
+        path={`${url}/:<<M aA>>Id`}
+        render={({ match }) => (
+          <<<M AA>>DetailView
+            <<M aA>>={<<M aA>>s[match.params.<<M aA>>Id]}
+            baseUrl={url}
+            onClickDelete={() => {
+              props.delete<<M AA>>(match.params.<<M aA>>Id)
+              .then(() => push(url));
+            }}
+          />
+        )}
+      />
+    </Switch>
+  </BaseLayout>
+);
+ 
+<<M AA>>sContainer.propTypes = {
+  createOrUpdate<<M AA>>: PropTypes.func.isRequired,
+  delete<<M AA>>: PropTypes.func.isRequired,
+ 
+  <<M aA>>s: PropTypes.objectOf(PropTypes.shape()).isRequired,
+ 
+  match: PropTypes.shape({
+    url: PropTypes.string.isRequired,
+  }).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
+ 
+export default connect(
+  (state) => ({
+    <<M aA>>s: state.data.entities.<<M aA>>s,
+  }),
+  { createOrUpdate<<M AA>>, delete<<M AA>> },
+)(withRouter(<<M AA>>sContainer));
+
+<<<
+function getInitialValues(match) {
+    return root.fields.list.filter(f => f.embedded === true).length > 0
+        ? `{
+              ...${root.names.camel}s[${match}.params.${root.names.camel}Id],
+              ${root.fields.list.filter(f => f.embedded === true).map(f => `${f.names.snake}: map(get(${root.names.camel}s[${match}.params.${root.names.camel}Id], '${f.names.snake}'), '${f.model.fields.primary.names.raw}')`)},
+            }`
+        : `${root.names.camel}s[${match}.params.${root.names.camel}Id]`;
+}
+>>>

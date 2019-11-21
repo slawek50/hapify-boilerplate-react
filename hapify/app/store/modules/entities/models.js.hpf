@@ -1,0 +1,110 @@
+import { flow, set } from 'lodash/fp';
+import { omit } from 'lodash';
+ 
+import { CALL_API, Schemas } from '../../Schemas';
+ 
+const FETCH_ALL_<<M A_A>>S_REQUEST = 'rswa/<<M aA>>s/FETCH_ALL_<<M A_A>>S_REQUEST';
+export const FETCH_ALL_<<M A_A>>S_SUCCESS = 'rswa/<<M aA>>s/FETCH_ALL_<<M A_A>>S_SUCCESS';
+const FETCH_ALL_<<M A_A>>S_FAILURE = 'rswa/<<M aA>>s/FETCH_ALL_<<M A_A>>S_FAILURE';
+const FETCH_<<M A_A>>_REQUEST = 'rswa/<<M aA>>s/FETCH_<<M A_A>>_REQUEST';
+const FETCH_<<M A_A>>_SUCCESS = 'rswa/<<M aA>>s/FETCH_<<M A_A>>_SUCCESS';
+const FETCH_<<M A_A>>_FAILURE = 'rswa/<<M aA>>s/FETCH_<<M A_A>>_FAILURE';
+const SET_<<M A_A>>_REQUEST = 'rswa/<<M aA>>s/SET_<<M A_A>>_REQUEST';
+const SET_<<M A_A>>_SUCCESS = 'rswa/<<M aA>>s/SET_<<M A_A>>_SUCCESS';
+const SET_<<M A_A>>_FAILURE = 'rswa/<<M aA>>s/SET_<<M A_A>>_FAILURE';
+const DELETE_<<M A_A>>_REQUEST = 'rswa/<<M aA>>s/DELETE_<<M A_A>>_REQUEST';
+const DELETE_<<M A_A>>_SUCCESS = 'rswa/<<M aA>>s/DELETE_<<M A_A>>_SUCCESS';
+const DELETE_<<M A_A>>_FAILURE = 'rswa/<<M aA>>s/DELETE_<<M A_A>>_FAILURE';
+ 
+export const <<M aA>>sActionsHandlers = {
+  [FETCH_ALL_<<M A_A>>S_REQUEST]: (state) => flow(
+    set('loaded.<<M aA>>s', false),
+    set('loading.<<M aA>>s', true),
+  )(state),
+  [FETCH_ALL_<<M A_A>>S_SUCCESS]: (state, action) => flow(
+    set('entities.<<M aA>>s', action.response.entities.<<M aA>>s || {}),
+    set('loaded.<<M aA>>s', true),
+    set('loading.<<M aA>>s', false),
+  )(state),
+  [FETCH_ALL_<<M A_A>>S_FAILURE]: (state) => flow(
+    set('loaded.<<M aA>>s', 'error'),
+    set('loading.<<M aA>>s', false),
+  )(state),
+  [FETCH_<<M A_A>>_SUCCESS]: (state, action) => flow(
+    set(`entities.<<M aA>>s.${action.id}`, action.response.entities.<<M aA>>s),
+  )(state),
+  [SET_<<M A_A>>_SUCCESS]: (state, action) => flow(
+    set('entities.<<M aA>>s', {
+      ...state.entities.<<M aA>>s,
+      ...action.response.entities.<<M aA>>s,
+    }),
+  )(state),
+  [DELETE_<<M A_A>>_SUCCESS]: (state, action) => flow(
+    set('entities.<<M aA>>s', omit(state.entities.<<M aA>>s, action.id)),
+  )(state),
+};
+ 
+export function load<<M AA>> (id) {
+  return {
+    id,
+    [CALL_API]: {
+      types: [
+        FETCH_<<M A_A>>_REQUEST,
+        FETCH_<<M A_A>>_SUCCESS,
+        FETCH_<<M A_A>>_FAILURE,
+      ],
+      method: 'GET',
+      endpoint: `/admin/<<M a-a>>/${id}`,
+      schema: Schemas.<<M A_A>>,
+    },
+  };
+}
+ 
+export function load<<M AA>>s () {
+  return {
+    [CALL_API]: {
+      types: [
+        FETCH_ALL_<<M A_A>>S_REQUEST,
+        FETCH_ALL_<<M A_A>>S_SUCCESS,
+        FETCH_ALL_<<M A_A>>S_FAILURE,
+      ],
+      method: 'GET',
+      endpoint: '/admin/<<M a-a>>?_page=0&_limit=10',
+      schema: Schemas.<<M A_A>>_ARRAY,
+      successMessage: '<<M A>>s fetched successfully',
+    },
+  };
+}
+ 
+export function createOrUpdate<<M AA>> (<<M aA>>) {
+  return {
+    [CALL_API]: {
+      types: [
+        SET_<<M A_A>>_REQUEST,
+        SET_<<M A_A>>_SUCCESS,
+        SET_<<M A_A>>_FAILURE,
+      ],
+      method: !<<M aA>> || !<<M aA>>.<<P R>> ? 'POST' : 'PUT',
+      endpoint: !<<M aA>> || !<<M aA>>.<<P R>> ? '/admin/<<M a-a>>' : `/admin/<<M a-a>>/${<<M aA>>.<<P R>>}`,
+      schema: Schemas.<<M A_A>>,
+      body: <<M aA>>,
+      successMessage: '<<M A>>s saved successfully',
+    },
+  };
+}
+ 
+export function delete<<M AA>> (id) {
+  return {
+    id,
+    [CALL_API]: {
+      types: [
+        DELETE_<<M A_A>>_REQUEST,
+        DELETE_<<M A_A>>_SUCCESS,
+        DELETE_<<M A_A>>_FAILURE,
+      ],
+      method: 'DELETE',
+      endpoint: `/admin/<<M a-a>>/${id}`,
+      successMessage: '<<M A>>s deleted successfully',
+    },
+  };
+}

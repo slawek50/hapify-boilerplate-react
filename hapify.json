@@ -44,9 +44,69 @@
   ],
   "templates": [
     {
-      "path": "src/models/{kebab}.js",
+      "path": "app/components/{camel}s/{pascal}DetailView.jsx",
       "engine": "hpf",
       "input": "one"
+    },
+    {
+      "path": "app/components/{camel}s/{pascal}EditForm.jsx",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "app/components/{camel}s/{pascal}sCardListView.jsx",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "app/components/{camel}s/{pascal}sTableListView.jsx",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "app/components/shared/Header.jsx",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "app/containers/{camel}s/{pascal}sContainer.jsx",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "app/containers/Router.jsx",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "app/containers/shared/AuthenticatedComponent.jsx",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "app/store/configureStore.js",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "app/store/initialState.js",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "app/store/modules/app.js",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "app/store/modules/entities/{camel}s.js",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "app/store/Schemas.js",
+      "engine": "hpf",
+      "input": "all"
     }
   ]
 }

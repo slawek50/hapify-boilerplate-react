@@ -1,0 +1,38 @@
+import { schema } from 'normalizr';
+ 
+// We use this Normalizr schemas to transform API responses from a nested form
+// to a flat form where repos and users are placed in `entities`, and nested
+// JSON objects are replaced with their IDs. This is very convenient for
+// consumption by reducers, because we can easily build a normalized tree
+// and keep it updated as we fetch more data.
+ 
+// Read more about Normalizr: https://github.com/gaearon/normalizr
+ 
+const accountSchema = new schema.Entity('accounts', {}, { idAttribute: 'account_id' });
+const modelSchema = new schema.Entity('models', {}, { idAttribute: 'model_id' });
+const postSchema = new schema.Entity('posts', {}, { idAttribute: 'id' });
+const uploadContentSchema = new schema.Entity('uploadContents', {}, { idAttribute: 'upload_content_id' });
+ 
+<<@ M /pMHd m>>
+const <<m aA>>Schema = new schema.Entity('<<m aA>>s', {}, { idAttribute: '<<m.fields.primary R>>' });
+<<@>>
+ 
+// Schemas for API responses.
+export const Schemas = {
+  ACCOUNT: accountSchema,
+  ACCOUNT_ARRAY: new schema.Array(accountSchema),
+  MODEL: modelSchema,
+  MODEL_ARRAY: new schema.Array(modelSchema),
+  POST: postSchema,
+  POST_ARRAY: new schema.Array(postSchema),
+  UPLOAD_CONTENT: uploadContentSchema,
+  UPLOAD_CONTENT_ARRAY: new schema.Array(uploadContentSchema),
+ 
+  <<@ M /pMHd m>>
+  <<m A_A>>: <<m aA>>Schema,
+  <<m A_A>>_ARRAY: new schema.Array(<<m aA>>Schema),
+  <<@>>
+};
+ 
+// Action key that carries API call info interpreted by this Redux middleware.
+export const CALL_API = Symbol('Call API');

@@ -1,0 +1,52 @@
+import React from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+ 
+import Login from './login/Login';
+import ResetPassword from './login/ResetPassword';
+import AuthenticatedComponent from './shared/AuthenticatedComponent';
+import PageNotFound from './shared/PageNotFound';
+import Home from './home/Home';
+ 
+import AccountsListContainer from './accounts/AccountsListContainer';
+import OptionsContainer from './options/OptionsContainer';
+import ModelsContainer from './models/ModelsContainer';
+import UploadContentsContainer from './uploadContents/UploadContentsContainer';
+ 
+import MyAccountContainer from './accounts/MyAccountContainer';
+ 
+<<@ M /pMHd m>>
+import <<m AA>>sContainer from './<<m aA>>s/<<m AA>>sContainer';
+<<@>>
+ 
+function requireAuthentication (Component) {
+  return () => (
+    <AuthenticatedComponent>
+      <Component />
+    </AuthenticatedComponent>
+  );
+}
+ 
+const Router = () => (
+  <BrowserRouter>
+    <Switch>
+      <Route exact path="/session/sign-in" component={Login} />
+      <Route exact path="/reset-password" component={ResetPassword} />
+ 
+      <Route exact path="/user" render={requireAuthentication(Home)} />
+      <Route exact path="/user/account" render={requireAuthentication(MyAccountContainer)} />
+ 
+      <Route path="/admin/accounts" render={requireAuthentication(AccountsListContainer)} />
+      <Route path="/admin/options" render={requireAuthentication(OptionsContainer)} />
+      <Route path="/admin/models" render={requireAuthentication(ModelsContainer)} />
+      <Route path="/admin/uploadContents" render={requireAuthentication(UploadContentsContainer)} />
+ 
+      <<@ M /pMHd m>>
+      <Route path="/admin/<<m aA>>s" render={requireAuthentication(<<m AA>>sContainer)} />
+      <<@>>
+ 
+      <Route path="*" render={requireAuthentication(PageNotFound)} />
+    </Switch>
+  </BrowserRouter>
+);
+ 
+export default Router;

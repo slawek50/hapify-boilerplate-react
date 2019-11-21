@@ -1,0 +1,54 @@
+import { createStore, applyMiddleware, compose } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
+import { createLogger } from 'redux-logger';
+// import createSocketIoMiddleware from 'redux-socket.io';
+// import io from 'socket.io-client';
+import * as storage from 'redux-storage';
+import createIndexedDBEngine from 'redux-storage-engine-indexed-db';
+import storageFilter from 'redux-storage-decorator-filter';
+ 
+import api from './middleware/api';
+import simpleActionMiddleware from './middleware/simpleActionMiddleware';
+import rootReducer from './modules/reducer';
+// import { SOCKET_BASE_TYPE } from './modules/socket';
+// import { API_URL } from '../configs/Constants';
+ 
+const logger = createLogger();
+ 
+const storageEngine = storageFilter(createIndexedDBEngine('react-starter-webapp'), [
+  'auth',
+  ['data', 'entities', 'models'],
+  ['data', 'entities', 'accounts'],
+  ['data', 'entities', 'options'],
+ 
+  <<@ M /pMHd m>>
+  ['data', 'entities', '<<m aA>>s'],
+  <<@>>
+]);
+ 
+const finalCreateStore = composeWithDevTools(compose(
+  // applyMiddleware(createSocketIoMiddleware(io(API_URL), SOCKET_BASE_TYPE)),
+  applyMiddleware(thunk, simpleActionMiddleware),
+  applyMiddleware(thunk, api),
+  applyMiddleware(logger),
+  applyMiddleware(storage.createMiddleware(storageEngine)),
+))(createStore);
+ 
+const finalReducer = storage.reducer(rootReducer);
+const load = storage.createLoader(storageEngine);
+ 
+export default function configureStore (initialState) {
+  const store = finalCreateStore(finalReducer, initialState);
+  load(store);
+ 
+  if (module.hot) {
+    // Enable Webpack hot module replacement for reducers
+    module.hot.accept('./modules/reducer', () => {
+      const nextRootReducer = require('./modules/reducer'); // eslint-disable-line
+      store.replaceReducer(nextRootReducer);
+    });
+  }
+ 
+  return store;
+}

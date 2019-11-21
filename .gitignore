@@ -1,4 +1,33 @@
+.DS_Store
+npm-debug.log*
 node_modules
+static
+yarn-error.log
 
 # Generated files. Remove these lines after generation
-./src/models
+app/components/*
+!app/components/accounts/
+!app/components/elements/
+!app/components/home/
+!app/components/login/
+!app/components/models/
+!app/components/options/
+!app/components/shared/
+app/components/shared/Header.jsx
+!app/components/uploadContents/
+app/containers/*
+!app/containers/App.jsx
+!app/containers/accounts/
+!app/containers/home/
+!app/containers/login/
+!app/containers/models/
+!app/containers/options/
+!app/containers/shared/
+app/containers/shared/AuthenticatedComponent.jsx
+!app/containers/uploadContents/
+app/containers/Router.jsx
+app/store/initialState.js
+app/store/configureStore.js
+app/store/modules/app.js
+app/store/modules/entities
+app/store/Schemas.js

@@ -1,0 +1,190 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+<<? F tE+tF/hd/pr>>
+import { connect } from 'react-redux';
+<<?>>
+import { reduxForm } from 'redux-form';
+import { NavLink } from 'react-router-dom';
+<<? F tSe/hd/pr/nu>>
+import isEmail from 'validator/lib/isEmail';
+<<?>>
+<<? F tN+tE/hd/pr/nu>>
+import { isNumber } from 'lodash';
+<<?>>
+import {
+  <<= getImportFieldComponents() >>
+} from 'react-components';
+<<? F tF/hd/pr>>
+ 
+import { uploadFiles, removeFile } from '../../store/modules/uploads';
+ 
+import { UPLOADS_URL } from '../../configs/Constants';
+<<?>>
+ 
+const <<M AA>>EditForm = ({\
+<<? F tE+tF/hd/pr>>
+  handleSubmit, baseUrl,<<? F tF>> upFiles, rmFile,<<?>>\
+  <<@ D d>> <<d aA>>s,<<@>>
+<<??>> handleSubmit, baseUrl <<?>>\
+}) => (
+  <form onSubmit={handleSubmit}>
+    <div className="grid">
+      <<@ F /hd/pr/in f>>
+      <<= getComponent(f) >>
+      <<@>>
+    </div>
+ 
+    <div className="btn-group right">
+      <button className="btn" type="submit">
+        Enregistrer
+      </button>
+ 
+      <NavLink className="btn" to={baseUrl}>
+        Annuler
+      </NavLink>
+    </div>
+  </form>
+);
+ 
+<<M AA>>EditForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  baseUrl: PropTypes.string.isRequired,
+  <<? F tE/hd/pr>>
+ 
+  <<@ D d>>
+  <<d aA>>s: PropTypes.objectOf(PropTypes.shape()),
+  <<@>>
+  <<?>>
+  <<? F tF/hd/pr>>
+ 
+  upFiles: PropTypes.func.isRequired,
+  rmFile: PropTypes.func.isRequired,
+  <<?>>
+};
+ 
+export default reduxForm({
+  form: '<<M AA>>EditForm',
+  validate: (values = {}) => {
+    const errors = {};
+ 
+    <<@ F /hd/pr/nu f>>
+    if (<<= getError(f) >>) errors.<<f a_a>> = 'Must be set';
+    <<@>>
+ 
+    return errors;
+  },
+})\
+<<? F tE+tF/hd/pr>>\
+(connect(
+<<? F tE>>
+  (state) => ({
+    <<@ D d>>
+    <<d aA>>s: state.data.entities.<<d aA>>s,
+    <<@>>
+  }),
+<<??>>
+  null,
+<<?>>
+<<? F tF>>
+  { upFiles: uploadFiles, rmFile: removeFile },
+<<?>>
+)(<<M AA>>EditForm));
+<<??>>(<<M AA>>EditForm);<<?>>
+
+<<<
+function hasType(type) {
+    return root.fields.list.filter(f => f.type === type || f.subtype === type).length > 0;
+}
+
+function getImportFieldComponents() {
+    const imports = new Set(['Field,']);
+    if (hasType('phone')) imports.add('CleaveField,');
+    if (hasType('datetime')) imports.add('DateField,');
+    if (hasType('file')) imports.add('FileField,');
+    if (hasType('boolean')) {
+        imports.add('ToggleField,');
+    }
+    if (hasType('string') || hasType('number')) {
+        imports.add('InputField,');
+        imports.add('RadioField,');
+        imports.add('SelectField,');
+    }
+    if (hasType('entity')) imports.add('SelectField,');
+    if (hasType('text') || hasType('rich')) imports.add('TextareaField,');
+    if (root.properties.hasMultiple) {
+        imports.add('MultiCheckboxField,');
+        imports.add('ArrayField,');
+    }
+
+    return [...imports].join(' ');
+}
+
+function getComponent(field) {
+    var customPropsTypes = {
+        string: `<Field name="${field.names.snake}" component={InputField} placeholder="${field.names.capital}" className="col-12" />`,
+        email: `<Field name="${field.names.snake}" component={InputField} type="email" placeholder="${field.names.capital}" className="col-12" />`,
+        password: `<Field name="${field.names.snake}" component={InputField} type="password" placeholder="${field.names.capital}" className="col-12" />`,
+        phone: `<Field
+        name="${field.names.snake}"
+        component={CleaveField}
+        placeholder="${field.names.capital}"
+        className="col-12"
+        cleaveOptions={{ phone: true, phoneRegionCode: 'FR' }}
+      />`,
+
+        file: `<Field
+        name="${field.names.snake}"
+        component={FileField}
+        uploadFiles={upFiles}
+        removeFile={rmFile}
+        getUrl={(item) => \`\${UPLOADS_URL}/\${item}\`}
+        placeholder="${field.names.capital}"
+        className="col-12"\
+${field.multiple ? `
+        isMulti` : ''}
+      />`,
+
+        number: `<Field name="${field.names.snake}" component={InputField} type="number" placeholder="${field.names.capital}" className="col-12" />`,
+        integer: `<Field name="${field.names.snake}" component={InputField} type="number" placeholder="${field.names.capital}" className="col-12" />`,
+        float: `<Field name="${field.names.snake}" component={InputField} type="number" step="any" placeholder="${field.names.capital}" className="col-12" />`,
+
+        boolean: `<Field name="${field.names.snake}" component={ToggleField} label="${field.names.capital}" className="col-12" />`,
+
+        datetime: `<Field name="${field.names.snake}" component={DateField} placeholder="${field.names.capital}" className="col-12" />`,
+
+        text: `<Field name="${field.names.snake}" component={TextareaField} placeholder="${field.names.capital}" className="col-12" />`,
+        rich: `<Field name="${field.names.snake}" component={TextareaField} isWysiwyg placeholder="${field.names.capital}" className="col-12" />`,
+
+        entity: `<Field
+        name="${field.names.snake}"
+        component={SelectField}
+        options={${field.model && field.model.names.camel}s}
+        optionsKeys={{ value: '${field.model && field.model.fields.primary.names.raw}', label: '${field.model && field.model.fields.lb[0] && field.model.fields.lb[0].names.snake}' }}
+        placeholder="${field.names.capital}"
+        className="col-12"\
+${field.multiple ? `
+        isMulti` : ''}
+      />`,
+    };
+
+    const component = customPropsTypes[field.subtype || field.type] || customPropsTypes['string'];
+    if (field.multiple && field.type !== 'entity' && field.type !== 'file') {
+        return component.replace('<Field', '<ArrayField').replace('/>', 'addLabel="Ajouter un élément (+)" removable />');
+    }
+    return component;
+}
+
+function getError (field) {
+    if (field.multiple) {
+        return `!Array.isArray(values.${field.names.snake}) || values.${field.names.snake}.length === 0`;
+    }
+    var customPropsTypes = {
+        email: `!isEmail(values.${field.names.snake} || '')`,
+        number: `!isNumber(values.${field.names.snake})`,
+        integer: `!isNumber(values.${field.names.snake})`,
+        float: `!isNumber(values.${field.names.snake})`,
+        boolean: `!(values.${field.names.snake} === false || values.${field.names.snake} === true)`,
+    };
+    return customPropsTypes[field.subtype || field.type] || `!values.${field.names.snake}`;
+}
+>>>

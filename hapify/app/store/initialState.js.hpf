@@ -1,0 +1,59 @@
+export default {
+  entities: {
+    accounts: {},
+    options: {},
+    models: {},
+    uploadContents: {},
+    posts: {},
+ 
+    <<@ M /pMHd m>>
+    <<m aA>>s: {},
+    <<@>>
+  },
+  loaded: {
+    appstorage: false,
+    accounts: false,
+    options: false,
+    models: false,
+    uploadContents: false,
+    posts: false,
+ 
+    <<@ M /pMHd m>>
+    <<m aA>>s: false,
+    <<@>>
+  },
+  loading: {
+    accounts: false,
+    options: false,
+    models: false,
+    uploadContents: false,
+    posts: false,
+ 
+    <<@ M /pMHd m>>
+    <<m aA>>s: false,
+    <<@>>
+  },
+  filters: {
+    shared: {
+      tableListSearch: '',
+      tableListSort: '',
+      tableListSortOrder: 'asc',
+    },
+    posts: {
+      search: '',
+      date: '',
+    },
+    accounts: {
+      search: '',
+    },
+  },
+  message: {
+    text: '',
+    messageType: '',
+    delay: 0,
+  },
+  config: {
+    menuIsTiny: null,
+    menuIsOpen: null,
+  },
+};

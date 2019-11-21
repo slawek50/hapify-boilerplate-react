@@ -1,0 +1,130 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+<<? F tE/hd/pr>>
+import { connect } from 'react-redux';
+<<?>>
+import { capitalize<<? F tE/hd/pr>>, get<<?>><<? F ml/hd>>, map<<?>> } from 'lodash';
+<<? F tD/hd/pr>>
+import moment from 'moment';
+<<?>>
+import { NavLink } from 'react-router-dom';
+import { ButtonConfirmModal } from 'react-components';
+
+<<= getImportConstants() >>
+ 
+const <<M AA>>DetailView = ({
+  <<M aA>> = {}, baseUrl, onClickDelete<<@ D /em d>>, <<d aA>>s<<@>>,
+}) => (
+  <div>
+    <<@ F /hd f>>
+    <div>
+      <<f A>>:&nbsp;
+      <<= renderProp(f) >>
+    </div>
+    <<@>>
+ 
+    <div className="btn-group right">
+      <NavLink className="btn" to={`${baseUrl}/${<<M aA>>.<<P R>>}/edit`}>
+        Modifier
+      </NavLink>
+ 
+      {onClickDelete && (
+        <ButtonConfirmModal
+          onConfirmationButton={() => onClickDelete()}
+          message="Voulez-vous vraiment effacer le <<M A>> ?"
+        >
+          <button className="btn" type="button">Supprimer</button>
+        </ButtonConfirmModal>
+      )}
+    </div>
+  </div>
+);
+ 
+<<M AA>>DetailView.propTypes = {
+  <<M aA>>: PropTypes.shape({
+    <<@ F /hd f>>
+    <<f a_a>>: PropTypes.<<= getPropsType(f) >><<? f /nu>>.isRequired<<?>>,
+    <<@>>
+  }).isRequired,
+  <<? F tE/hd/pr>>
+ 
+  <<@ D /em d>>
+  <<d aA>>s: PropTypes.objectOf(PropTypes.shape()),
+  <<@>>
+  <<?>>
+ 
+  baseUrl: PropTypes.string.isRequired,
+  onClickDelete: PropTypes.func,
+};
+ 
+export default <<? F tE>>\
+connect(
+  (state) => ({
+    <<@ D /em d>>
+    <<d aA>>s: state.data.entities.<<d aA>>s,
+    <<@>>
+  }),
+)\
+<<?>>(<<M AA>>DetailView);
+
+<<<
+function hasType(type) {
+    return root.fields.list.filter(f => f.type === type || f.subtype === type).length > 0;
+}
+
+function getImportConstants() {
+    const imports = new Set([]);
+    if (hasType('datetime')) imports.add('DATE_FORMAT');
+    if (hasType('file')) imports.add('UPLOADS_URL');
+
+    return imports.size > 0
+        ? `\rimport { ${[...imports].join(', ')} } from '../../configs/Constants';`
+        : '';
+}
+
+function getPropsType(field) {
+    var customPropsTypes = {
+        datetime: 'number',
+        boolean: 'bool',
+        entity: 'string',
+        file: 'string',
+    };
+
+    const component = customPropsTypes[field.subtype] || customPropsTypes[field.type] || field.type;
+    if (field.multiple) {
+        return `arrayOf(PropTypes.${component}${field.nullable ? '' : '.isRequired'})`;
+    }
+    return component;
+}
+
+function renderProp(field) {
+    if (field.multiple) {
+        render = `(val) => capitalize(val)`;
+        if (field.subtype === 'image') {
+            render = `(val) => <img src={\`\${UPLOADS_URL}/\${val}\`} alt={val} />`;
+        } else if (field.type === 'file') {
+            render = `(val) => <a href={\`\${UPLOADS_URL}/\${val}\`} target="_blank" rel="noopener noreferrer">{val}</a>`;
+        } else if (field.type === 'entity' && !field.embedded) {
+            render = `(val) => get(${field.model.names.camel}s, \`\${val}.${field.model.fields.lb[0] ? field.model.fields.lb[0].names.snake : field.model.fields.primary.names.raw}\`)`;
+        } else if (field.type === 'entity' && field.embedded) {
+            render = `(val) => val.${field.model.fields.lb[0] ? field.model.fields.lb[0].names.snake : field.model.fields.primary.names.raw}`;
+        } else if (field.type === 'datetime') {
+            render = `(val) => moment(val).format(DATE_FORMAT)`;
+        }
+        return `{map(<<M aA>>.${field.names.snake}, ${render}).join(', ')}`;
+    }
+    
+    if (field.subtype === 'image') {
+        return `<img src={\`\${UPLOADS_URL}/\${<<M aA>>.${field.names.snake}}\`} alt={<<M aA>>.${field.names.snake}} />`;
+    } else if (field.type === 'file') {
+        return `<a href={\`\${UPLOADS_URL}/\${<<M aA>>.${field.names.snake}}\`} target="_blank" rel="noopener noreferrer">{<<M aA>>.${field.names.snake}}</a>`;
+    } else if (field.type === 'entity' && !field.embedded) {
+        return `{get(${field.model.names.camel}s, \`\${<<M aA>>.${field.names.snake}}.${field.model.fields.lb[0] ? field.model.fields.lb[0].names.snake : field.model.fields.primary.names.raw}\`)}`;
+    } else if (field.type === 'entity' && field.embedded) {
+        return `{<<M aA>>.${field.names.snake}.${field.model.fields.lb[0] ? field.model.fields.lb[0].names.snake : field.model.fields.primary.names.raw}}`;
+    } else if (field.type === 'datetime') {
+        return `{moment(<<M aA>>.${field.names.snake}).format(DATE_FORMAT)}`;
+    }
+    return `{capitalize(<<M aA>>.${field.names.snake})}`;
+}
+>>>

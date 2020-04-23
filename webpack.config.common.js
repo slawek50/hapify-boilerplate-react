@@ -81,6 +81,7 @@ module.exports = {
           path.resolve('./node_modules/react-datepicker'),
           path.resolve('./node_modules/react-draft-wysiwyg'),
           path.resolve('./node_modules/react-sweet-progress'),
+          path.resolve('./node_modules/antd'),
         ],
         loader: 'style-loader!css-loader',
       },

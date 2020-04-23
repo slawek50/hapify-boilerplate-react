@@ -9,31 +9,31 @@ const FETCH_ALL_<<M A_A>>S_FAILURE = 'rswa/<<M aA>>s/FETCH_ALL_<<M A_A>>S_FAILUR
 const FETCH_<<M A_A>>_REQUEST = 'rswa/<<M aA>>s/FETCH_<<M A_A>>_REQUEST';
 const FETCH_<<M A_A>>_SUCCESS = 'rswa/<<M aA>>s/FETCH_<<M A_A>>_SUCCESS';
 const FETCH_<<M A_A>>_FAILURE = 'rswa/<<M aA>>s/FETCH_<<M A_A>>_FAILURE';
-const SET_<<M A_A>>_REQUEST = 'rswa/<<M aA>>s/SET_<<M A_A>>_REQUEST';
-const SET_<<M A_A>>_SUCCESS = 'rswa/<<M aA>>s/SET_<<M A_A>>_SUCCESS';
-const SET_<<M A_A>>_FAILURE = 'rswa/<<M aA>>s/SET_<<M A_A>>_FAILURE';
+const CREATE_<<M A_A>>_REQUEST = 'rswa/<<M aA>>s/CREATE_<<M A_A>>_REQUEST';
+const CREATE_<<M A_A>>_SUCCESS = 'rswa/<<M aA>>s/CREATE_<<M A_A>>_SUCCESS';
+const CREATE_<<M A_A>>_FAILURE = 'rswa/<<M aA>>s/CREATE_<<M A_A>>_FAILURE';
+const UPDATE_<<M A_A>>_REQUEST = 'rswa/<<M aA>>s/UPDATE_<<M A_A>>_REQUEST';
+const UPDATE_<<M A_A>>_SUCCESS = 'rswa/<<M aA>>s/UPDATE_<<M A_A>>_SUCCESS';
+const UPDATE_<<M A_A>>_FAILURE = 'rswa/<<M aA>>s/UPDATE_<<M A_A>>_FAILURE';
 const DELETE_<<M A_A>>_REQUEST = 'rswa/<<M aA>>s/DELETE_<<M A_A>>_REQUEST';
 const DELETE_<<M A_A>>_SUCCESS = 'rswa/<<M aA>>s/DELETE_<<M A_A>>_SUCCESS';
 const DELETE_<<M A_A>>_FAILURE = 'rswa/<<M aA>>s/DELETE_<<M A_A>>_FAILURE';
  
 export const <<M aA>>sActionsHandlers = {
   [FETCH_ALL_<<M A_A>>S_REQUEST]: (state) => flow(
-    set('loaded.<<M aA>>s', false),
-    set('loading.<<M aA>>s', true),
+    set('loaded.<<M aA>>s', 'loading'),
   )(state),
   [FETCH_ALL_<<M A_A>>S_SUCCESS]: (state, action) => flow(
     set('entities.<<M aA>>s', action.response.entities.<<M aA>>s || {}),
-    set('loaded.<<M aA>>s', true),
-    set('loading.<<M aA>>s', false),
+    set('loaded.<<M aA>>s', 'loaded'),
   )(state),
   [FETCH_ALL_<<M A_A>>S_FAILURE]: (state) => flow(
     set('loaded.<<M aA>>s', 'error'),
-    set('loading.<<M aA>>s', false),
   )(state),
   [FETCH_<<M A_A>>_SUCCESS]: (state, action) => flow(
-    set(`entities.<<M aA>>s.${action.id}`, action.response.entities.<<M aA>>s),
+    set('entities.<<M aA>>s', action.response.entities.<<M aA>>s),
   )(state),
-  [SET_<<M A_A>>_SUCCESS]: (state, action) => flow(
+  [CREATE_<<M A_A>>_SUCCESS]: (state, action) => flow(
     set('entities.<<M aA>>s', {
       ...state.entities.<<M aA>>s,
       ...action.response.entities.<<M aA>>s,
@@ -76,19 +76,42 @@ export function load<<M AA>>s () {
   };
 }
  
-export function createOrUpdate<<M AA>> (<<M aA>>) {
+export function create<<M AA>> (<<M aA>>) {
   return {
     [CALL_API]: {
       types: [
-        SET_<<M A_A>>_REQUEST,
-        SET_<<M A_A>>_SUCCESS,
-        SET_<<M A_A>>_FAILURE,
+        CREATE_<<M A_A>>_REQUEST,
+        CREATE_<<M A_A>>_SUCCESS,
+        CREATE_<<M A_A>>_FAILURE,
       ],
-      method: !<<M aA>> || !<<M aA>>.<<P R>> ? 'POST' : 'PUT',
-      endpoint: !<<M aA>> || !<<M aA>>.<<P R>> ? '/admin/<<M a-a>>' : `/admin/<<M a-a>>/${<<M aA>>.<<P R>>}`,
+      method: 'POST',
+      endpoint: '/admin/<<M a-a>>',
       schema: Schemas.<<M A_A>>,
       body: <<M aA>>,
-      successMessage: '<<M A>>s saved successfully',
+      successMessage: '<<M A>>s created successfully',
+    },
+  };
+}
+ 
+export function update<<M AA>> (<<M aA>>) {
+  return {
+    [CALL_API]: {
+      types: [
+        UPDATE_<<M A_A>>_REQUEST,
+        UPDATE_<<M A_A>>_SUCCESS,
+        UPDATE_<<M A_A>>_FAILURE,
+      ],
+      method: 'PATCH',
+      endpoint: `/admin/<<M a-a>>/${<<M aA>>.<<P R>>}`,
+      body: {
+        <<@ F /hd/pr/in f>>
+        <<f a_a>>: <<M aA>>.<<f a_a>>,
+        <<@>>
+      },
+      successMessage: '<<M A>>s updated successfully',
+      successNext: [
+        () => load<<M AA>>(<<M aA>>.<<P R>>),
+      ],
     },
   };
 }

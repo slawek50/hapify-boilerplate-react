@@ -1,8 +1,9 @@
 {
   "version": "1",
   "validatorPath": "hapify/validator.js",
-  "name": "hapify-react-dashboard",
+  "name": "React Dashboard",
   "description": "React Dashboard",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/langfr-2560px-React-icon.svg.png",
   "project": "5dcc601ed4d153001014f7e1",
   "defaultFields": [
     {
@@ -50,6 +51,11 @@
     },
     {
       "path": "app/components/{camel}s/{pascal}EditForm.jsx",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "app/components/{camel}s/{pascal}EditFormAntd.jsx",
       "engine": "hpf",
       "input": "one"
     },

@@ -18,17 +18,14 @@ const DELETE_MODEL_FAILURE = 'rswa/models/DELETE_MODEL_FAILURE';
 
 export const modelsActionsHandlers = {
   [FETCH_ALL_MODELS_REQUEST]: (state) => flow(
-    set('loaded.models', false),
-    set('loading.models', true),
+    set('loaded.models', 'loading'),
   )(state),
   [FETCH_ALL_MODELS_SUCCESS]: (state, action) => flow(
     set('entities.models', action.response.entities.models || {}),
-    set('loaded.models', true),
-    set('loading.models', false),
+    set('loaded.models', 'loaded'),
   )(state),
   [FETCH_ALL_MODELS_FAILURE]: (state) => flow(
     set('loaded.models', 'error'),
-    set('loading.models', false),
   )(state),
   [FETCH_MODEL_SUCCESS]: (state, action) => flow(
     set(`entities.models.${action.id}`, action.response.entities.models),

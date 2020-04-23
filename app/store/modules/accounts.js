@@ -18,17 +18,14 @@ const DELETE_ACCOUNT_FAILURE = 'rswa/accounts/DELETE_ACCOUNT_FAILURE';
 
 export const accountsActionsHandlers = {
   [FETCH_ALL_ACCOUNTS_REQUEST]: (state) => flow(
-    set('loaded.accounts', false),
-    set('loading.accounts', true),
+    set('loaded.accounts', 'loading'),
   )(state),
   [FETCH_ALL_ACCOUNTS_SUCCESS]: (state, action) => flow(
     set('entities.accounts', action.response.entities.accounts || {}),
-    set('loaded.accounts', true),
-    set('loading.accounts', false),
+    set('loaded.accounts', 'loaded'),
   )(state),
   [FETCH_ALL_ACCOUNTS_FAILURE]: (state) => flow(
     set('loaded.accounts', 'error'),
-    set('loading.accounts', false),
   )(state),
   [FETCH_ACCOUNT_SUCCESS]: (state, action) => flow(
     set(`entities.accounts.${action.id}`, action.response.entities.accounts),

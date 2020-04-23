@@ -13,8 +13,7 @@ const EDIT_POST = 'rswa/posts/EDIT_POST';
 
 export const postsActionsHandlers = {
   [FETCH_ALL_POSTS_REQUEST]: (state) => flow(
-    set('loaded.posts', false),
-    set('loading.posts', true),
+    set('loaded.posts', 'loading'),
   )(state),
   [FETCH_ALL_POSTS_SUCCESS]: (state, action) => flow(
     set('entities.posts', mapValues(action.response.entities.posts, (post) => (
@@ -25,12 +24,10 @@ export const postsActionsHandlers = {
         loaded: false,
       }
     )) || {}),
-    set('loaded.posts', true),
-    set('loading.posts', false),
+    set('loaded.posts', 'loaded'),
   )(state),
   [FETCH_ALL_POSTS_FAILURE]: (state) => flow(
     set('loaded.posts', 'error'),
-    set('loading.posts', false),
   )(state),
   [FETCH_POST_REQUEST]: (state, action) => flow(
     set(`entities.posts.${action.id}.loaded`, false),

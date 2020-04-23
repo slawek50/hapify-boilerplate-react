@@ -6,9 +6,9 @@
  * ACCOUNTS_ROLES
  */
 export const ACCOUNTS_ROLES = {
-  ADMIN: 'admin',
-  USER: 'user',
-  REPORTER: 'reporter',
+  admin: 'Admin',
+  user: 'User',
+  reporter: 'Reporter',
 };
 
 /*

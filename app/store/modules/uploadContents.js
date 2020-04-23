@@ -18,17 +18,14 @@ const DELETE_UPLOAD_CONTENT_FAILURE = 'rswa/uploadContents/DELETE_UPLOAD_CONTENT
 
 export const uploadContentsActionsHandlers = {
   [FETCH_ALL_UPLOAD_CONTENTS_REQUEST]: (state) => flow(
-    set('loaded.uploadContents', false),
-    set('loading.uploadContents', true),
+    set('loaded.uploadContents', 'loading'),
   )(state),
   [FETCH_ALL_UPLOAD_CONTENTS_SUCCESS]: (state, action) => flow(
     set('entities.uploadContents', action.response.entities.uploadContents || {}),
-    set('loaded.uploadContents', true),
-    set('loading.uploadContents', false),
+    set('loaded.uploadContents', 'loaded'),
   )(state),
   [FETCH_ALL_UPLOAD_CONTENTS_FAILURE]: (state) => flow(
     set('loaded.uploadContents', 'error'),
-    set('loading.uploadContents', false),
   )(state),
   [FETCH_UPLOAD_CONTENT_SUCCESS]: (state, action) => flow(
     set(`entities.uploadContents.${action.id}`, action.response.entities.uploadContents),

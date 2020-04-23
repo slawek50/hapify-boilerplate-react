@@ -5,19 +5,19 @@ import Modal from 'react-modal';
 import { withRouter, Switch, Route } from 'react-router-dom';
 import { keys<<? F em>>, map, get<<?>> } from 'lodash';
  
-import { createOrUpdate<<M AA>>, delete<<M AA>> } from '../../store/modules/entities/<<M aA>>s';
+import { create<<M AA>>, update<<M AA>>, delete<<M AA>> } from '../../store/modules/entities/<<M aA>>s';
  
 import BaseLayout from '../shared/BaseLayout';
  
 import <<M AA>>DetailView from '../../components/<<M aA>>s/<<M AA>>DetailView';
-import <<M AA>>EditForm from '../../components/<<M aA>>s/<<M AA>>EditForm';
+import <<M AA>>EditFormAntd from '../../components/<<M aA>>s/<<M AA>>EditFormAntd';
 import <<M AA>>sTableListView from '../../components/<<M aA>>s/<<M AA>>sTableListView';
 import <<M AA>>sCardListView from '../../components/<<M aA>>s/<<M AA>>sCardListView';
  
 import modalDefaultClass from '../../utils/ModalDefaultClass';
  
 const RenderEditDetailsModalsRouter = ({
-  url, edit<<M AA>>, del<<M AA>>, push, <<M aA>>s,
+  url, create<<M AA>>, update<<M AA>>, del<<M AA>>, push, <<M aA>>s,
 }) => (
   <Switch>
     <Route
@@ -25,10 +25,10 @@ const RenderEditDetailsModalsRouter = ({
       path={`${url}/new`}
       render={() => (
         <Modal {...modalDefaultClass} isOpen onRequestClose={() => push(url)}>
-          <<<M AA>>EditForm
+          <<<M AA>>EditFormAntd
             initialValues={{}}
             onSubmit={(v) => {
-              edit<<M AA>>(v)
+              create<<M AA>>(v)
               .then(() => push(url));
             }}
             baseUrl={url}
@@ -41,11 +41,11 @@ const RenderEditDetailsModalsRouter = ({
       path={`${url}/:<<M aA>>Id/edit`}
       render={(subProps) => (
         <Modal {...modalDefaultClass} isOpen onRequestClose={() => push(url)}>
-          <<<M AA>>EditForm
+          <<<M AA>>EditFormAntd
             enableReinitialize
             initialValues={<<= getInitialValues('subProps.match') >>}
             onSubmit={(v) => {
-              edit<<M AA>>(v)
+              update<<M AA>>(v)
               .then(() => push(url));
             }}
             baseUrl={url}
@@ -74,7 +74,8 @@ const RenderEditDetailsModalsRouter = ({
  
 RenderEditDetailsModalsRouter.propTypes = {
   url: PropTypes.string.isRequired,
-  edit<<M AA>>: PropTypes.func.isRequired,
+  create<<M AA>>: PropTypes.func.isRequired,
+  update<<M AA>>: PropTypes.func.isRequired,
   del<<M AA>>: PropTypes.func.isRequired,
   push: PropTypes.func.isRequired,
   <<M aA>>s: PropTypes.objectOf(PropTypes.shape()).isRequired,
@@ -99,7 +100,8 @@ const <<M AA>>sContainer = ({
             />
             <RenderEditDetailsModalsRouter
               url={match.url}
-              edit<<M AA>>={props.createOrUpdate<<M AA>>}
+              create<<M AA>>={props.create<<M AA>>}
+              update<<M AA>>={props.update<<M AA>>}
               del<<M AA>>={props.delete<<M AA>>}
               push={push}
               <<M aA>>s={<<M aA>>s}
@@ -121,7 +123,8 @@ const <<M AA>>sContainer = ({
             />
             <RenderEditDetailsModalsRouter
               url={match.url}
-              edit<<M AA>>={props.createOrUpdate<<M AA>>}
+              create<<M AA>>={props.create<<M AA>>}
+              update<<M AA>>={props.update<<M AA>>}
               del<<M AA>>={props.delete<<M AA>>}
               push={push}
               <<M aA>>s={<<M aA>>s}
@@ -133,10 +136,10 @@ const <<M AA>>sContainer = ({
         exact
         path={`${url}/new`}
         render={() => (
-          <<<M AA>>EditForm
+          <<<M AA>>EditFormAntd
             initialValues={{}}
             onSubmit={(v) => {
-              props.createOrUpdate<<M AA>>(v)
+              props.create<<M AA>>(v)
               .then(({ response }) => push(`${url}/${keys(response.entities.<<M aA>>s)[0]}`));
             }}
             baseUrl={url}
@@ -147,11 +150,11 @@ const <<M AA>>sContainer = ({
         exact
         path={`${url}/:<<M aA>>Id/edit`}
         render={({ match }) => (
-          <<<M AA>>EditForm
+          <<<M AA>>EditFormAntd
             enableReinitialize
             initialValues={<<= getInitialValues('match') >>}
             onSubmit={(v) => {
-              props.createOrUpdate<<M AA>>(v)
+              props.update<<M AA>>(v)
               .then(() => push(`${url}/${match.params.<<M aA>>Id}`));
             }}
             baseUrl={url}
@@ -177,7 +180,8 @@ const <<M AA>>sContainer = ({
 );
  
 <<M AA>>sContainer.propTypes = {
-  createOrUpdate<<M AA>>: PropTypes.func.isRequired,
+  create<<M AA>>: PropTypes.func.isRequired,
+  update<<M AA>>: PropTypes.func.isRequired,
   delete<<M AA>>: PropTypes.func.isRequired,
  
   <<M aA>>s: PropTypes.objectOf(PropTypes.shape()).isRequired,
@@ -194,7 +198,7 @@ export default connect(
   (state) => ({
     <<M aA>>s: state.data.entities.<<M aA>>s,
   }),
-  { createOrUpdate<<M AA>>, delete<<M AA>> },
+  { create<<M AA>>, update<<M AA>>, delete<<M AA>> },
 )(withRouter(<<M AA>>sContainer));
 
 <<<

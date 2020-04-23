@@ -38,7 +38,9 @@ function callApi (endpoint, schema, method, data, upload = false) {
   }
 
   return fetch(fullUrl, options)
-  .then((response) => response.json().then((json) => ({ json, response })))
+  .then((response) => response.json()
+    .then((json) => ({ json, response }))
+    .catch(() => ({ json: {}, response })))
   .then(({ json, response }) => {
     if (!response.ok) {
       return Promise.reject(json);
@@ -116,50 +118,48 @@ export default (store) => (next) => (action) => {
     type: requestType,
   }));
   return callApi(endpoint, schema, method, body, upload)
-  .then(
-    (response) => {
-      const successResponse = next(actionWith({
-        response,
-        type: successType,
-      }));
-      if (successNext) {
-        executeAllActions(successNext, store)
-        .then((successNextResponse) => {
-          if (successMessage) {
-            next(setMessage(successMessage, 'info', 5000));
-          }
-          return {
-            ...successResponse,
-            successNextResponse,
-          };
-        });
-      }
-      if (successMessage) {
-        next(setMessage(successMessage, 'info', 5000));
-      }
-      return successResponse;
-    },
-    (error) => {
-      if (error && error.message) {
-        if (error.message === 'Failed to fetch') {
-          next(setMessage('Impossible de se connecter au serveur'));
-        } else {
-          next(setMessage(error.message));
+  .then((response) => {
+    const successResponse = next(actionWith({
+      response,
+      type: successType,
+    }));
+    if (successNext) {
+      executeAllActions(successNext, store)
+      .then((successNextResponse) => {
+        if (successMessage) {
+          next(setMessage(successMessage, 'info', 5000));
         }
+        return {
+          ...successResponse,
+          successNextResponse,
+        };
+      });
+    }
+    if (successMessage) {
+      next(setMessage(successMessage, 'info', 5000));
+    }
+    return successResponse;
+  })
+  .catch((error) => {
+    if (error && error.message) {
+      if (error.message === 'Failed to fetch') {
+        next(setMessage('Impossible de se connecter au serveur'));
+      } else {
+        next(setMessage(error.message));
       }
-      if (error && error.statusCode === 401) {
-        return next(logout());
-      }
-      next(actionWith({
-        type: failureType,
-        error: error.message || 'Something bad happened',
-        code: error.code,
-        data: error.data,
-      }));
-      if (errorNext) {
-        executeAllActions(errorNext, store);
-      }
-      throw error.message;
-    },
-  );
+    }
+    if (error && error.statusCode === 401) {
+      return next(logout());
+    }
+    next(actionWith({
+      type: failureType,
+      error: error.message || 'Something bad happened',
+      code: error.code,
+      data: error.data,
+    }));
+    if (errorNext) {
+      executeAllActions(errorNext, store);
+    }
+    return null;
+  });
 };

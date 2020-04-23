@@ -1,20 +1,15 @@
-import { size } from 'lodash';
-
 import { ACCOUNTS_ROLES } from '../configs/Properties';
 
-export function isAdmin (userAccount = {}, uniqRole = false) {
-  return (!uniqRole || size(userAccount.role) === 1)
-    && userAccount.role === ACCOUNTS_ROLES.ADMIN;
+export function isAdmin (userAccount = {}) {
+  return userAccount.role === 'admin';
 }
 
-export function isUser (userAccount = {}, uniqRole = false) {
-  return (!uniqRole || size(userAccount.role) === 1)
-    && userAccount.role === ACCOUNTS_ROLES.USER;
+export function isUser (userAccount = {}) {
+  return userAccount.role === 'user';
 }
 
-export function isReporter (userAccount = {}, uniqRole = false) {
-  return (!uniqRole || size(userAccount.role) === 1)
-    && userAccount.role === ACCOUNTS_ROLES.REPORTER;
+export function isReporter (userAccount = {}) {
+  return userAccount.role === 'reporter';
 }
 
 export function canDoSomething (userAccount = {}) {

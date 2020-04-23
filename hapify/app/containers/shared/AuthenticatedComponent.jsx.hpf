@@ -17,24 +17,6 @@ import { load<<m AA>>s } from '../../store/modules/entities/<<m aA>>s';
  
 import { isAdmin, isUser } from '../../utils/RolesUtils';
  
-@connect(
-  (state) => ({
-    user: state.auth.user,
-    loaded: state.data.loaded,
-    loading: state.data.loading,
-  }),
-  {
-    loadAccounts,
-    loadOption,
-    loadModels,
-    loadUploadContents,
-    loadPosts,
- 
-    <<@ M /pMHd m>>
-    load<<m AA>>s,
-    <<@>>
-  },
-)
 class AuthenticatedComponent extends React.PureComponent {
   constructor (props) {
     super(props);
@@ -43,7 +25,7 @@ class AuthenticatedComponent extends React.PureComponent {
  
   static getDerivedStateFromProps (props) {
     // Waiting for appstorage loading
-    if (!props.loaded.appstorage) {
+    if (props.loaded.appstorage === '') {
       return { preventRender: true };
     }
  
@@ -71,7 +53,7 @@ class AuthenticatedComponent extends React.PureComponent {
     }
  
     // Load application data if not currently loaded
-    const isNotLoaded = (entityKey) => !get(props, `loading.${entityKey}`) && !get(props, `loaded.${entityKey}`);
+    const isNotLoaded = (entityKey) => get(props, `loaded.${entityKey}`) === '';
     if (isNotLoaded('options')) {
       props.loadOption('welcomeMessage');
     }
@@ -129,7 +111,7 @@ AuthenticatedComponent.propTypes = {
   children: PropTypes.node.isRequired,
  
   user: PropTypes.shape({
-    role: PropTypes.arrayOf(PropTypes.string).isRequired,
+    role: PropTypes.string.isRequired,
   }),
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
@@ -138,21 +120,34 @@ AuthenticatedComponent.propTypes = {
     replace: PropTypes.func.isRequired,
   }).isRequired,
   loaded: PropTypes.shape({
-    appstorage: PropTypes.bool.isRequired,
-    accounts: PropTypes.bool.isRequired,
-    options: PropTypes.bool.isRequired,
-    models: PropTypes.bool.isRequired,
-    uploadContents: PropTypes.bool.isRequired,
-    posts: PropTypes.bool.isRequired,
-  }).isRequired,
-  loading: PropTypes.shape({
-    accounts: PropTypes.bool.isRequired,
-    options: PropTypes.bool.isRequired,
-    models: PropTypes.bool.isRequired,
-    uploadContents: PropTypes.bool.isRequired,
-    posts: PropTypes.bool.isRequired,
+    appstorage: PropTypes.string.isRequired,
+    accounts: PropTypes.string.isRequired,
+    options: PropTypes.string.isRequired,
+    models: PropTypes.string.isRequired,
+    uploadContents: PropTypes.string.isRequired,
+    posts: PropTypes.string.isRequired,
+    
+    <<@ M /pMHd m>>
+    <<m aA>>s: PropTypes.string.isRequired,
+    <<@>>
   }).isRequired,
   match: PropTypes.shape().isRequired,
 };
  
-export default withRouter(AuthenticatedComponent);
+export default connect(
+  (state) => ({
+    user: state.auth.user,
+    loaded: state.data.loaded,
+  }),
+  {
+    loadAccounts,
+    loadOption,
+    loadModels,
+    loadUploadContents,
+    loadPosts,
+ 
+    <<@ M /pMHd m>>
+    load<<m AA>>s,
+    <<@>>
+  },
+)(withRouter(AuthenticatedComponent));

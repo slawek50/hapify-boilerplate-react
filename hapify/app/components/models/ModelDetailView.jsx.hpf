@@ -13,7 +13,7 @@ import { ButtonConfirmModal } from 'react-components';
 <<= getImportConstants() >>
  
 const <<M AA>>DetailView = ({
-  <<M aA>> = {}, baseUrl, onClickDelete<<@ D /em d>>, <<d aA>>s<<@>>,
+  <<M aA>> = {}, baseUrl, onClickDelete<<@ F tE/hd/em f>>, <<f.model aA>>s<<@>>,
 }) => (
   <div>
     <<@ F /hd f>>
@@ -48,8 +48,8 @@ const <<M AA>>DetailView = ({
   }).isRequired,
   <<? F tE/hd/pr>>
  
-  <<@ D /em d>>
-  <<d aA>>s: PropTypes.objectOf(PropTypes.shape()),
+  <<@ F tE/hd/em f>>
+  <<f.model aA>>s: PropTypes.objectOf(PropTypes.shape()),
   <<@>>
   <<?>>
  
@@ -57,19 +57,19 @@ const <<M AA>>DetailView = ({
   onClickDelete: PropTypes.func,
 };
  
-export default <<? F tE>>\
-connect(
+export default <<? F tE>>connect(
   (state) => ({
-    <<@ D /em d>>
-    <<d aA>>s: state.data.entities.<<d aA>>s,
+    <<@ F tE/hd/em f>>
+    <<f.model aA>>s: state.data.entities.<<f.model aA>>s,
     <<@>>
   }),
-)\
-<<?>>(<<M AA>>DetailView);
+)<<?>>(<<M AA>>DetailView);
 
 <<<
-function hasType(type) {
-    return root.fields.list.filter(f => f.type === type || f.subtype === type).length > 0;
+function hasType(type, subtype) {
+    return root.fields.list.filter(
+        f => !f.hidden && (f.type === type || f.subtype === type) && (!subtype || f.subtype !== subtype)
+    ).length > 0;
 }
 
 function getImportConstants() {

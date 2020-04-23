@@ -3,17 +3,15 @@ import PropTypes from 'prop-types';
 <<? F tE+tF/hd/pr>>
 import { connect } from 'react-redux';
 <<?>>
-import { reduxForm } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 import { NavLink } from 'react-router-dom';
-<<? F tSe/hd/pr/nu>>
+<<? F tSe/hd/pr>>
 import isEmail from 'validator/lib/isEmail';
 <<?>>
-<<? F tN+tE/hd/pr/nu>>
-import { isNumber } from 'lodash';
-<<?>>
+<<= getImportLodash() >>
 import {
   <<= getImportFieldComponents() >>
-} from 'react-components';
+} from '../elements';
 <<? F tF/hd/pr>>
  
 import { uploadFiles, removeFile } from '../../store/modules/uploads';
@@ -21,11 +19,8 @@ import { uploadFiles, removeFile } from '../../store/modules/uploads';
 import { UPLOADS_URL } from '../../configs/Constants';
 <<?>>
  
-const <<M AA>>EditForm = ({\
-<<? F tE+tF/hd/pr>>
-  handleSubmit, baseUrl,<<? F tF>> upFiles, rmFile,<<?>>\
-  <<@ D d>> <<d aA>>s,<<@>>
-<<??>> handleSubmit, baseUrl <<?>>\
+const <<M AA>>EditForm = ({
+  handleSubmit, baseUrl,<<? F tF/hd/pr>> upFiles, rmFile,<<?>><<@ F tE/hd/pr f>> <<f.model aA>>s,<<@>>
 }) => (
   <form onSubmit={handleSubmit}>
     <div className="grid">
@@ -51,8 +46,8 @@ const <<M AA>>EditForm = ({\
   baseUrl: PropTypes.string.isRequired,
   <<? F tE/hd/pr>>
  
-  <<@ D d>>
-  <<d aA>>s: PropTypes.objectOf(PropTypes.shape()),
+  <<@ F tE/hd f>>
+  <<f.model aA>>s: PropTypes.objectOf(PropTypes.shape()),
   <<@>>
   <<?>>
   <<? F tF/hd/pr>>
@@ -67,19 +62,15 @@ export default reduxForm({
   validate: (values = {}) => {
     const errors = {};
  
-    <<@ F /hd/pr/nu f>>
-    if (<<= getError(f) >>) errors.<<f a_a>> = 'Must be set';
-    <<@>>
+<<@ F /hd/pr/in f>><<= getError(f, '    ') >><<@>>
  
     return errors;
   },
-})\
-<<? F tE+tF/hd/pr>>\
-(connect(
+})<<? F tE+tF/hd/pr>>(connect(
 <<? F tE>>
   (state) => ({
-    <<@ D d>>
-    <<d aA>>s: state.data.entities.<<d aA>>s,
+    <<@ F tE/hd f>>
+    <<f.model aA>>s: state.data.entities.<<f.model aA>>s,
     <<@>>
   }),
 <<??>>
@@ -92,38 +83,55 @@ export default reduxForm({
 <<??>>(<<M AA>>EditForm);<<?>>
 
 <<<
-function hasType(type) {
-    return root.fields.list.filter(f => f.type === type || f.subtype === type).length > 0;
+function hasType(type, subtype) {
+    return root.fields.list.filter(
+        f => !f.primary && !f.hidden && !f.internal && (f.type === type || f.subtype === type) && (!subtype || f.subtype !== subtype)
+    ).length > 0;
+}
+
+function getImportLodash() {
+    const imports = new Set([]);
+    if (hasType('integer')) imports.add('isInteger');
+    if (hasType('number', 'integer')) imports.add('isNumber');
+    if (hasType('entity')) imports.add('map');
+    if (root.fields.list.filter(f => f.multiple && !f.nullable).length > 0) imports.add('map');
+    
+    if (imports.size === 0) return '';
+
+    return `import { ${[...imports].join(', ')} } from 'lodash';`;
 }
 
 function getImportFieldComponents() {
-    const imports = new Set(['Field,']);
-    if (hasType('phone')) imports.add('CleaveField,');
-    if (hasType('datetime')) imports.add('DateField,');
-    if (hasType('file')) imports.add('FileField,');
+    const imports = new Set([]);
+    if (hasType('phone')) imports.add('CleaveField');
+    if (hasType('datetime')) imports.add('DatePickerField');
+    if (hasType('file')) imports.add('FileField');
     if (hasType('boolean')) {
-        imports.add('ToggleField,');
+        imports.add('SwitchField');
     }
-    if (hasType('string') || hasType('number')) {
-        imports.add('InputField,');
-        imports.add('RadioField,');
-        imports.add('SelectField,');
+    if (hasType('string')) {
+        imports.add('TextField');
+        imports.add('RadioField');
+        imports.add('SelectField');
     }
-    if (hasType('entity')) imports.add('SelectField,');
-    if (hasType('text') || hasType('rich')) imports.add('TextareaField,');
+    if (hasType('number')) {
+        imports.add('NumberField');
+    }
+    if (hasType('entity')) imports.add('SelectField');
+    if (hasType('text') || hasType('rich')) imports.add('TextAreaField');
     if (root.properties.hasMultiple) {
-        imports.add('MultiCheckboxField,');
-        imports.add('ArrayField,');
+        imports.add('CheckboxGroupField');
+        imports.add('ArrayField');
     }
 
-    return [...imports].join(' ');
+    return [...imports].join(', ');
 }
 
 function getComponent(field) {
     var customPropsTypes = {
-        string: `<Field name="${field.names.snake}" component={InputField} placeholder="${field.names.capital}" className="col-12" />`,
-        email: `<Field name="${field.names.snake}" component={InputField} type="email" placeholder="${field.names.capital}" className="col-12" />`,
-        password: `<Field name="${field.names.snake}" component={InputField} type="password" placeholder="${field.names.capital}" className="col-12" />`,
+        string: `<Field name="${field.names.snake}" component={TextField} placeholder="${field.names.capital}" className="col-12" />`,
+        email: `<Field name="${field.names.snake}" component={TextField} type="email" placeholder="${field.names.capital}" className="col-12" />`,
+        password: `<Field name="${field.names.snake}" component={TextField} type="password" placeholder="${field.names.capital}" className="col-12" />`,
         phone: `<Field
         name="${field.names.snake}"
         component={CleaveField}
@@ -144,22 +152,20 @@ ${field.multiple ? `
         isMulti` : ''}
       />`,
 
-        number: `<Field name="${field.names.snake}" component={InputField} type="number" placeholder="${field.names.capital}" className="col-12" />`,
-        integer: `<Field name="${field.names.snake}" component={InputField} type="number" placeholder="${field.names.capital}" className="col-12" />`,
-        float: `<Field name="${field.names.snake}" component={InputField} type="number" step="any" placeholder="${field.names.capital}" className="col-12" />`,
+        number: `<Field name="${field.names.snake}" component={NumberField} type="number" placeholder="${field.names.capital}" className="col-12" />`,
+        float: `<Field name="${field.names.snake}" component={NumberField} type="number" step={0.01} placeholder="${field.names.capital}" className="col-12" />`,
 
-        boolean: `<Field name="${field.names.snake}" component={ToggleField} label="${field.names.capital}" className="col-12" />`,
+        boolean: `<Field name="${field.names.snake}" component={SwitchField} label="${field.names.capital}" className="col-12" />`,
 
-        datetime: `<Field name="${field.names.snake}" component={DateField} placeholder="${field.names.capital}" className="col-12" />`,
+        datetime: `<Field name="${field.names.snake}" component={DatePickerField} placeholder="${field.names.capital}" className="col-12" />`,
 
-        text: `<Field name="${field.names.snake}" component={TextareaField} placeholder="${field.names.capital}" className="col-12" />`,
-        rich: `<Field name="${field.names.snake}" component={TextareaField} isWysiwyg placeholder="${field.names.capital}" className="col-12" />`,
+        text: `<Field name="${field.names.snake}" component={TextAreaField} placeholder="${field.names.capital}" className="col-12" />`,
+        rich: `<Field name="${field.names.snake}" component={TextAreaField} isWysiwyg placeholder="${field.names.capital}" className="col-12" />`,
 
         entity: `<Field
         name="${field.names.snake}"
         component={SelectField}
-        options={${field.model && field.model.names.camel}s}
-        optionsKeys={{ value: '${field.model && field.model.fields.primary.names.raw}', label: '${field.model && field.model.fields.lb[0] && field.model.fields.lb[0].names.snake}' }}
+        options={map(${field.model && field.model.names.camel}s, ${field.model && field.model.names.camel} => ({ value: ${field.model && field.model.names.camel}.${field.model && field.model.fields.primary.names.raw}, label: ${field.model && field.model.names.camel}.${field.model && field.model.fields.lb[0] && field.model.fields.lb[0].names.snake} }))}
         placeholder="${field.names.capital}"
         className="col-12"\
 ${field.multiple ? `
@@ -167,24 +173,43 @@ ${field.multiple ? `
       />`,
     };
 
-    const component = customPropsTypes[field.subtype || field.type] || customPropsTypes['string'];
+    const component = customPropsTypes[field.subtype] || customPropsTypes[field.type] || customPropsTypes['string'];
     if (field.multiple && field.type !== 'entity' && field.type !== 'file') {
-        return component.replace('<Field', '<ArrayField').replace('/>', 'addLabel="Ajouter un élément (+)" removable />');
+        return component.replace('<Field', '<ArrayField').replace('/>', 'addLabel="Ajouter un élément" removable />');
     }
     return component;
 }
 
-function getError (field) {
+function getError (field, indent) {
+    let errors = '';
     if (field.multiple) {
-        return `!Array.isArray(values.${field.names.snake}) || values.${field.names.snake}.length === 0`;
+        if (!field.nullable) {
+            errors += `${indent}if (!values.${field.names.snake} || values.${field.names.snake}.length === 0) errors.${field.names.snake} = { _error: 'Can\\'t be empty' };
+    else {
+      errors.${field.names.snake} = [];
+      map(values.${field.names.snake}, (value, key) => {
+        if (!value) errors.${field.names.snake}[key] = 'Can\\'t be empty';
+      });
+    }\n`;
+        }
+        errors += `${indent}if (!Array.isArray(values.${field.names.snake})) errors.${field.names.snake} = { _error: 'Must be an array' };\n`;
+        return errors;
     }
-    var customPropsTypes = {
-        email: `!isEmail(values.${field.names.snake} || '')`,
-        number: `!isNumber(values.${field.names.snake})`,
-        integer: `!isNumber(values.${field.names.snake})`,
-        float: `!isNumber(values.${field.names.snake})`,
-        boolean: `!(values.${field.names.snake} === false || values.${field.names.snake} === true)`,
+
+    const nullable = field.nullable ? `values.${field.names.snake} && ` : '';
+    const customPropsTypes = {
+        email: `if (${nullable}!isEmail(values.${field.names.snake} || '')) errors.${field.names.snake} = 'Is not an email';`,
+        number: `if (${nullable}!isNumber(values.${field.names.snake})) errors.${field.names.snake} = 'Is not a number';`,
+        integer: `if (${nullable}!isInteger(values.${field.names.snake})) errors.${field.names.snake} = 'Is not an integer';`,
+        float: `if (${nullable}!isNumber(values.${field.names.snake})) errors.${field.names.snake} = 'Is not a float';`,
+        boolean: `if (${nullable}!(values.${field.names.snake} === false || values.${field.names.snake} === true)) errors.${field.names.snake} = 'Is not a boolean';`,
     };
-    return customPropsTypes[field.subtype || field.type] || `!values.${field.names.snake}`;
+    if (customPropsTypes[field.subtype] || customPropsTypes[field.type]) {
+        errors += `${indent}${customPropsTypes[field.subtype] || customPropsTypes[field.type]}\n`;
+    } else if (!field.nullable) {
+        errors += `${indent}if (!values.${field.names.snake}) errors.${field.names.snake} = 'Can\\'t be empty';\n`;
+    }
+    
+    return errors;
 }
 >>>

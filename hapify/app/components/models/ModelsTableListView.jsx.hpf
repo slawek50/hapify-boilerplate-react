@@ -51,7 +51,7 @@ const <<M AA>>sTableListView = ({
           {<<M aA>> && (
             <ButtonConfirmModal
               onConfirmationButton={() => onClickDelete(<<M aA>>.<<P R>>)}
-              message="Voulez-vous vraiment effacer le modèle ?"
+              message="Voulez-vous vraiment effacer le <<M A>> ?"
             >
               <button className="btn" type="button">
                 <i className="far fa-trash" />
@@ -86,21 +86,21 @@ const <<M AA>>sTableListView = ({
   }).isRequired,
 };
  
-export default <<? F tE>>\
-connect(
+export default <<? F tE>>connect(
   (state) => ({
     <<@ D /em d>>
     <<d aA>>s: state.data.entities.<<d aA>>s,
     <<@>>
   }),
-)\
-(<<?>>withRouter(<<M AA>>sTableListView)<<? F tE>>)<<?>>;
+)(<<?>>withRouter(<<M AA>>sTableListView)<<? F tE>>)<<?>>;
 
 <<<
-function hasType(type) {
-    return root.fields.list.filter(f => f.type === type || f.subtype === type).length > 0;
+function hasType(type, subtype) {
+    return root.fields.list.filter(
+        f => !f.hidden && (f.type === type || f.subtype === type) && (!subtype || f.subtype !== subtype)
+    ).length > 0;
 }
- 
+
 function getImportConstants() {
     const imports = new Set([]);
     if (hasType('datetime')) imports.add('DATE_FORMAT');

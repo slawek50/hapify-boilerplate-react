@@ -11,17 +11,14 @@ const UPDATE_OPTION_FAILURE = 'rswa/options/UPDATE_OPTION_FAILURE';
 
 export const optionsActionsHandlers = {
   [FETCH_OPTION_REQUEST]: (state) => flow(
-    set('loaded.options', false),
-    set('loading.options', true),
+    set('loaded.options', 'loading'),
   )(state),
   [FETCH_OPTION_SUCCESS]: (state, action) => flow(
     set(`entities.options.${action.optionName}`, action.response.data),
-    set('loaded.options', true),
-    set('loading.options', false),
+    set('loaded.options', 'loaded'),
   )(state),
   [FETCH_OPTION_FAILURE]: (state) => flow(
     set('loaded.options', 'error'),
-    set('loading.options', false),
   )(state),
   [UPDATE_OPTION_SUCCESS]: (state, action) => flow(
     set(`entities.options.${action.optionName}`, action.response.data),

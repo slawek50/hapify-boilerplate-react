@@ -1,15 +1,15 @@
 import { accountsActionsHandlers } from './accounts';
 import { optionsActionsHandlers } from './options';
+import { uploadsActionsHandlers } from './uploads';
 import { modelsActionsHandlers } from './models';
-import { uploadContentsActionsHandlers } from './uploadContents';
-import { postsActionsHandlers } from './posts';
 import initialState from '../initialState';
  
 <<@ M /pMHd m>>
 import { <<m aA>>sActionsHandlers } from './entities/<<m aA>>s';
 <<@>>
  
-import { uploadsActionsHandlers } from './uploads';
+import { uploadContentsActionsHandlers } from './uploadContents';
+import { postsActionsHandlers } from './posts';
 import { socketActionsHandlers } from './socket';
 import { globalsActionsHandlers } from './globals';
  

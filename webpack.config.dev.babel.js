@@ -13,7 +13,7 @@ module.exports = {
   ],
   devtool: 'source-map',
   devServer: {
-    port: 4200,
+    port: 4201,
     contentBase: 'static/',
     historyApiFallback: true,
   },

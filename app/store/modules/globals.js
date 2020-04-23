@@ -20,13 +20,13 @@ export const globalsActionsHandlers = {
     set(`config.${action.key}`, action.value),
   )(state),
   [LOAD]: (state) => flow(
-    set('loaded.appstorage', true),
+    set('loaded.appstorage', 'loaded'),
   )(state),
-  [LOGOUT_SUCCESS]: () => ({
+  [LOGOUT_SUCCESS]: (state) => ({
     ...initialState,
     loaded: {
       ...initialState.loaded,
-      appstorage: true,
+      appstorage: state.loaded.appstorage,
     },
   }),
 };

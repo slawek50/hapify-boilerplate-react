@@ -1,5 +1,3 @@
-import { ACCOUNTS_ROLES } from '../configs/Properties';
-
 export function isAdmin (userAccount = {}) {
   return userAccount.role === 'admin';
 }

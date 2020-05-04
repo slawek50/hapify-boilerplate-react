@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { get } from 'lodash';
-import { isUserAgentMobile } from 'react-components';
+ 
+import { isUserAgentMobile } from '../../utils/DeviceUtils';
  
 import { loadAccounts } from '../../store/modules/accounts';
 import { loadOption } from '../../store/modules/options';
@@ -43,11 +44,11 @@ class AuthenticatedComponent extends React.PureComponent {
         ? `/session/sign-in?next=${props.location.pathname}`
         : null);
     }
-    if (!isUser(props.user) && props.location.pathname.indexOf('/user') === 0) {
+    if (props.location.pathname.indexOf('/user') === 0 && !isUser(props.user) && !isAdmin(props.user)) {
       // Only User access to /user
       return redirectLocation('/');
     }
-    if (!isAdmin(props.user) && props.location.pathname.indexOf('/admin/') === 0) {
+    if (props.location.pathname.indexOf('/admin/') === 0 && !isAdmin(props.user)) {
       // Only Admin access to /admin
       return redirectLocation('/');
     }

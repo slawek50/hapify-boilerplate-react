@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { reduxForm } from 'redux-form';
-import { Field, InputField, validateEmail } from 'react-components';
+import {
+  Form, Input, Button,
+} from 'antd';
+import { UserOutlined } from '@ant-design/icons';
 
-const PasswordRecoverForm = ({ handleSubmit, onClickCancel }) => (
+import getRules from '../../utils/RulesValidator';
+
+const PasswordRecoverForm = ({ onSubmit, initialValues, onClickCancel }) => (
   <div className="box animated fadeInDown">
     <div className="box-header">
       <div className="logo" />
@@ -12,18 +16,19 @@ const PasswordRecoverForm = ({ handleSubmit, onClickCancel }) => (
     </div>
     <div className="box-content">
       <p className="text-center">Veillez saisir votre adresse email afin de recevoir un nouveau mot de passe.</p>
-      <form
-        onSubmit={handleSubmit}
+      <Form
+        onFinish={(v) => onSubmit({ ...initialValues, ...v })}
+        initialValues={initialValues}
         className="login-form"
       >
-        <Field name="email" component={InputField} type="text" label="Email" placeholder="Adresse email" className="field" fontIcon="far fa-user" />
-        <button
-          className="btn btn-full"
-          type="submit"
-        >
-          Envoyer
-        </button>
+        <Form.Item name="email" label="Email" rules={getRules('email', true)} hasFeedback>
+          <Input placeholder="Adresse email" prefix={<UserOutlined />} />
+        </Form.Item>
+
+        <Button type="primary" htmlType="submit">Envoyer</Button>
+
         <div className="form-separator" />
+
         <div className="btn-group">
           <button
             type="button"
@@ -33,25 +38,15 @@ const PasswordRecoverForm = ({ handleSubmit, onClickCancel }) => (
             Annuler
           </button>
         </div>
-      </form>
+      </Form>
     </div>
   </div>
 );
 
 PasswordRecoverForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  initialValues: PropTypes.shape().isRequired,
   onClickCancel: PropTypes.func.isRequired,
 };
 
-export default reduxForm({
-  form: 'PasswordRecoverForm',
-  validate: (values = {}) => {
-    const errors = {};
-    if (!values.email) {
-      errors.email = 'Champ obligatoire';
-    } else if (!validateEmail(values.email)) {
-      errors.email = 'Veuillez saisir une adresse email';
-    }
-    return errors;
-  },
-})(PasswordRecoverForm);
+export default (PasswordRecoverForm);

@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { reduxForm } from 'redux-form';
-import { Field, InputField } from 'react-components';
+import {
+  Form, Input, Button,
+} from 'antd';
+import { LockOutlined } from '@ant-design/icons';
 
-const ResetPasswordForm = ({ handleSubmit }) => (
+import getRules from '../../utils/RulesValidator';
+
+const ResetPasswordForm = ({ onSubmit, initialValues }) => (
   <div className="box animated fadeInDown">
     <div className="box-header">
       <div className="logo" />
@@ -12,36 +16,40 @@ const ResetPasswordForm = ({ handleSubmit }) => (
     </div>
     <div className="box-content">
       <p className="text-center">Veillez saisir votre nouveau mot de passe.</p>
-      <form
-        onSubmit={handleSubmit}
+      <Form
+        onFinish={(v) => onSubmit({ ...initialValues, ...v })}
+        initialValues={initialValues}
         className="login-form"
       >
-        <Field name="password" component={InputField} type="password" label="Mot de passe" placeholder="Mot de passe" fontIcon="far fa-lock" className="field" />
-        <Field name="verification" component={InputField} type="password" label="Vérification" placeholder="Vérification" fontIcon="far fa-lock" className="field" />
-        <button
-          className="btn btn-full"
-          type="submit"
+        <Form.Item name="password" label="Mot de passe" rules={getRules('password', true)} hasFeedback>
+          <Input.Password placeholder="Mot de passe" prefix={<LockOutlined />} />
+        </Form.Item>
+        <Form.Item
+          name="verification"
+          label="Vérification"
+          rules={[
+            ...getRules('password', true),
+            ({ getFieldValue }) => ({
+              validator: (r, v) => {
+                if (!v || getFieldValue('password') === v) return Promise.resolve();
+                return Promise.reject(new Error('Not same password'));
+              },
+            }),
+          ]}
+          hasFeedback
         >
-          Enregistrer
-        </button>
-      </form>
+          <Input.Password placeholder="Vérification" prefix={<LockOutlined />} />
+        </Form.Item>
+
+        <Button type="primary" htmlType="submit">Enregistrer</Button>
+      </Form>
     </div>
   </div>
 );
 
 ResetPasswordForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  initialValues: PropTypes.shape().isRequired,
 };
 
-export default reduxForm({
-  form: 'ResetPasswordForm',
-  validate: (values = {}) => {
-    const errors = {};
-    if (!values.password) {
-      errors.password = 'Champ obligatoire';
-    } else if (values.password !== values.verification) {
-      errors.verification = 'Les deux champs ne sont pas identiques';
-    }
-    return errors;
-  },
-})(ResetPasswordForm);
+export default (ResetPasswordForm);

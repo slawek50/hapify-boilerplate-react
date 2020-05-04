@@ -4,7 +4,10 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
-import { IconButton, upperFirst } from 'react-components';
+import { Button } from 'antd';
+import { MenuOutlined } from '@ant-design/icons';
+
+import { upperFirst } from '../../utils/StringUtils';
 
 import { setConfig } from '../../store/modules/globals';
 import { sendSocket } from '../../store/modules/socket';
@@ -26,7 +29,11 @@ const PageHeader = ({
     <div className={classNames('page-header', className)}>
       <div className="container">
         <div className="page-header-left">
-          <IconButton onClick={() => setConf('menuIsTiny', !menuIsTiny)} fontIcon="far fa-bars" className="menu-button btn" />
+          <Button
+            icon={<MenuOutlined />}
+            className="menu-button btn"
+            onClick={() => setConf('menuIsTiny', !menuIsTiny)}
+          />
           <div className="page-header-title">
             {title}
           </div>

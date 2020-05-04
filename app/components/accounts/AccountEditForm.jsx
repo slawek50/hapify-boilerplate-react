@@ -1,54 +1,44 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { reduxForm } from 'redux-form';
 import {
-  Field, InputField, SelectField,
-} from 'react-components';
+  Button, Form, Input, Select,
+} from 'antd';
+import { map } from 'lodash';
+
+import getRules from '../../utils/RulesValidator';
 
 import { ACCOUNTS_ROLES } from '../../configs/Properties';
 
-const AccountEditForm = ({ handleSubmit, isMyAccount }) => (
-  <form onSubmit={handleSubmit}>
+const AccountEditForm = ({ onSubmit, initialValues, isMyAccount }) => (
+  <Form onFinish={(v) => onSubmit({ ...initialValues, ...v })} initialValues={initialValues}>
     <div className="grid">
-      <div className="col-12">
-        <Field name="name" component={InputField} placeholder="Identifiant" label="Identifiant" disabled={isMyAccount} />
-      </div>
-      <div className="col-12">
-        <Field name="email" component={InputField} placeholder="Email" label="Email" type="email" />
-      </div>
+      <Form.Item name="name" label="Identifiant" rules={getRules('string', true)} hasFeedback><Input placeholder="Identifiant" disabled={isMyAccount} /></Form.Item>
+      <Form.Item name="email" label="Email" rules={getRules('email', true)} hasFeedback><Input placeholder="Email" /></Form.Item>
       {!isMyAccount && (
-        <div className="col-12">
-          <Field name="role" component={SelectField} placeholder="Rôle" label="Rôle" options={ACCOUNTS_ROLES} />
-        </div>
+        <Form.Item name="role" label="Rôle" rules={getRules('entity', true)} hasFeedback>
+          <Select placeholder="Rôle">
+            {map(ACCOUNTS_ROLES, (role, value) => (
+              <Select.Option key={value} value={value}>{role}</Select.Option>
+            ))}
+          </Select>
+        </Form.Item>
       )}
       {isMyAccount && (
-        <div className="col-12">
-          <Field name="password" component={InputField} placeholder="Mot de passe" label="Mot de passe" type="password" />
-        </div>
+        <Form.Item name="password" label="Mot de passe" rules={getRules('password', true)} hasFeedback><Input.Password placeholder="Mot de passe" /></Form.Item>
       )}
     </div>
     <div className="btn-group right">
-      <button className="btn" type="submit">
-        Enregistrer
-      </button>
+      <Form.Item>
+        <Button type="primary" htmlType="submit">Enregistrer</Button>
+      </Form.Item>
     </div>
-  </form>
+  </Form>
 );
 
 AccountEditForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-
+  onSubmit: PropTypes.func.isRequired,
+  initialValues: PropTypes.shape().isRequired,
   isMyAccount: PropTypes.bool.isRequired,
 };
 
-export default reduxForm({
-  form: 'AccountEditForm',
-  validate: (values = {}) => {
-    const errors = {};
-
-    if (!values.name) errors.name = 'Must be set';
-    if (!values.email) errors.email = 'Must be set';
-
-    return errors;
-  },
-})(AccountEditForm);
+export default (AccountEditForm);

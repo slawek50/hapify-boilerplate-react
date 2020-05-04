@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   isString, isArray, isFunction, map, orderBy,
 } from 'lodash';
-import { InputField, SelectField } from 'react-components';
+import { Input, Select } from 'antd';
 
 import sharedSelector from '../../selectors/SharedSelector';
 
@@ -39,29 +39,28 @@ const CardListView = ({
           <div className="toolbar-actions">
             {(search) && (
               <div className="toolbar-search">
-                <InputField
+                <Input
                   placeholder={searchLabel}
-                  input={{
-                    value: searchText,
-                    onChange: (e) => {
-                      if (isFunction(search)) {
-                        return search(e.target.value);
-                      }
-                      return setSearchText(e.target.value);
-                    },
+                  value={searchText}
+                  onChange={(e) => {
+                    if (isFunction(search)) {
+                      return search(e.target.value);
+                    }
+                    return setSearchText(e.target.value);
                   }}
                 />
               </div>
             )}
             {isArray(sortOptions) && (
-              <SelectField
+              <Select
                 placeholder={sortLabel}
-                input={{
-                  value: sort.by,
-                  onChange: setOrder,
-                }}
-                options={sortOptions}
-              />
+                value={sort.by}
+                onChange={setOrder}
+              >
+                {map(sortOptions, (value) => (
+                  <Select.Option key={value} value={value}>{value}</Select.Option>
+                ))}
+              </Select>
             )}
             {buttons && (
               <div className="toolbar-buttons">

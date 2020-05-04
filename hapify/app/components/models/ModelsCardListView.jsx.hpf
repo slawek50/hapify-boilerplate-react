@@ -8,9 +8,9 @@ import { capitalize<<? F tE/hd/pr>>, get<<?>><<? F ml/hd>>, map<<?>> } from 'lod
 <<? F tD/hd/pr>>
 import moment from 'moment';
 <<?>>
-import { ButtonConfirmModal } from 'react-components';
-
 <<= getImportConstants() >>
+ 
+import { ButtonConfirmModal } from '../elements';
  
 import CardListView from '../shared/CardListView';
  

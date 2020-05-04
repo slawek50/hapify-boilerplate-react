@@ -3,7 +3,8 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-import { IconButton } from 'react-components';
+import { Button } from 'antd';
+import { LogoutOutlined, MenuOutlined } from '@ant-design/icons';
  
 import { setConfig } from '../../store/modules/globals';
 import { logout } from '../../store/modules/auth';
@@ -133,7 +134,7 @@ const Header = ({
               >
                 <i className="item-icon fal fa-cog" />
               </NavLink>
-              <IconButton title="Déconnexion" fontIcon="fal fa-sign-out" onClick={doLogout} />
+              <Button title="Déconnexion" icon={<LogoutOutlined />} onClick={doLogout} />
             </div>
           </div>
         </nav>
@@ -147,7 +148,12 @@ const Header = ({
           onClick={() => setConf('menuIsOpen', false)}
           aria-label="Menu"
         />
-        <IconButton onClick={() => setConf('menuIsOpen', true)} fontIcon="far fa-bars" title="Menu" className={classNames('menu-button', { 'menu-opened': menuIsOpen })} />
+        <Button
+          title="Menu"
+          icon={<MenuOutlined />}
+          className={classNames('menu-button', { 'menu-opened': menuIsOpen })}
+          onClick={() => setConf('menuIsOpen', !menuIsOpen)}
+        />
       </div>
     </div>
   </header>

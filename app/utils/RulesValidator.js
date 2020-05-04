@@ -14,9 +14,8 @@ const typesRules = {
   integer: {
     validator: (r, v) => {
       if (Number.isInteger(v)) return Promise.resolve();
-      return Promise.reject(new Error('Not Integer'));
+      return Promise.reject(new Error('Is not an integer !'));
     },
-    message: 'Is not an integer !',
   },
 };
 

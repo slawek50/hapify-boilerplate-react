@@ -27,6 +27,7 @@ const <<M AA>>EditFormAntd = ({
     <div className="grid">
       <<@ F /hd/pr/in f>>
       <<= getComponent(f) >>
+ 
       <<@>>
     </div>
  
@@ -124,25 +125,49 @@ function getComponent(field) {
     const itemProps = `name="${field.names.snake}"`;
     const inputProps = `placeholder="${field.names.capital}"`;
     const customPropsTypes = {
-        string: `<Form.Item ${itemProps} rules={getRules('string', ${!field.nullable})} hasFeedback><Input ${inputProps} /></Form.Item>`,
-        email: `<Form.Item ${itemProps} rules={getRules('email', ${!field.nullable})} hasFeedback><Input ${inputProps} /></Form.Item>`,
-        password: `<Form.Item ${itemProps} rules={getRules('password', ${!field.nullable})} hasFeedback><Input.Password ${inputProps} /></Form.Item>`,
-        url: `<Form.Item ${itemProps} rules={getRules('url', ${!field.nullable})} hasFeedback><Input ${inputProps} /></Form.Item>`,
-        text: `<Form.Item ${itemProps} rules={getRules('text', ${!field.nullable})} hasFeedback><Input.TextArea ${inputProps} /></Form.Item>`,
+        string: `<Form.Item ${itemProps} rules={getRules('string', ${!field.nullable})} hasFeedback>
+        <Input ${inputProps} />
+      </Form.Item>`,
+        email: `<Form.Item ${itemProps} rules={getRules('email', ${!field.nullable})} hasFeedback>
+        <Input ${inputProps} />
+      </Form.Item>`,
+        password: `<Form.Item ${itemProps} rules={getRules('password', ${!field.nullable})} hasFeedback>
+        <Input.Password ${inputProps} />
+      </Form.Item>`,
+        url: `<Form.Item ${itemProps} rules={getRules('url', ${!field.nullable})} hasFeedback>
+        <Input ${inputProps} />
+      </Form.Item>`,
+        text: `<Form.Item ${itemProps} rules={getRules('text', ${!field.nullable})} hasFeedback>
+        <Input.TextArea ${inputProps} />
+      </Form.Item>`,
         // rich wysiwyg
         // phone cleave
 
-        number: `<Form.Item ${itemProps} rules={getRules('number', ${!field.nullable})} hasFeedback><InputNumber ${inputProps} /></Form.Item>`,
-        integer: `<Form.Item ${itemProps} rules={getRules('integer', ${!field.nullable})} hasFeedback><InputNumber ${inputProps} step={1} /></Form.Item>`,
-        float: `<Form.Item ${itemProps} rules={getRules('number', ${!field.nullable})} hasFeedback><InputNumber ${inputProps} step={0.01} /></Form.Item>`,
+        number: `<Form.Item ${itemProps} rules={getRules('number', ${!field.nullable})} hasFeedback>
+        <InputNumber ${inputProps} />
+      </Form.Item>`,
+        integer: `<Form.Item ${itemProps} rules={getRules('integer', ${!field.nullable})} hasFeedback>
+        <InputNumber ${inputProps} step={1} />
+      </Form.Item>`,
+        float: `<Form.Item ${itemProps} rules={getRules('number', ${!field.nullable})} hasFeedback>
+        <InputNumber ${inputProps} step={0.01} />
+      </Form.Item>`,
         // lat
         // long
 
-        boolean: `<Form.Item ${itemProps} rules={getRules('boolean', ${!field.nullable})} valuePropName="checked" hasFeedback><Switch ${inputProps} /></Form.Item>`,
+        boolean: `<Form.Item ${itemProps} rules={getRules('boolean', ${!field.nullable})} valuePropName="checked" hasFeedback>
+        <Switch ${inputProps} />
+      </Form.Item>`,
 
-        datetime: `<Form.Item ${itemProps} rules={getRules('datetime', ${!field.nullable})} hasFeedback><DatePicker ${inputProps} showTime /></Form.Item>`,
-        date: `<Form.Item ${itemProps} rules={getRules('date', ${!field.nullable})} hasFeedback><DatePicker ${inputProps} /></Form.Item>`,
-        time: `<Form.Item ${itemProps} rules={getRules('time', ${!field.nullable})} hasFeedback><TimePicker ${inputProps} /></Form.Item>`,
+        datetime: `<Form.Item ${itemProps} rules={getRules('datetime', ${!field.nullable})} hasFeedback>
+        <DatePicker ${inputProps} showTime />
+      </Form.Item>`,
+        date: `<Form.Item ${itemProps} rules={getRules('date', ${!field.nullable})} hasFeedback>
+        <DatePicker ${inputProps} />
+      </Form.Item>`,
+        time: `<Form.Item ${itemProps} rules={getRules('time', ${!field.nullable})} hasFeedback>
+        <TimePicker ${inputProps} />
+      </Form.Item>`,
 
         // object ??
         

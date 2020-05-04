@@ -7,11 +7,6 @@ import AuthenticatedComponent from './shared/AuthenticatedComponent';
 import PageNotFound from './shared/PageNotFound';
 import Home from './home/Home';
  
-import AccountsListContainer from './accounts/AccountsListContainer';
-import OptionsContainer from './options/OptionsContainer';
-import ModelsContainer from './models/ModelsContainer';
-import UploadContentsContainer from './uploadContents/UploadContentsContainer';
- 
 import MyAccountContainer from './accounts/MyAccountContainer';
  
 <<@ M /pMHd m>>
@@ -34,11 +29,6 @@ const Router = () => (
  
       <Route exact path="/user" render={requireAuthentication(Home)} />
       <Route exact path="/user/account" render={requireAuthentication(MyAccountContainer)} />
- 
-      <Route path="/admin/accounts" render={requireAuthentication(AccountsListContainer)} />
-      <Route path="/admin/options" render={requireAuthentication(OptionsContainer)} />
-      <Route path="/admin/models" render={requireAuthentication(ModelsContainer)} />
-      <Route path="/admin/uploadContents" render={requireAuthentication(UploadContentsContainer)} />
  
       <<@ M /pMHd m>>
       <Route path="/admin/<<m aA>>s" render={requireAuthentication(<<m AA>>sContainer)} />

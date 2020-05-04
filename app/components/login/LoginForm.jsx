@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { reduxForm } from 'redux-form';
-import { Field, InputField, validateEmail } from 'react-components';
+import {
+  Form, Input, Button,
+} from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
-const LoginForm = ({ handleSubmit, onClickRecoverPassword }) => (
+import getRules from '../../utils/RulesValidator';
+
+const LoginForm = ({ onSubmit, initialValues, onClickRecoverPassword }) => (
   <div className="box animated">
     <div className="box-header">
       <div className="logo" />
@@ -11,19 +15,22 @@ const LoginForm = ({ handleSubmit, onClickRecoverPassword }) => (
       <h1>Login</h1>
     </div>
     <div className="box-content">
-      <form
-        onSubmit={handleSubmit}
+      <Form
+        onFinish={(v) => onSubmit({ ...initialValues, ...v })}
+        initialValues={initialValues}
         className="login-form"
       >
-        <Field name="email" component={InputField} type="email" label="Email" placeholder="Adresse email" fontIcon="far fa-user" className="field" />
-        <Field name="password" component={InputField} type="password" label="Mot de passe" placeholder="Mot de passe" fontIcon="far fa-lock" className="field" />
-        <button
-          className="btn btn-full"
-          type="submit"
-        >
-          Se connecter
-        </button>
+        <Form.Item name="email" label="Email" rules={getRules('email', true)} hasFeedback>
+          <Input placeholder="Adresse email" prefix={<UserOutlined />} />
+        </Form.Item>
+        <Form.Item name="password" label="Mot de passe" rules={getRules('password', true)} hasFeedback>
+          <Input.Password placeholder="Mot de passe" prefix={<LockOutlined />} />
+        </Form.Item>
+
+        <Button type="primary" htmlType="submit">Se connecter</Button>
+
         <div className="form-separator" />
+
         <div className="btn-group">
           <button
             type="button"
@@ -33,25 +40,15 @@ const LoginForm = ({ handleSubmit, onClickRecoverPassword }) => (
             Mot de passe oublié
           </button>
         </div>
-      </form>
+      </Form>
     </div>
   </div>
 );
 
 LoginForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  initialValues: PropTypes.shape().isRequired,
   onClickRecoverPassword: PropTypes.func.isRequired,
 };
 
-export default reduxForm({
-  form: 'LoginForm',
-  validate: (values = {}) => {
-    const errors = {};
-    if (!values.email) {
-      errors.email = 'Champ obligatoire';
-    } else if (!validateEmail(values.email)) {
-      errors.email = 'Veuillez saisir une adresse email';
-    }
-    return errors;
-  },
-})(LoginForm);
+export default (LoginForm);

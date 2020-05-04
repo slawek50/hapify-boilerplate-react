@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { getJSONFromUrlParams } from 'react-components';
+
+import { getJSONFromUrlParams } from '../../utils/URLParser';
 
 import { login, recoverPassword, RECOVER_PASSWORD_SUCCESS } from '../../store/modules/auth';
 import { setMessage } from '../../store/modules/globals';

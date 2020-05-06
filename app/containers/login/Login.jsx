@@ -2,18 +2,17 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { notification } from 'antd';
 
 import { getJSONFromUrlParams } from '../../utils/URLParser';
 
 import { login, recoverPassword, RECOVER_PASSWORD_SUCCESS } from '../../store/modules/auth';
-import { setMessage } from '../../store/modules/globals';
 
 import LoginForm from '../../components/login/LoginForm';
 import PasswordRecoverForm from '../../components/login/PasswordRecoverForm';
-import MessageBox from '../shared/MessageBox';
 
 const Login = ({
-  history, doLogin, doRecoverPassword, setMsg,
+  history, doLogin, doRecoverPassword,
 }) => {
   const [forgottenPassword, setForgottenPassword] = useState(false);
 
@@ -27,13 +26,12 @@ const Login = ({
   .then((action) => {
     if (action.type === RECOVER_PASSWORD_SUCCESS) {
       setForgottenPassword(false);
-      setMsg('Un lien de réinitialisation du mot de passe vous a été envoyé par email.', 'info', 5000);
+      notification.success({ message: 'Un lien de réinitialisation du mot de passe vous a été envoyé par email.' });
     }
   });
 
   return (
     <main className="login">
-      <MessageBox />
       <div className="login-overflow">
         { !forgottenPassword
           ? (
@@ -59,10 +57,9 @@ Login.propTypes = {
 
   doLogin: PropTypes.func.isRequired,
   doRecoverPassword: PropTypes.func.isRequired,
-  setMsg: PropTypes.func.isRequired,
 };
 
 export default connect(
   null,
-  { doLogin: login, doRecoverPassword: recoverPassword, setMsg: setMessage },
+  { doLogin: login, doRecoverPassword: recoverPassword },
 )(withRouter(Login));

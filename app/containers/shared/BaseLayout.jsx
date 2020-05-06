@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import classnames from 'classnames';
 import Modal from 'react-modal';
 
-import MessageBox from './MessageBox';
-
 import Header from '../../components/shared/Header';
 import PageHeader from '../../components/shared/PageHeader';
 
@@ -17,7 +15,6 @@ const BaseLayout = ({
   title, hideHeader, className, pageHeaderClassName, children, account,
 }) => (
   <div id="wrapper" className={`env-${process.env.NODE_ENV} ${isAdmin(account) ? 'admin' : 'client'}`}>
-    <MessageBox />
     <Header />
     <main>
       {!hideHeader && (

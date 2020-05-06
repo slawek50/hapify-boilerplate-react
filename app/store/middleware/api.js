@@ -2,11 +2,11 @@ import { normalize } from 'normalizr';
 import fetch from 'isomorphic-fetch';
 import FormData from 'form-data';
 import { map } from 'lodash';
+import { notification } from 'antd';
 
 import { CALL_API } from '../Schemas';
 import { API_URL } from '../../configs/Constants';
 import { logout } from '../modules/auth';
-import { setMessage } from '../modules/globals';
 
 // Fetches an API response and normalizes the result JSON according to schema.
 // This makes every API response have the same shape, regardless of how nested it was.
@@ -127,7 +127,7 @@ export default (store) => (next) => (action) => {
       executeAllActions(successNext, store)
       .then((successNextResponse) => {
         if (successMessage) {
-          next(setMessage(successMessage, 'info', 5000));
+          notification.success({ message: successMessage });
         }
         return {
           ...successResponse,
@@ -136,16 +136,16 @@ export default (store) => (next) => (action) => {
       });
     }
     if (successMessage) {
-      next(setMessage(successMessage, 'info', 5000));
+      notification.success({ message: successMessage });
     }
     return successResponse;
   })
   .catch((error) => {
     if (error && error.message) {
       if (error.message === 'Failed to fetch') {
-        next(setMessage('Impossible de se connecter au serveur'));
+        notification.error({ message: 'Impossible de se connecter au serveur', duration: 0 });
       } else {
-        next(setMessage(error.message));
+        notification.error({ message: error.message, duration: 0 });
       }
     }
     if (error && error.statusCode === 401) {

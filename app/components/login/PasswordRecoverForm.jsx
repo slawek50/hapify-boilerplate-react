@@ -30,13 +30,7 @@ const PasswordRecoverForm = ({ onSubmit, initialValues, onClickCancel }) => (
         <div className="form-separator" />
 
         <div className="btn-group">
-          <button
-            type="button"
-            className="btn btn-link btn-full"
-            onClick={onClickCancel}
-          >
-            Annuler
-          </button>
+          <Button type="link" block onClick={onClickCancel}>Annuler</Button>
         </div>
       </Form>
     </div>

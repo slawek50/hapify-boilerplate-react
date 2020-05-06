@@ -32,13 +32,7 @@ const LoginForm = ({ onSubmit, initialValues, onClickRecoverPassword }) => (
         <div className="form-separator" />
 
         <div className="btn-group">
-          <button
-            type="button"
-            className="btn btn-link btn-full"
-            onClick={onClickRecoverPassword}
-          >
-            Mot de passe oublié
-          </button>
+          <Button type="link" block onClick={onClickRecoverPassword}>Mot de passe oublié</Button>
         </div>
       </Form>
     </div>

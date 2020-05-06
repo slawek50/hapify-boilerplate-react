@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
+import { Button, Tooltip } from 'antd';
+import { CloseOutlined } from '@ant-design/icons';
 
 import { setMessage } from '../../store/modules/globals';
 
@@ -24,7 +26,9 @@ const MessageBox = ({ message, setMsg }) => {
               {message.text}
             </span>
           </div>
-          <button type="button" onClick={() => setMsg()} aria-label="Close"><i className="fas fa-times" /></button>
+          <Tooltip title="Fermer">
+            <Button icon={<CloseOutlined />} onClick={() => setMsg()} />
+          </Tooltip>
         </div>
       )}
     </div>

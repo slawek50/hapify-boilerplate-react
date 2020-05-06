@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import {
   get, isString, isArray, isFunction, map, orderBy,
 } from 'lodash';
-import { Input, Select } from 'antd';
+import { Input, Select, Button } from 'antd';
+import { UpOutlined, DownOutlined } from '@ant-design/icons';
 
 import sharedSelector from '../../selectors/SharedSelector';
 
@@ -88,8 +89,7 @@ const TableListView = ({
             <div className="tr">
               <div className="grid">
                 {map(cols, (col, colKey) => col && (
-                  <button
-                    type="button"
+                  <Button
                     key={colKey}
                     className={col.className + (sort.by === colKey ? ' cln-sorted' : '')}
                     onClick={() => setOrder(colKey)}
@@ -97,10 +97,10 @@ const TableListView = ({
                     <div className={`th${sort.by === colKey && ' sorted'}`}>
                       {col.label}
                       {sort.by === colKey && (
-                        <i className={`far fa-angle-${sort.order === 'asc' ? 'down' : 'up'}`} />
+                        sort.order === 'asc' ? <UpOutlined /> : <DownOutlined />
                       )}
                     </div>
-                  </button>
+                  </Button>
                 ))}
                 {rowButtons && rowButtons()}
               </div>
@@ -112,8 +112,7 @@ const TableListView = ({
             <div className="tr" key={rowKey}>
               <div className="grid">
                 {map(cols, (col, colKey) => col && (
-                  <button
-                    type="button"
+                  <Button
                     key={colKey}
                     className={col.className}
                     onClick={onClickRow ? () => onClickRow(row) : null}
@@ -125,7 +124,7 @@ const TableListView = ({
                         || row[colKey]
                       }
                     </div>
-                  </button>
+                  </Button>
                 ))}
                 {rowButtons && rowButtons(row)}
               </div>

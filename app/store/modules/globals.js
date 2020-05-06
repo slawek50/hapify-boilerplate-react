@@ -28,6 +28,7 @@ export const globalsActionsHandlers = {
       ...initialState.loaded,
       appstorage: state.loaded.appstorage,
     },
+    message: state.message,
   }),
 };
 

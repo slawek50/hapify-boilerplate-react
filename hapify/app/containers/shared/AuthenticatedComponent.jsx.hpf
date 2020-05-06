@@ -6,12 +6,8 @@ import { get } from 'lodash';
  
 import { isUserAgentMobile } from '../../utils/DeviceUtils';
  
-import { loadAccounts } from '../../store/modules/accounts';
 import { loadOption } from '../../store/modules/options';
-import { loadModels } from '../../store/modules/models';
-import { loadUploadContents } from '../../store/modules/uploadContents';
-import { loadPosts } from '../../store/modules/posts';
- 
+
 <<@ M /pMHd m>>
 import { load<<m AA>>s } from '../../store/modules/entities/<<m aA>>s';
 <<@>>
@@ -60,16 +56,6 @@ class AuthenticatedComponent extends React.PureComponent {
     }
     // Only Admins
     if (isAdmin(props.user)) {
-      if (isNotLoaded('accounts')) {
-        props.loadAccounts();
-      }
-      if (isNotLoaded('models')) {
-        props.loadModels();
-      }
-      if (isNotLoaded('uploadContents')) {
-        props.loadUploadContents();
-      }
- 
       <<@ M /pMHd m>>
       if (isNotLoaded('<<m aA>>s')) {
         props.load<<m AA>>s();
@@ -78,9 +64,6 @@ class AuthenticatedComponent extends React.PureComponent {
     }
     // Only desktop
     if (!isUserAgentMobile) {
-      if (isNotLoaded('posts')) {
-        props.loadPosts();
-      }
     }
  
     return { preventRender: false };
@@ -99,11 +82,7 @@ class AuthenticatedComponent extends React.PureComponent {
 }
  
 AuthenticatedComponent.propTypes = {
-  loadAccounts: PropTypes.func.isRequired,
   loadOption: PropTypes.func.isRequired,
-  loadModels: PropTypes.func.isRequired,
-  loadUploadContents: PropTypes.func.isRequired,
-  loadPosts: PropTypes.func.isRequired,
  
   <<@ M /pMHd m>>
   load<<m AA>>s: PropTypes.func.isRequired,
@@ -122,12 +101,8 @@ AuthenticatedComponent.propTypes = {
   }).isRequired,
   loaded: PropTypes.shape({
     appstorage: PropTypes.string.isRequired,
-    accounts: PropTypes.string.isRequired,
     options: PropTypes.string.isRequired,
-    models: PropTypes.string.isRequired,
-    uploadContents: PropTypes.string.isRequired,
-    posts: PropTypes.string.isRequired,
-    
+ 
     <<@ M /pMHd m>>
     <<m aA>>s: PropTypes.string.isRequired,
     <<@>>
@@ -141,11 +116,7 @@ export default connect(
     loaded: state.data.loaded,
   }),
   {
-    loadAccounts,
     loadOption,
-    loadModels,
-    loadUploadContents,
-    loadPosts,
  
     <<@ M /pMHd m>>
     load<<m AA>>s,

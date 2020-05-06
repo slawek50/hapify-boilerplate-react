@@ -66,8 +66,6 @@
     "react-sweet-progress": "^1.1.0",
     "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.0",
-    "redux-form": "^8.1.0",
-    "redux-form-antd": "^3.2.2",
     "redux-logger": "^3.0.1",
     "redux-socket.io": "^1.4.0",
     "redux-storage": "^4.1.2",

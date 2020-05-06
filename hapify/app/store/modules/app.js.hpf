@@ -1,30 +1,22 @@
-import { accountsActionsHandlers } from './accounts';
+import initialState from '../initialState';
+ 
 import { optionsActionsHandlers } from './options';
 import { uploadsActionsHandlers } from './uploads';
-import { modelsActionsHandlers } from './models';
-import initialState from '../initialState';
+import { socketActionsHandlers } from './socket';
+import { globalsActionsHandlers } from './globals';
  
 <<@ M /pMHd m>>
 import { <<m aA>>sActionsHandlers } from './entities/<<m aA>>s';
 <<@>>
  
-import { uploadContentsActionsHandlers } from './uploadContents';
-import { postsActionsHandlers } from './posts';
-import { socketActionsHandlers } from './socket';
-import { globalsActionsHandlers } from './globals';
- 
 const actionsHandlers = {
-  ...accountsActionsHandlers,
-  ...optionsActionsHandlers,
-  ...uploadsActionsHandlers,
-  ...modelsActionsHandlers,
  
   <<@ M /pMHd m>>
   ...<<m aA>>sActionsHandlers,
   <<@>>
  
-  ...uploadContentsActionsHandlers,
-  ...postsActionsHandlers,
+  ...optionsActionsHandlers,
+  ...uploadsActionsHandlers,
   ...socketActionsHandlers,
   ...globalsActionsHandlers,
 };

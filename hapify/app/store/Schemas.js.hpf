@@ -8,26 +8,12 @@ import { schema } from 'normalizr';
  
 // Read more about Normalizr: https://github.com/gaearon/normalizr
  
-const accountSchema = new schema.Entity('accounts', {}, { idAttribute: 'account_id' });
-const modelSchema = new schema.Entity('models', {}, { idAttribute: 'model_id' });
-const postSchema = new schema.Entity('posts', {}, { idAttribute: 'id' });
-const uploadContentSchema = new schema.Entity('uploadContents', {}, { idAttribute: 'upload_content_id' });
- 
 <<@ M /pMHd m>>
 const <<m aA>>Schema = new schema.Entity('<<m aA>>s', {}, { idAttribute: '<<m.fields.primary R>>' });
 <<@>>
  
 // Schemas for API responses.
 export const Schemas = {
-  ACCOUNT: accountSchema,
-  ACCOUNT_ARRAY: new schema.Array(accountSchema),
-  MODEL: modelSchema,
-  MODEL_ARRAY: new schema.Array(modelSchema),
-  POST: postSchema,
-  POST_ARRAY: new schema.Array(postSchema),
-  UPLOAD_CONTENT: uploadContentSchema,
-  UPLOAD_CONTENT_ARRAY: new schema.Array(uploadContentSchema),
- 
   <<@ M /pMHd m>>
   <<m A_A>>: <<m aA>>Schema,
   <<m A_A>>_ARRAY: new schema.Array(<<m aA>>Schema),

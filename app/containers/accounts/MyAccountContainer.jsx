@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { createOrUpdateAccount } from '../../store/modules/accounts';
+import { updateUser } from '../../store/modules/entities/users';
 
 import BaseLayout from '../shared/BaseLayout';
 
@@ -20,7 +20,7 @@ const AccountsContainer = ({
         email: user.email,
       }}
       onSubmit={(v) => {
-        props.createOrUpdateAccount(v, true);
+        props.updateUser(v, true);
       }}
       isMyAccount
     />
@@ -28,7 +28,7 @@ const AccountsContainer = ({
 );
 
 AccountsContainer.propTypes = {
-  createOrUpdateAccount: PropTypes.func.isRequired,
+  updateUser: PropTypes.func.isRequired,
 
   user: PropTypes.shape().isRequired,
 };
@@ -37,5 +37,5 @@ export default connect(
   (state) => ({
     user: state.auth.user,
   }),
-  { createOrUpdateAccount },
+  { updateUser },
 )(AccountsContainer);

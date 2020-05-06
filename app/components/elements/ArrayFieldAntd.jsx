@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   Form, Row, Col, Button,
 } from 'antd';
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
 
 const ArrayFieldAntd = ({
   name, label, addLabel, removable, children,
@@ -18,11 +18,9 @@ const ArrayFieldAntd = ({
             </Col>
             {removable && (
               <Col flex="none">
-                <MinusCircleOutlined
-                  className="dynamic-delete-button"
-                  onClick={() => {
-                    remove(field.name);
-                  }}
+                <Button
+                  onClick={() => remove(field.name)}
+                  icon={<CloseOutlined />}
                 />
               </Col>
             )}
@@ -31,8 +29,8 @@ const ArrayFieldAntd = ({
         <Form.Item>
           <Button
             type="dashed"
+            block
             onClick={() => add()}
-            style={{ width: '100%' }}
           >
             <PlusOutlined />
             {addLabel}

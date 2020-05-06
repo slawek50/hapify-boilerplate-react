@@ -10,7 +10,7 @@ import { create<<M AA>>, update<<M AA>>, delete<<M AA>> } from '../../store/modu
 import BaseLayout from '../shared/BaseLayout';
  
 import <<M AA>>DetailView from '../../components/<<M aA>>s/<<M AA>>DetailView';
-import <<M AA>>EditFormAntd from '../../components/<<M aA>>s/<<M AA>>EditFormAntd';
+import <<M AA>>EditForm from '../../components/<<M aA>>s/<<M AA>>EditForm';
 import <<M AA>>sTableListView from '../../components/<<M aA>>s/<<M AA>>sTableListView';
 import <<M AA>>sCardListView from '../../components/<<M aA>>s/<<M AA>>sCardListView';
  
@@ -25,7 +25,7 @@ const RenderEditDetailsModalsRouter = ({
       path={`${url}/new`}
       render={() => (
         <Modal {...modalDefaultClass} isOpen onRequestClose={() => push(url)}>
-          <<<M AA>>EditFormAntd
+          <<<M AA>>EditForm
             initialValues={{}}
             onSubmit={(v) => {
               create<<M AA>>(v)
@@ -41,7 +41,7 @@ const RenderEditDetailsModalsRouter = ({
       path={`${url}/:<<M aA>>Id/edit`}
       render={(subProps) => (
         <Modal {...modalDefaultClass} isOpen onRequestClose={() => push(url)}>
-          <<<M AA>>EditFormAntd
+          <<<M AA>>EditForm
             enableReinitialize
             initialValues={<<= getInitialValues('subProps.match') >>}
             onSubmit={(v) => {
@@ -136,7 +136,7 @@ const <<M AA>>sContainer = ({
         exact
         path={`${url}/new`}
         render={() => (
-          <<<M AA>>EditFormAntd
+          <<<M AA>>EditForm
             initialValues={{}}
             onSubmit={(v) => {
               props.create<<M AA>>(v)
@@ -150,7 +150,7 @@ const <<M AA>>sContainer = ({
         exact
         path={`${url}/:<<M aA>>Id/edit`}
         render={({ match }) => (
-          <<<M AA>>EditFormAntd
+          <<<M AA>>EditForm
             enableReinitialize
             initialValues={<<= getInitialValues('match') >>}
             onSubmit={(v) => {

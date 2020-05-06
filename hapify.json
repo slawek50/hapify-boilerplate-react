@@ -55,11 +55,6 @@
       "input": "one"
     },
     {
-      "path": "app/components/{camel}s/{pascal}EditFormAntd.jsx",
-      "engine": "hpf",
-      "input": "one"
-    },
-    {
       "path": "app/components/{camel}s/{pascal}sCardListView.jsx",
       "engine": "hpf",
       "input": "one"

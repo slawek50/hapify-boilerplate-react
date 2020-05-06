@@ -3,46 +3,47 @@ import PropTypes from 'prop-types';
 <<? F tE+tF/hd/pr>>
 import { connect } from 'react-redux';
 <<?>>
-import { reduxForm, Field } from 'redux-form';
 import { NavLink } from 'react-router-dom';
-<<? F tSe/hd/pr>>
-import isEmail from 'validator/lib/isEmail';
-<<?>>
 <<= getImportLodash() >>
-import {
-  <<= getImportFieldComponents() >>
-} from '../elements';
+<<= getImportFieldComponents() >>
 <<? F tF/hd/pr>>
- 
-import { uploadFiles, removeFile } from '../../store/modules/uploads';
- 
-import { UPLOADS_URL } from '../../configs/Constants';
+import { InboxOutlined } from '@ant-design/icons';
 <<?>>
  
+import getRules from '../../utils/RulesValidator';
+ 
+<<? F ml/tE/tF>>
+import { ArrayFieldAntd } from '../elements';
+ 
+<<?>>
+<<? F tF/hd/pr>>
+import { UPLOADS_URL } from '../../configs/Constants';
+ 
+<<?>>
 const <<M AA>>EditForm = ({
-  handleSubmit, baseUrl,<<? F tF/hd/pr>> upFiles, rmFile,<<?>><<@ F tE/hd/pr f>> <<f.model aA>>s,<<@>>
+  onSubmit, initialValues, baseUrl,<<@ F tE/hd/pr f>> <<f.model aA>>s,<<@>>
 }) => (
-  <form onSubmit={handleSubmit}>
+  <Form onFinish={(v) => onSubmit({ ...initialValues, ...v })} initialValues={initialValues}>
     <div className="grid">
       <<@ F /hd/pr/in f>>
       <<= getComponent(f) >>
+ 
       <<@>>
     </div>
  
     <div className="btn-group right">
-      <button className="btn" type="submit">
-        Enregistrer
-      </button>
+      <Button type="primary" htmlType="submit">Enregistrer</Button>
  
-      <NavLink className="btn" to={baseUrl}>
-        Annuler
+      <NavLink to={baseUrl}>
+        <Button>Annuler</Button>
       </NavLink>
     </div>
-  </form>
+  </Form>
 );
  
 <<M AA>>EditForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  initialValues: PropTypes.shape().isRequired,
   baseUrl: PropTypes.string.isRequired,
   <<? F tE/hd/pr>>
  
@@ -50,23 +51,9 @@ const <<M AA>>EditForm = ({
   <<f.model aA>>s: PropTypes.objectOf(PropTypes.shape()),
   <<@>>
   <<?>>
-  <<? F tF/hd/pr>>
- 
-  upFiles: PropTypes.func.isRequired,
-  rmFile: PropTypes.func.isRequired,
-  <<?>>
 };
  
-export default reduxForm({
-  form: '<<M AA>>EditForm',
-  validate: (values = {}) => {
-    const errors = {};
- 
-<<@ F /hd/pr/in f>><<= getError(f, '    ') >><<@>>
- 
-    return errors;
-  },
-})<<? F tE+tF/hd/pr>>(connect(
+export default <<? F tE+tF/hd/pr>>(connect(
 <<? F tE>>
   (state) => ({
     <<@ F tE/hd f>>
@@ -75,9 +62,6 @@ export default reduxForm({
   }),
 <<??>>
   null,
-<<?>>
-<<? F tF>>
-  { upFiles: uploadFiles, rmFile: removeFile },
 <<?>>
 )(<<M AA>>EditForm));
 <<??>>(<<M AA>>EditForm);<<?>>
@@ -91,10 +75,9 @@ function hasType(type, subtype) {
 
 function getImportLodash() {
     const imports = new Set([]);
-    if (hasType('integer')) imports.add('isInteger');
-    if (hasType('number', 'integer')) imports.add('isNumber');
-    if (hasType('entity')) imports.add('map');
-    if (root.fields.list.filter(f => f.multiple && !f.nullable).length > 0) imports.add('map');
+    if (hasType('entity')) {
+        imports.add('map');
+    }
     
     if (imports.size === 0) return '';
 
@@ -102,80 +85,116 @@ function getImportLodash() {
 }
 
 function getImportFieldComponents() {
-    const imports = new Set([]);
-    if (hasType('phone')) imports.add('CleaveField');
-    if (hasType('datetime')) imports.add('DatePickerField');
-    if (hasType('file')) imports.add('FileField');
-    if (hasType('boolean')) {
-        imports.add('SwitchField');
-    }
+    const imports = new Set(['Button', 'Form']);
     if (hasType('string')) {
-        imports.add('TextField');
-        imports.add('RadioField');
-        imports.add('SelectField');
+        imports.add('Input');
     }
     if (hasType('number')) {
-        imports.add('NumberField');
+        imports.add('InputNumber');
     }
-    if (hasType('entity')) imports.add('SelectField');
-    if (hasType('text') || hasType('rich')) imports.add('TextAreaField');
-    if (root.properties.hasMultiple) {
-        imports.add('CheckboxGroupField');
-        imports.add('ArrayField');
+    if (hasType('boolean')) {
+        imports.add('Switch');
     }
+    if (hasType('datetime', 'time')) {
+        imports.add('DatePicker');
+    }
+    if (hasType('time')) {
+        imports.add('TimePicker');
+    }
+    if (hasType('file')) {
+        imports.add('Upload');
+    }
+    if (hasType('entity')) {
+        imports.add('Select');
+    }
+    
+    if (imports.size === 0) return '';
 
-    return [...imports].join(', ');
+    return `import {
+  ${[...imports].join(', ')},
+} from 'antd';`;
 }
 
 function getComponent(field) {
-    var customPropsTypes = {
-        string: `<Field name="${field.names.snake}" component={TextField} placeholder="${field.names.capital}" className="col-12" />`,
-        email: `<Field name="${field.names.snake}" component={TextField} type="email" placeholder="${field.names.capital}" className="col-12" />`,
-        password: `<Field name="${field.names.snake}" component={TextField} type="password" placeholder="${field.names.capital}" className="col-12" />`,
-        phone: `<Field
-        name="${field.names.snake}"
-        component={CleaveField}
-        placeholder="${field.names.capital}"
-        className="col-12"
-        cleaveOptions={{ phone: true, phoneRegionCode: 'FR' }}
-      />`,
+    const itemProps = `name="${field.names.snake}"`;
+    const inputProps = `placeholder="${field.names.capital}"`;
+    const customPropsTypes = {
+        string: `<Form.Item ${itemProps} rules={getRules('string', ${!field.nullable})} hasFeedback>
+        <Input ${inputProps} />
+      </Form.Item>`,
+        email: `<Form.Item ${itemProps} rules={getRules('email', ${!field.nullable})} hasFeedback>
+        <Input ${inputProps} />
+      </Form.Item>`,
+        password: `<Form.Item ${itemProps} rules={getRules('password', ${!field.nullable})} hasFeedback>
+        <Input.Password ${inputProps} />
+      </Form.Item>`,
+        url: `<Form.Item ${itemProps} rules={getRules('url', ${!field.nullable})} hasFeedback>
+        <Input ${inputProps} />
+      </Form.Item>`,
+        text: `<Form.Item ${itemProps} rules={getRules('text', ${!field.nullable})} hasFeedback>
+        <Input.TextArea ${inputProps} />
+      </Form.Item>`,
+        // rich wysiwyg
+        // phone cleave
 
-        file: `<Field
-        name="${field.names.snake}"
-        component={FileField}
-        uploadFiles={upFiles}
-        removeFile={rmFile}
-        getUrl={(item) => \`\${UPLOADS_URL}/\${item}\`}
-        placeholder="${field.names.capital}"
-        className="col-12"\
-${field.multiple ? `
-        isMulti` : ''}
-      />`,
+        number: `<Form.Item ${itemProps} rules={getRules('number', ${!field.nullable})} hasFeedback>
+        <InputNumber ${inputProps} />
+      </Form.Item>`,
+        integer: `<Form.Item ${itemProps} rules={getRules('integer', ${!field.nullable})} hasFeedback>
+        <InputNumber ${inputProps} step={1} />
+      </Form.Item>`,
+        float: `<Form.Item ${itemProps} rules={getRules('number', ${!field.nullable})} hasFeedback>
+        <InputNumber ${inputProps} step={0.01} />
+      </Form.Item>`,
+        // lat
+        // long
 
-        number: `<Field name="${field.names.snake}" component={NumberField} type="number" placeholder="${field.names.capital}" className="col-12" />`,
-        float: `<Field name="${field.names.snake}" component={NumberField} type="number" step={0.01} placeholder="${field.names.capital}" className="col-12" />`,
+        boolean: `<Form.Item ${itemProps} rules={getRules('boolean', ${!field.nullable})} valuePropName="checked" hasFeedback>
+        <Switch ${inputProps} />
+      </Form.Item>`,
 
-        boolean: `<Field name="${field.names.snake}" component={SwitchField} label="${field.names.capital}" className="col-12" />`,
+        datetime: `<Form.Item ${itemProps} rules={getRules('datetime', ${!field.nullable})} hasFeedback>
+        <DatePicker ${inputProps} showTime />
+      </Form.Item>`,
+        date: `<Form.Item ${itemProps} rules={getRules('date', ${!field.nullable})} hasFeedback>
+        <DatePicker ${inputProps} />
+      </Form.Item>`,
+        time: `<Form.Item ${itemProps} rules={getRules('time', ${!field.nullable})} hasFeedback>
+        <TimePicker ${inputProps} />
+      </Form.Item>`,
 
-        datetime: `<Field name="${field.names.snake}" component={DatePickerField} placeholder="${field.names.capital}" className="col-12" />`,
-
-        text: `<Field name="${field.names.snake}" component={TextAreaField} placeholder="${field.names.capital}" className="col-12" />`,
-        rich: `<Field name="${field.names.snake}" component={TextAreaField} isWysiwyg placeholder="${field.names.capital}" className="col-12" />`,
-
-        entity: `<Field
-        name="${field.names.snake}"
-        component={SelectField}
-        options={map(${field.model && field.model.names.camel}s, ${field.model && field.model.names.camel} => ({ value: ${field.model && field.model.names.camel}.${field.model && field.model.fields.primary.names.raw}, label: ${field.model && field.model.names.camel}.${field.model && field.model.fields.lb[0] && field.model.fields.lb[0].names.snake} }))}
-        placeholder="${field.names.capital}"
-        className="col-12"\
-${field.multiple ? `
-        isMulti` : ''}
-      />`,
+        // object ??
+        
+        file: `<Form.Item ${itemProps} rules={getRules('file', ${!field.nullable})} valuePropName="fileList" getValueFromEvent={() => []} hasFeedback>
+        <Upload.Dragger name="files" action={UPLOADS_URL} withCredentials${field.multiple ? ' multiple' : ''}>
+          <p className="ant-upload-drag-icon">
+            <InboxOutlined />
+          </p>
+          <p className="ant-upload-text">Click or drag file to this area to upload</p>
+          <p className="ant-upload-hint">Support for a single or bulk upload.</p>
+        </Upload.Dragger>
+      </Form.Item>`,
+        // image ??
+        // video ??
+        // audio ??
+        // document ??
+        
+        entity: `<Form.Item ${itemProps} rules={getRules('entity', ${!field.nullable})} hasFeedback>
+        <Select ${inputProps}${field.multiple ? ' mode="multiple"' : ''}>
+          {map(${field.model && field.model.names.camel}s, (${field.model && field.model.names.camel}) => (
+            <Select.Option key={${field.model && field.model.names.camel}.${field.model && field.model.fields.primary.names.raw}} value={${field.model && field.model.names.camel}.${field.model && field.model.fields.primary.names.raw}}>{${field.model && field.model.names.camel}.${field.model && field.model.fields.lb[0] && field.model.fields.lb[0].names.snake}}</Select.Option>
+          ))}
+        </Select>
+      </Form.Item>`,
     };
 
     const component = customPropsTypes[field.subtype] || customPropsTypes[field.type] || customPropsTypes['string'];
     if (field.multiple && field.type !== 'entity' && field.type !== 'file') {
-        return component.replace('<Field', '<ArrayField').replace('/>', 'addLabel="Ajouter un élément" removable />');
+        return `<ArrayFieldAntd ${itemProps} addLabel="Ajouter un élément" removable>
+        {(field) => (
+          ${component.replace(itemProps, "name={field.name} fieldKey={field.fieldKey}")}
+        )}
+      </ArrayFieldAntd>`
     }
     return component;
 }

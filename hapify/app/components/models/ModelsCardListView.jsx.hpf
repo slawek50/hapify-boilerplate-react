@@ -8,9 +8,10 @@ import { capitalize<<? F tE/hd/pr>>, get<<?>><<? F ml/hd>>, map<<?>> } from 'lod
 <<? F tD/hd/pr>>
 import moment from 'moment';
 <<?>>
-<<= getImportConstants() >>
+import { Modal, Button, Tooltip } from 'antd';
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
  
-import { ButtonConfirmModal } from '../elements';
+<<= getImportConstants() >>
  
 import CardListView from '../shared/CardListView';
  
@@ -42,21 +43,28 @@ const <<M AA>>sCardListView = ({
                 <div />
               </div>
             </div>
+ 
             <div className="card-actions btn-group">
-              <NavLink to={`${baseUrl}/${<<M aA>>.<<P R>>}/edit`} className="btn">
-                <i className="far fa-pencil" />
-                <span>Modifier</span>
+              <NavLink to={`${baseUrl}/${<<M aA>>.<<P R>>}/edit`}>
+                <Tooltip title="Modifier">
+                  <Button icon={<EditOutlined />} />
+                </Tooltip>
               </NavLink>
+ 
               {onClickDelete && (
-                <ButtonConfirmModal
-                  onConfirmationButton={() => onClickDelete(<<M aA>>.<<P R>>)}
-                  message="Voulez-vous vraiment effacer le <<M A>> ?"
-                >
-                  <button className="btn" type="button">
-                    <i className="far fa-trash" />
-                    <span>Supprimer</span>
-                  </button>
-                </ButtonConfirmModal>
+                <Tooltip title="Supprimer">
+                  <Button
+                    icon={<DeleteOutlined />}
+                    onClick={() => Modal.confirm({
+                      title: 'Voulez-vous vraiment effacer le <<M A>> ?',
+                      icon: <DeleteOutlined />,
+                      okText: 'Oui',
+                      okType: 'danger',
+                      cancelText: 'Non',
+                      onOk: () => onClickDelete(<<M aA>>.<<P R>>),
+                    })}
+                  />
+                </Tooltip>
               )}
             </div>
           </div>

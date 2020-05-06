@@ -4,6 +4,4 @@ export CheckboxGroupField from './CheckboxGroupField';
 export NumberField from './NumberField';
 export SwitchField from './SwitchField';
 
-export ArrayField from './ArrayField';
-
-export ButtonConfirmModal from './ButtonConfirmModal';
+export ArrayFieldAntd from './ArrayFieldAntd';

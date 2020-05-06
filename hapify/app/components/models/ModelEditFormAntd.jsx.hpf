@@ -32,17 +32,11 @@ const <<M AA>>EditFormAntd = ({
     </div>
  
     <div className="btn-group right">
-      <Form.Item>
-        <Button type="primary" htmlType="submit">Enregistrer</Button>
-      </Form.Item>
+      <Button type="primary" htmlType="submit">Enregistrer</Button>
  
-      <Form.Item>
-        <NavLink to={baseUrl}>
-          <Button>
-            Annuler
-          </Button>
-        </NavLink>
-      </Form.Item>
+      <NavLink to={baseUrl}>
+        <Button>Annuler</Button>
+      </NavLink>
     </div>
   </Form>
 );

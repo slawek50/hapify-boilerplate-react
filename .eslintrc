@@ -11,7 +11,8 @@
     'spaced-comment': ['error', 'always', {
       'block': { 'exceptions': ['*'] }
     }],
-    'indent': ["error", 2, {'MemberExpression': 'off'}]
+    'indent': ["error", 2, {'MemberExpression': 'off'}],
+    'no-underscore-dangle': ["error", { "allow": ["_id"] }]
   },
   'parser': 'babel-eslint',
   'parserOptions': {

@@ -8,10 +8,10 @@ import { capitalize<<? F tE/hd/pr>>, get<<?>><<? F ml/hd>>, map<<?>> } from 'lod
 import moment from 'moment';
 <<?>>
 import { NavLink } from 'react-router-dom';
-
-<<= getImportConstants() >>
+import { Modal, Button } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
  
-import { ButtonConfirmModal } from '../elements';
+<<= getImportConstants() >>
  
 const <<M AA>>DetailView = ({
   <<M aA>> = {}, baseUrl, onClickDelete<<@ F tE/hd/em f>>, <<f.model aA>>s<<@>>,
@@ -25,17 +25,22 @@ const <<M AA>>DetailView = ({
     <<@>>
  
     <div className="btn-group right">
-      <NavLink className="btn" to={`${baseUrl}/${<<M aA>>.<<P R>>}/edit`}>
-        Modifier
+      <NavLink to={`${baseUrl}/${<<M aA>>.<<P R>>}/edit`}>
+        <Button>Modifier</Button>
       </NavLink>
  
       {onClickDelete && (
-        <ButtonConfirmModal
-          onConfirmationButton={() => onClickDelete()}
-          message="Voulez-vous vraiment effacer le <<M A>> ?"
+        <Button onClick={() => Modal.confirm({
+          title: 'Voulez-vous vraiment effacer le <<M A>> ?',
+          icon: <DeleteOutlined />,
+          okText: 'Oui',
+          okType: 'danger',
+          cancelText: 'Non',
+          onOk: onClickDelete,
+        })}
         >
-          <button className="btn" type="button">Supprimer</button>
-        </ButtonConfirmModal>
+          Supprimer
+        </Button>
       )}
     </div>
   </div>

@@ -8,9 +8,10 @@ import { capitalize<<? F tE/hd/pr>>, get<<?>><<? F ml/hd>>, map<<?>> } from 'lod
 <<? F tD/hd/pr>>
 import moment from 'moment';
 <<?>>
-<<= getImportConstants() >>
+import { Modal, Button, Tooltip } from 'antd';
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
  
-import { ButtonConfirmModal } from '../elements';
+<<= getImportConstants() >>
  
 import TableListView from '../shared/TableListView';
  
@@ -35,8 +36,8 @@ const <<M AA>>sTableListView = ({
     <<= getSort(root.fields)>>
     buttons={(
       <div>
-        <NavLink className="btn" to={`${baseUrl}/new`}>
-          Créer un <<M A>>
+        <NavLink to={`${baseUrl}/new`}>
+          <Button>Créer un <<M A>></Button>
         </NavLink>
       </div>
     )}
@@ -44,19 +45,26 @@ const <<M AA>>sTableListView = ({
       <div className="col-2_sm-12">
         <div className="td td-buttons">
           {<<M aA>> && (
-            <NavLink className="btn" to={`${baseUrl}/${<<M aA>>.<<P R>>}/edit`}>
-              <i className="far fa-pencil" />
+            <NavLink to={`${baseUrl}/${<<M aA>>.<<P R>>}/edit`}>
+              <Tooltip title="Modifier">
+                <Button icon={<EditOutlined />} />
+              </Tooltip>
             </NavLink>
           )}
           {<<M aA>> && (
-            <ButtonConfirmModal
-              onConfirmationButton={() => onClickDelete(<<M aA>>.<<P R>>)}
-              message="Voulez-vous vraiment effacer le <<M A>> ?"
-            >
-              <button className="btn" type="button">
-                <i className="far fa-trash" />
-              </button>
-            </ButtonConfirmModal>
+            <Tooltip title="Supprimer">
+              <Button
+                icon={<DeleteOutlined />}
+                onClick={() => Modal.confirm({
+                  title: 'Voulez-vous vraiment effacer le <<M A>> ?',
+                  icon: <DeleteOutlined />,
+                  okText: 'Oui',
+                  okType: 'danger',
+                  cancelText: 'Non',
+                  onOk: () => onClickDelete(<<M aA>>.<<P R>>),
+                })}
+              />
+            </Tooltip>
           )}
         </div>
       </div>

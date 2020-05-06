@@ -138,16 +138,6 @@ const Header = ({
             </div>
           </div>
         </nav>
-        <button
-          type="button"
-          className={classNames(
-            'menu-mask',
-            { 'animated opened': menuIsOpen === true },
-            { 'animated closed': menuIsOpen === false },
-          )}
-          onClick={() => setConf('menuIsOpen', false)}
-          aria-label="Menu"
-        />
         <Button
           title="Menu"
           icon={<MenuOutlined />}

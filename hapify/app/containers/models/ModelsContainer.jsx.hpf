@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Modal from 'react-modal';
 import { withRouter, Switch, Route } from 'react-router-dom';
 import { keys<<? F em>>, map, get<<?>> } from 'lodash';
+import { Modal } from 'antd';
  
 import { create<<M AA>>, update<<M AA>>, delete<<M AA>> } from '../../store/modules/entities/<<M aA>>s';
  
@@ -14,7 +14,12 @@ import <<M AA>>EditForm from '../../components/<<M aA>>s/<<M AA>>EditForm';
 import <<M AA>>sTableListView from '../../components/<<M aA>>s/<<M AA>>sTableListView';
 import <<M AA>>sCardListView from '../../components/<<M aA>>s/<<M AA>>sCardListView';
  
-import modalDefaultClass from '../../utils/ModalDefaultClass';
+const modalConf = {
+  visible: true,
+  closable: false,
+  maskClosable: false,
+  footer: null,
+};
  
 const RenderEditDetailsModalsRouter = ({
   url, create<<M AA>>, update<<M AA>>, del<<M AA>>, push, <<M aA>>s,
@@ -24,7 +29,7 @@ const RenderEditDetailsModalsRouter = ({
       exact
       path={`${url}/new`}
       render={() => (
-        <Modal {...modalDefaultClass} isOpen onRequestClose={() => push(url)}>
+        <Modal {...modalConf} onCancel={() => push(url)}>
           <<<M AA>>EditForm
             initialValues={{}}
             onSubmit={(v) => {
@@ -40,7 +45,7 @@ const RenderEditDetailsModalsRouter = ({
       exact
       path={`${url}/:<<M aA>>Id/edit`}
       render={(subProps) => (
-        <Modal {...modalDefaultClass} isOpen onRequestClose={() => push(url)}>
+        <Modal {...modalConf} onCancel={() => push(url)}>
           <<<M AA>>EditForm
             enableReinitialize
             initialValues={<<= getInitialValues('subProps.match') >>}
@@ -57,7 +62,7 @@ const RenderEditDetailsModalsRouter = ({
       exact
       path={`${url}/:<<M aA>>Id`}
       render={(subProps) => (
-        <Modal {...modalDefaultClass} isOpen onRequestClose={() => push(url)}>
+        <Modal {...modalConf} onCancel={() => push(url)}>
           <<<M AA>>DetailView
             <<M aA>>={<<M aA>>s[subProps.match.params.<<M aA>>Id]}
             baseUrl={url}

@@ -24,7 +24,7 @@ const <<M AA>>EditForm = ({
   onSubmit, initialValues, baseUrl,<<@ F tE/hd/pr f>> <<f.model aA>>s,<<@>>
 }) => (
   <Form onFinish={(v) => onSubmit({ ...initialValues, ...v })} initialValues={initialValues}>
-    <div className="grid">
+    <div>
       <<@ F /hd/pr/in f>>
       <<= getComponent(f) >>
  
@@ -32,11 +32,11 @@ const <<M AA>>EditForm = ({
     </div>
  
     <div className="btn-group right">
-      <Button type="primary" htmlType="submit">Enregistrer</Button>
- 
       <NavLink to={baseUrl}>
         <Button>Annuler</Button>
       </NavLink>
+ 
+      <Button type="primary" htmlType="submit">Enregistrer</Button>
     </div>
   </Form>
 );
@@ -116,7 +116,7 @@ function getImportFieldComponents() {
 }
 
 function getComponent(field) {
-    const itemProps = `name="${field.names.snake}"`;
+    const itemProps = `name="${field.names.snake}" label="${field.names.capital}"`;
     const inputProps = `placeholder="${field.names.capital}"`;
     const customPropsTypes = {
         string: `<Form.Item ${itemProps} rules={getRules('string', ${!field.nullable})} hasFeedback>
@@ -192,7 +192,7 @@ function getComponent(field) {
     if (field.multiple && field.type !== 'entity' && field.type !== 'file') {
         return `<ArrayFieldAntd ${itemProps} addLabel="Ajouter un élément" removable>
         {(field) => (
-          ${component.replace(itemProps, "name={field.name} fieldKey={field.fieldKey}")}
+          ${component.replace(itemProps, `name={field.name} label="${field.names.capital}" fieldKey={field.fieldKey}`)}
         )}
       </ArrayFieldAntd>`
     }

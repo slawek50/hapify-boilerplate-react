@@ -11,9 +11,13 @@ import { ACCOUNTS_ROLES } from '../../configs/Properties';
 
 const AccountEditForm = ({ onSubmit, initialValues, isMyAccount }) => (
   <Form onFinish={(v) => onSubmit({ ...initialValues, ...v })} initialValues={initialValues}>
-    <div className="grid">
-      <Form.Item name="name" label="Identifiant" rules={getRules('string', true)} hasFeedback><Input placeholder="Identifiant" disabled={isMyAccount} /></Form.Item>
-      <Form.Item name="email" label="Email" rules={getRules('email', true)} hasFeedback><Input placeholder="Email" /></Form.Item>
+    <div>
+      <Form.Item name="name" label="Identifiant" rules={getRules('string', true)} hasFeedback>
+        <Input placeholder="Identifiant" disabled={isMyAccount} />
+      </Form.Item>
+      <Form.Item name="email" label="Email" rules={getRules('email', true)} hasFeedback>
+        <Input placeholder="Email" />
+      </Form.Item>
       {!isMyAccount && (
         <Form.Item name="role" label="Rôle" rules={getRules('entity', true)} hasFeedback>
           <Select placeholder="Rôle">
@@ -24,13 +28,14 @@ const AccountEditForm = ({ onSubmit, initialValues, isMyAccount }) => (
         </Form.Item>
       )}
       {isMyAccount && (
-        <Form.Item name="password" label="Mot de passe" rules={getRules('password', true)} hasFeedback><Input.Password placeholder="Mot de passe" /></Form.Item>
+        <Form.Item name="password" label="Mot de passe" rules={getRules('password', true)} hasFeedback>
+          <Input.Password placeholder="Mot de passe" />
+        </Form.Item>
       )}
     </div>
+
     <div className="btn-group right">
-      <Form.Item>
-        <Button type="primary" htmlType="submit">Enregistrer</Button>
-      </Form.Item>
+      <Button type="primary" htmlType="submit">Enregistrer</Button>
     </div>
   </Form>
 );

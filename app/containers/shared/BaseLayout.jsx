@@ -2,14 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import Modal from 'react-modal';
 
 import Header from '../../components/shared/Header';
 import PageHeader from '../../components/shared/PageHeader';
 
 import { isAdmin } from '../../utils/RolesUtils';
-
-Modal.setAppElement('body');
 
 const BaseLayout = ({
   title, hideHeader, className, pageHeaderClassName, children, account,

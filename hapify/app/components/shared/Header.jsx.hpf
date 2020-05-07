@@ -4,7 +4,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { Button } from 'antd';
-import { LogoutOutlined, MenuOutlined } from '@ant-design/icons';
+import {
+  LogoutOutlined, MenuOutlined, SelectOutlined, ToolOutlined, SettingOutlined,
+} from '@ant-design/icons';
+import Gravatar from 'react-gravatar';
  
 import { setConfig } from '../../store/modules/globals';
 import { logout } from '../../store/modules/auth';
@@ -17,9 +20,9 @@ const Header = ({
   <header className="header">
     <div className={classNames('header-menu', { tiny: menuIsTiny })}>
       <div className="container">
-        <a href="/" className="logo-block">
+        <NavLink to="/" className="logo-block">
           <img src="" alt="Logo" className="logo" />
-        </a>
+        </NavLink>
         <nav
           className={classNames(
             'main-nav',
@@ -37,68 +40,12 @@ const Header = ({
             <ul>
               <li>
                 <NavLink
-                  to="/admin/accounts"
-                  onClick={menuIsOpen === true ? () => setConf('menuIsOpen', false) : null}
-                  exact
-                  activeClassName="active"
-                >
-                  <i className="item-icon fal fa-users" />
-                  <span>Utilisateurs</span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/admin/models"
-                  onClick={menuIsOpen === true ? () => setConf('menuIsOpen', false) : null}
-                  exact
-                  activeClassName="active"
-                >
-                  <i className="item-icon fal fa-archive" />
-                  <span>Gestion des modèles</span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/admin/models/table"
-                  onClick={menuIsOpen === true ? () => setConf('menuIsOpen', false) : null}
-                  exact
-                  activeClassName="active"
-                >
-                  <i className="item-icon fal fa-table" />
-                  <span>Tableaux</span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/admin/models/cards"
-                  onClick={menuIsOpen === true ? () => setConf('menuIsOpen', false) : null}
-                  exact
-                  activeClassName="active"
-                >
-                  <i className="item-icon fal fa-id-badge" />
-                  <span>Cards</span>
-                </NavLink>
-              </li>
-
-              <li>
-                <NavLink
-                  to="/admin/uploadContents"
-                  onClick={menuIsOpen === true ? () => setConf('menuIsOpen', false) : null}
-                  exact
-                  activeClassName="active"
-                >
-                  <i className="item-icon fal fa-cloud-upload" />
-                  <span>Uploads</span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
                   to="/admin/options"
                   onClick={menuIsOpen === true ? () => setConf('menuIsOpen', false) : null}
                   exact
                   activeClassName="active"
                 >
-                  <i className="item-icon fal fa-wrench" />
+                  <ToolOutlined />
                   <span>Paramètres</span>
                 </NavLink>
               </li>
@@ -110,7 +57,7 @@ const Header = ({
                   exact
                   activeClassName="active"
                 >
-                  <i className="item-icon fal fa-wrench" />
+                  <SelectOutlined />
                   <span><<m A>></span>
                 </NavLink>
               </li>
@@ -120,7 +67,9 @@ const Header = ({
           <div className="user-block">
             <div className="user-profil">
               <div className="user-avatar-block">
-                <div className="user-avatar"><img src="//www.gravatar.com/avatar/60d44261bab4309c41da7218addde9db?d=404" alt="NL" /></div>
+                <div className="user-avatar">
+                  <Gravatar email={account.email} />
+                </div>
               </div>
               <div className="user-name">{account.name}</div>
             </div>
@@ -130,9 +79,8 @@ const Header = ({
                 onClick={menuIsOpen === true ? () => setConf('menuIsOpen', false) : null}
                 exact
                 activeClassName="active"
-                className="btn"
               >
-                <i className="item-icon fal fa-cog" />
+                <Button icon={<SettingOutlined />} />
               </NavLink>
               <Button title="Déconnexion" icon={<LogoutOutlined />} onClick={doLogout} />
             </div>
@@ -154,6 +102,7 @@ Header.propTypes = {
   menuIsTiny: PropTypes.bool,
   account: PropTypes.shape({
     name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
   }).isRequired,
  
   setConf: PropTypes.func.isRequired,

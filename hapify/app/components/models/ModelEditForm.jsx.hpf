@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-<<? F tE+tF/hd/pr>>
+<<? F tE+tF/hd/pr/in>>
 import { connect } from 'react-redux';
 <<?>>
 import { NavLink } from 'react-router-dom';
 <<= getImportLodash() >>
 <<= getImportFieldComponents() >>
-<<? F tF/hd/pr>>
+<<? F tF/hd/pr/in>>
 import { InboxOutlined } from '@ant-design/icons';
 <<?>>
  
@@ -16,12 +16,12 @@ import getRules from '../../utils/RulesValidator';
 import { ArrayFieldAntd } from '../elements';
  
 <<?>>
-<<? F tF/hd/pr>>
+<<? F tF/hd/pr/in>>
 import { UPLOADS_URL } from '../../configs/Constants';
  
 <<?>>
 const <<M AA>>EditForm = ({
-  onSubmit, initialValues, baseUrl,<<@ F tE/hd/pr f>> <<f.model aA>>s,<<@>>
+  onSubmit, initialValues, baseUrl,<<@ F tE/hd/pr/in f>> <<f.model aA>>s,<<@>>
 }) => (
   <Form onFinish={(v) => onSubmit({ ...initialValues, ...v })} initialValues={initialValues}>
     <div>
@@ -45,18 +45,18 @@ const <<M AA>>EditForm = ({
   onSubmit: PropTypes.func.isRequired,
   initialValues: PropTypes.shape().isRequired,
   baseUrl: PropTypes.string.isRequired,
-  <<? F tE/hd/pr>>
+  <<? F tE/hd/pr/in>>
  
-  <<@ F tE/hd f>>
+  <<@ F tE/hd/pr/in f>>
   <<f.model aA>>s: PropTypes.objectOf(PropTypes.shape()),
   <<@>>
   <<?>>
 };
  
-export default <<? F tE+tF/hd/pr>>(connect(
+export default <<? F tE+tF/hd/pr/in>>(connect(
 <<? F tE>>
   (state) => ({
-    <<@ F tE/hd f>>
+    <<@ F tE/hd/pr/in f>>
     <<f.model aA>>s: state.data.entities.<<f.model aA>>s,
     <<@>>
   }),

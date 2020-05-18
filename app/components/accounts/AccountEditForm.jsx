@@ -10,14 +10,21 @@ import getRules from '../../utils/RulesValidator';
 import { ACCOUNTS_ROLES } from '../../configs/Properties';
 
 const AccountEditForm = ({ onSubmit, initialValues, isMyAccount }) => (
-  <Form onFinish={(v) => onSubmit({ ...initialValues, ...v })} initialValues={initialValues}>
+  <Form
+    onFinish={(v) => onSubmit({ ...initialValues, ...v })}
+    initialValues={initialValues}
+    layout="vertical"
+    hideRequiredMark
+  >
     <div>
       <Form.Item name="name" label="Identifiant" rules={getRules('string', true)} hasFeedback>
         <Input placeholder="Identifiant" disabled={isMyAccount} />
       </Form.Item>
+
       <Form.Item name="email" label="Email" rules={getRules('email', true)} hasFeedback>
         <Input placeholder="Email" />
       </Form.Item>
+
       {!isMyAccount && (
         <Form.Item name="role" label="Rôle" rules={getRules('entity', true)} hasFeedback>
           <Select placeholder="Rôle">
@@ -27,6 +34,7 @@ const AccountEditForm = ({ onSubmit, initialValues, isMyAccount }) => (
           </Select>
         </Form.Item>
       )}
+
       {isMyAccount && (
         <Form.Item name="password" label="Mot de passe" rules={getRules('password', true)} hasFeedback>
           <Input.Password placeholder="Mot de passe" />

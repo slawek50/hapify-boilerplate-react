@@ -1,0 +1,28 @@
+.site-bg-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 450px;
+  -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 74%, 0% 100%);
+  clip-path: polygon(0% 0%, 100% 0%, 100% 74%, 0% 100%);
+  @include gradient-directional(
+    $deg: $header-bg-gradient-deg,
+    $start-color: $header-bg-gradient-color-2,
+    $end-color: $header-bg-gradient-color-1,
+    $start-percent: $header-bg-gradient-color-start,
+    $end-percent: $header-bg-gradient-color-end);
+  div {
+    width: 100%;
+    height: 100%;
+    background-image: url("../images/body-bg-picture.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+
+#root #wrapper {
+  background-color: transparent;
+}
+
+

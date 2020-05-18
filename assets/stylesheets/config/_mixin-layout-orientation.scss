@@ -1,0 +1,142 @@
+@mixin layout-orientation() {
+  @if $layout-orientation == "vertical" {
+    .container {
+      @extend %flexbox;
+      @include justify-content(space-between);
+      margin: 0 auto;
+      padding: 0 $vertical-container-padding;
+      width: 100%;
+      @include media-breakpoint-between(md, lg) {
+        @include flex-direction(column);
+      }
+      @include media-breakpoint-up(lg) {
+        padding: 0 $vertical-container-padding-lg;
+        width: $vertical-container-width-lg;
+      }
+      @include media-breakpoint-up(xl) {
+        padding: 0 $vertical-container-padding-xl;
+        width: $vertical-container-width-xl;
+      }
+    }
+    .header {
+      position: $vertical-header-position;
+      top: 0;
+      .header-menu {
+        .menu-button {
+          @include media-breakpoint-up(md) {
+            display: none;
+          }
+        }
+        .main-nav {
+          // @extend %flexbox;
+          @include flex-basis(100%);
+          width: $mobile-menu-width;
+          @include media-breakpoint-up(md) {
+            @include flex-direction(row);
+          }
+          @include media-breakpoint-between(md, lg) {
+            width: 100%;
+          }
+          > ul {
+            @extend %flexbox;
+            @include media-breakpoint-up(md) {
+              @include flex-direction(row);
+              @include align-items($menu-align);
+              @include justify-content(flex-start);
+              @include flex(1 1 auto);
+            }
+            @include media-breakpoint-up(xl) {
+              @include justify-content($menu-justify);
+            }
+
+            li {
+              height: $menu-link-height;
+              a {
+                height: 100%;
+                @include justify-content(flex-start);
+                @include media-breakpoint-up(md) {
+                  @include justify-content(center);
+                }
+                @include media-breakpoint-between(md, lg) {
+                  i + span {
+                    font-size: 0;
+                    margin: 0;
+                    transition: all .2s ease;
+                  }
+                  &:hover, &.active {
+                    i + span {
+                      font-size: inherit;
+                      margin: $menu-link-icon-margin;
+                    }
+                  }
+                }
+                i + span {
+                  flex: none;
+                }
+              }
+            }
+            ul {
+              position: absolute;
+            }
+          }
+        }
+      }
+    }
+    .page-header {
+      .menu-button { display: none; }
+    }
+  }
+  @if $layout-orientation == "horizontal" {
+    @include media-breakpoint-up(md) {
+      @include flex(1 1 auto);
+      @include flex-direction(row);
+      overflow: hidden;
+      .header, .header-menu {
+        width: $header-width;
+      }
+    }
+    .header {
+      .header-menu {
+        &.tiny {
+          .container {
+            @include align-items($tiny-header-menu-align);
+          }
+        }
+        @include media-breakpoint-up(md) {
+          .container {
+            @include flex-direction($header-menu-direction);
+            @include align-items($header-menu-align);
+            @include justify-content($header-menu-justify);
+          }
+        }
+        .main-nav {
+          > ul {
+            @include flex-direction(column);
+          }
+        }
+        .menu-button {
+          @include media-breakpoint-up(md) {
+            display: none;
+          }
+        }
+      }
+    }
+    .container {
+      @extend %flexbox;
+      width: 100%;
+    }
+    .page-header,
+    .workspace {
+      .container {
+        margin: 0 $horizontal-workspace-container-padding;
+      }
+    }
+    .page-header .menu-button {
+      display: none;
+      @include media-breakpoint-up(md) {
+        @include flexbox();
+      }
+    }
+
+  }
+}

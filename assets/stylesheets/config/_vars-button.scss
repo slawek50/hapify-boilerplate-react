@@ -1,0 +1,63 @@
+// Button Group
+$btn-group-btn-margin: 0 3px;
+
+// Button
+$btn-color: $first-txt-color;
+$btn-size: 15px;
+$btn-weight: normal;
+$btn-padding-vertical: 6px;
+$btn-padding-horizontal: 8px;
+$btn-padding: $btn-padding-vertical $btn-padding-horizontal;
+$btn-radius: $global-radius;
+$btn-bg-color: #fff;
+$btn-border-width: 1px;
+$btn-border-style: solid;
+$btn-border-color: transparent;
+// Button Icon
+$btn-icon-width: 16px;
+$btn-icon-size: 16px;
+$btn-icon-margin: 8px;
+// Button Small
+$btn-small-size: 14px;
+$btn-small-padding: 6px;
+$btn-small-icon-size: 12px;
+// Button Big
+$btn-big-size: 18px;
+$btn-big-padding: 10px;
+$btn-big-icon-size: 23px;
+$btn-big-icon-margin: 12px;
+
+// Button Link
+$btn-link-color: $first-color;
+
+// Button Primary
+$btn-primary-color: #fff;
+$btn-primary-bg-color: $first-color;
+$btn-primary-border-width: 0;
+$btn-primary-border-style: solid;
+$btn-primary-border-color: $first-color;
+$btn-primary-radius: $global-radius;
+$btn-primary-box-shadow: none;
+// Button Secondary
+$btn-secondary-color: rgba(#000,.5);
+$btn-secondary-bg-color: rgba(#000,0.2);
+$btn-secondary-border-width: $btn-primary-border-width;
+$btn-secondary-border-style: $btn-primary-border-style;
+$btn-secondary-border-color: rgba(#000,0.05);
+
+// Button Mail Mobile
+$btn-main-mobile-color: #fff !important;
+$btn-main-mobile-width: 60px;
+$btn-main-mobile-height: 60px;
+$btn-main-mobile-radius: 100%;
+$btn-main-mobile-bg-color: $btn-primary-bg-color;
+$btn-main-mobile-border-width: $btn-primary-border-width;
+$btn-main-mobile-border-style: $btn-primary-border-style;
+$btn-main-mobile-border-color: $btn-primary-border-color;
+$btn-main-mobile-shadow: 4px 4px 10px;
+$btn-main-mobile-icon-size: 28px !important;
+$btn-main-mobile-bottom: 30px;
+$btn-main-mobile-right: 30px;
+
+
+$table-btn-margin: 3px;

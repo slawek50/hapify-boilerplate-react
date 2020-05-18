@@ -1,0 +1,102 @@
+@-webkit-keyframes uil-default-anim {
+  0% { opacity: 1}
+  100% {opacity: 0}
+  }
+@keyframes uil-default-anim {
+  0% { opacity: 1}
+  100% {opacity: 0}
+}
+
+.uil-default-css > {
+  div:nth-of-type(1){
+    -webkit-animation: uil-default-anim 1s linear infinite;
+    animation: uil-default-anim 1s linear infinite;
+    -webkit-animation-delay: -0.5s;
+    animation-delay: -0.5s;
+  }
+  div:nth-of-type(2){
+    -webkit-animation: uil-default-anim 1s linear infinite;
+    animation: uil-default-anim 1s linear infinite;
+    -webkit-animation-delay: -0.4s;
+    animation-delay: -0.4s;
+  }
+  div:nth-of-type(3){
+    -webkit-animation: uil-default-anim 1s linear infinite;
+    animation: uil-default-anim 1s linear infinite;
+    -webkit-animation-delay: -0.3s;
+    animation-delay: -0.3s;
+  }
+  div:nth-of-type(4){
+    -webkit-animation: uil-default-anim 1s linear infinite;
+    animation: uil-default-anim 1s linear infinite;
+    -webkit-animation-delay: -0.2s;
+    animation-delay: -0.2s;
+  }
+  div:nth-of-type(5){
+    -webkit-animation: uil-default-anim 1s linear infinite;
+    animation: uil-default-anim 1s linear infinite;
+    -webkit-animation-delay: -0.09999999999999998s;
+    animation-delay: -0.09999999999999998s;
+  }
+  div:nth-of-type(6){
+    -webkit-animation: uil-default-anim 1s linear infinite;
+    animation: uil-default-anim 1s linear infinite;
+    -webkit-animation-delay: 0s;
+    animation-delay: 0s;
+  }
+  div:nth-of-type(7){
+    -webkit-animation: uil-default-anim 1s linear infinite;
+    animation: uil-default-anim 1s linear infinite;
+    -webkit-animation-delay: 0.09999999999999998s;
+    animation-delay: 0.09999999999999998s;
+  }
+  div:nth-of-type(8){
+    -webkit-animation: uil-default-anim 1s linear infinite;
+    animation: uil-default-anim 1s linear infinite;
+    -webkit-animation-delay: 0.19999999999999996s;
+    animation-delay: 0.19999999999999996s;
+  }
+  div:nth-of-type(9){
+    -webkit-animation: uil-default-anim 1s linear infinite;
+    animation: uil-default-anim 1s linear infinite;
+    -webkit-animation-delay: 0.30000000000000004s;
+    animation-delay: 0.30000000000000004s;
+  }
+  div:nth-of-type(10){
+    -webkit-animation: uil-default-anim 1s linear infinite;
+    animation: uil-default-anim 1s linear infinite;
+    -webkit-animation-delay: 0.4s;
+    animation-delay: 0.4s;
+  }
+}
+
+.uil-default-css {
+  background:none;
+  width:200px;
+  height:260px;
+  transform:scale(0.61);
+  display: inline-block;
+  position: absolute;
+  left:0;top:0;right:0;bottom:0;
+  margin: auto;
+}
+
+.uil-default-css-1 {top:80px;left:93px;width:14px;height:40px;background:#aaa;-webkit-transform:rotate(0deg) translate(0,-60px);transform:rotate(0deg) translate(0,-60px);border-radius:8px;position:absolute;}
+.uil-default-css-2 {top:80px;left:93px;width:14px;height:40px;background:#aaa;-webkit-transform:rotate(36deg) translate(0,-60px);transform:rotate(36deg) translate(0,-60px);border-radius:8px;position:absolute;}
+.uil-default-css-3 {top:80px;left:93px;width:14px;height:40px;background:#aaa;-webkit-transform:rotate(72deg) translate(0,-60px);transform:rotate(72deg) translate(0,-60px);border-radius:8px;position:absolute;}
+.uil-default-css-4 {top:80px;left:93px;width:14px;height:40px;background:#aaa;-webkit-transform:rotate(108deg) translate(0,-60px);transform:rotate(108deg) translate(0,-60px);border-radius:8px;position:absolute;}
+.uil-default-css-5 {top:80px;left:93px;width:14px;height:40px;background:#aaa;-webkit-transform:rotate(144deg) translate(0,-60px);transform:rotate(144deg) translate(0,-60px);border-radius:8px;position:absolute;}
+.uil-default-css-6 {top:80px;left:93px;width:14px;height:40px;background:#aaa;-webkit-transform:rotate(180deg) translate(0,-60px);transform:rotate(180deg) translate(0,-60px);border-radius:8px;position:absolute;}
+.uil-default-css-7 {top:80px;left:93px;width:14px;height:40px;background:#aaa;-webkit-transform:rotate(216deg) translate(0,-60px);transform:rotate(216deg) translate(0,-60px);border-radius:8px;position:absolute;}
+.uil-default-css-8 {top:80px;left:93px;width:14px;height:40px;background:#aaa;-webkit-transform:rotate(252deg) translate(0,-60px);transform:rotate(252deg) translate(0,-60px);border-radius:8px;position:absolute;}
+.uil-default-css-9 {top:80px;left:93px;width:14px;height:40px;background:#aaa;-webkit-transform:rotate(288deg) translate(0,-60px);transform:rotate(288deg) translate(0,-60px);border-radius:8px;position:absolute;}
+.uil-default-css-10 {top:80px;left:93px;width:14px;height:40px;background:#aaa;-webkit-transform:rotate(324deg) translate(0,-60px);transform:rotate(324deg) translate(0,-60px);border-radius:8px;position:absolute;}
+
+.uil-default-css-txt {
+  width:100%;
+  text-align: center;
+  color: #aaa;
+  font-size: 28px;
+  bottom: 0;
+  position: absolute;
+}

@@ -1,0 +1,105 @@
+.toolbar {
+  color: #fff;
+  .toolbar-actions {
+    .toolbar-search {
+      input {
+        color: #fff;
+        border: 1px solid rgba(#fff,.6);
+        background-color: rgba(#fff,.05);
+        width: 100%;
+        &::-webkit-input-placeholder { color: rgba(#fff,.8); }
+        &::-moz-placeholder { color: rgba(#fff,.8); }
+        &:-ms-input-placeholder { color: rgba(#fff,.8); }
+        &:-moz-placeholder { color: rgba(#fff,.8); }
+        &:focus, &:hover {
+          border: 1px solid rgba(#fff,1);
+        }
+        @include media-breakpoint-up(md) {
+          width: 300px;
+        }
+      }
+    }
+  }
+  .toolbar-buttons {
+    .ant-btn {
+      i {
+        @include media-breakpoint-up(md) {
+          display: none;
+        }
+      }
+      box-shadow: 0 2px 6px -1px rgba(#000,.3);
+    }
+  }
+}
+
+.box {
+  .toolbar {
+    .toolbar-title {
+      color: $first-txt-color;
+    }
+    .toolbar-buttons {
+      .ant-btn {
+        background-color: $first-color;
+        color: #fff;
+        box-shadow: none;
+        i {
+          font-size: 14px;
+          width: auto;
+          @include media-breakpoint-up(md) {
+            @include flexbox();
+          }
+        }
+      }
+    }
+  }
+}
+
+.table-boxed {
+  .toolbar {
+    .toolbar-actions {
+      width: 100%;
+    }
+  }
+}
+
+.admin {
+  .toolbar {
+    .toolbar-title, .toolbar-actions {
+      width: 100%;
+    }
+  }
+  .box {
+    .toolbar {
+      .toolbar-title, .toolbar-actions {
+        width: auto;
+      }
+    }
+  }
+}
+.client {
+  .site-header + .table-boxed,
+  .site-header + .card-list {
+    .toolbar {
+      background-color: transparent;
+      padding: 0;
+    }
+  }
+  .table-boxed .toolbar .toolbar-actions {
+    width: auto;
+  }
+  .toolbar {
+    background-color: $box-secondary-bg-color;
+    padding: 5px 5px 5px 14px;
+    border-radius: $global-radius;
+    margin-bottom: 10px;
+    .toolbar-title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+}
+
+.toolbar-subtitle {
+  font-size: 15px;
+  font-weight: normal;
+}

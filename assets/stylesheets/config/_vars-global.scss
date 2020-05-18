@@ -1,0 +1,77 @@
+// Grid breakpoints
+//
+// Define the minimum dimensions at which your layout will change,
+// adapting to different screen sizes, for use in media queries.
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+) !default;
+
+$layout-orientation: vertical; //horizontal vs vertical
+
+// Layout Horizontal
+$horizontal-workspace-container-padding: 20px;
+// Layout Vertical
+$vertical-header-position: static;
+$vertical-container-padding: 20px;
+$vertical-container-padding-lg: 0;
+$vertical-container-padding-xl: $vertical-container-padding-lg;
+$vertical-container-width-lg: 960px;
+$vertical-container-width-xl: 1170px;
+
+// Global
+$global-radius: 4px;
+$global-weight: 500;
+
+// WebFont
+$webfont-type: "googlefont"; // localfont or googlefont
+$font-family: "Open Sans";
+$font-spacing: 0;
+
+@if $webfont-type == "googlefont" {
+  body * {
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+  }
+}
+
+// General
+$first-color: #00be1d; //#ba1330;
+
+$edition-color: #c5c4d1;
+
+// Text
+$first-txt-color: #444;
+
+// Layout
+$app-bg-color: #f1f1f4;
+$content-margin-small: 14px;
+$content-margin-medium: 16px;
+$content-margin-large: 32px;
+
+.full-width {width: 100%;}
+.full-height {
+  height: 100%;
+  .flex-0 { @include flex(0); }
+}
+
+.sticky-top {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+}
+
+// Flex
+.scroll-auto { overflow-y: auto; }
+.edition { background-color: $edition-color; }
+.edition-2 { background-color: $app-bg-color;}
+
+.text-center {
+  justify-content: center;
+  text-align: center;
+}
+

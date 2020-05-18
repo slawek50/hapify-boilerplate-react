@@ -71,7 +71,7 @@ export function load<<M AA>>s () {
       method: 'GET',
       endpoint: '/admin/<<M a-a>>?_page=0&_limit=10',
       schema: Schemas.<<M A_A>>_ARRAY,
-      successMessage: '<<M A>>s fetched successfully',
+      // successMessage: '<<M A>>s fetched successfully',
     },
   };
 }

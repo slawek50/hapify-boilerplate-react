@@ -1,0 +1,48 @@
+// Page Header
+// Page Header Nav
+$mobile-page-header-nav-padding: 0 0 10px;
+$mobile-page-header-nav-font-color: #fff;
+$page-header-nav-height: auto;
+$page-header-nav-padding: 24px 0 0;
+$page-header-nav-font-color: #fff;
+$page-header-nav-shadow: none;
+$page-header-nav-bg-orientation: horizontal;
+$page-header-nav-bg-color-1: transparent;
+$page-header-nav-bg-color-2: transparent;
+$page-header-nav-bg-start-percent: 0%;
+$page-header-nav-bg-end-percent: 100%;
+// Page Header Nav Button
+$page-header-nav-btn-color: #fff;
+$page-header-nav-btn-size: 24px;
+$page-header-nav-btn-bg-color: transparent;
+
+// Page Header Nav Button Menu
+$page-header-nav-btn-menu-size: 22px;
+$page-header-nav-btn-menu-color: $first-txt-color;
+$page-header-nav-btn-menu-border-width: 0;
+$page-header-nav-btn-menu-border-style: solid;
+$page-header-nav-btn-menu-border-color: transparent;
+$page-header-nav-btn-menu-padding: 0;
+$page-header-nav-btn-menu-m-r: 10px;
+// Page Header Nav Title
+$mobile-page-header-nav-title-size: 18px;
+$page-header-nav-title-size: 24px;
+$page-header-nav-title-weight: $global-weight;
+$page-header-nav-title-m-r: 20px;
+// Page Header Nav Date
+$page-header-date-size: 13px;
+$page-header-date-m-l: 24px;
+// Page Header Title
+$page-header-title-color: $first-color;
+$page-header-title-border-bottom: 1px solid darken($app-bg-color, 6%);
+$page-header-title-bg-orientation: horizontal;
+$page-header-title-bg-color-1: #fff;
+$page-header-title-bg-color-2: #fff;
+$page-header-title-bg-start-percent: 0%;
+$page-header-title-bg-end-percent: 100%;
+$page-header-maintitle-size: 16px;
+$page-header-maintitle-weight: normal;
+$page-header-subtitle-size: 14px;
+$page-header-subtitle-weight: normal;
+$page-header-subtitle-color: inherit;
+$page-header-subtitle-margin: 6px 0 0;

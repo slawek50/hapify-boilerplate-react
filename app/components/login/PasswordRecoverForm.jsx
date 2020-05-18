@@ -7,10 +7,12 @@ import { UserOutlined } from '@ant-design/icons';
 
 import getRules from '../../utils/RulesValidator';
 
+import appLogo from '../../../assets/images/logo-app.png';
+
 const PasswordRecoverForm = ({ onSubmit, initialValues, onClickCancel }) => (
   <div className="box animated fadeInDown">
     <div className="box-header">
-      <div className="logo" />
+      <img src={appLogo} alt="Logo" className="logo-login" />
       <div className="separator" />
       <h1>Mot de passe oublié</h1>
     </div>
@@ -20,17 +22,17 @@ const PasswordRecoverForm = ({ onSubmit, initialValues, onClickCancel }) => (
         onFinish={(v) => onSubmit({ ...initialValues, ...v })}
         initialValues={initialValues}
         className="login-form"
+        layout="vertical"
+        hideRequiredMark
       >
         <Form.Item name="email" label="Email" rules={getRules('email', true)} hasFeedback>
-          <Input placeholder="Adresse email" prefix={<UserOutlined />} />
+          <Input placeholder="Adresse email" prefix={<UserOutlined />} size="large" />
         </Form.Item>
 
-        <Button type="primary" htmlType="submit">Envoyer</Button>
-
-        <div className="form-separator" />
+        <Button type="primary" htmlType="submit" block>Envoyer</Button>
 
         <div className="btn-group">
-          <Button type="link" block onClick={onClickCancel}>Annuler</Button>
+          <Button type="link" onClick={onClickCancel} block>Annuler</Button>
         </div>
       </Form>
     </div>

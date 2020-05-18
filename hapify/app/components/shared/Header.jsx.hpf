@@ -14,6 +14,8 @@ import { logout } from '../../store/modules/auth';
  
 import { isAdmin } from '../../utils/RolesUtils';
  
+import appLogo from '../../../assets/images/logo-app.png';
+ 
 const Header = ({
   menuIsOpen, menuIsTiny, account, setConf, doLogout,
 }) => (
@@ -21,7 +23,7 @@ const Header = ({
     <div className={classNames('header-menu', { tiny: menuIsTiny })}>
       <div className="container">
         <NavLink to="/" className="logo-block">
-          <img src="" alt="Logo" className="logo" />
+          <img src={appLogo} alt="Logo" className="logo" />
         </NavLink>
         <nav
           className={classNames(
@@ -31,7 +33,7 @@ const Header = ({
           )}
         >
           <div href="/" className="mobile-logo-block">
-            <img src="" alt="Logo" className="mobile-logo" />
+            <img src={appLogo} alt="Logo" className="mobile-logo" />
           </div>
           { isAdmin(account) && (
             <div className="menu-title">Administrateurs :</div>

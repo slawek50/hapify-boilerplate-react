@@ -1,0 +1,22 @@
+.toolbar {
+  @extend %flexbox;
+  @include justify-content(space-between);
+  @include align-items(center);
+  @include flex-wrap(wrap);
+  margin-bottom: 20px;
+  .toolbar-title {
+    &.full-width {
+      margin-bottom: 10px;
+    }
+  }
+  .toolbar-actions {
+    @extend %flexbox;
+    @include flex-direction(column);
+    @include media-breakpoint-up(md) {
+      @include flex-direction(row);
+      @include justify-content(space-between);
+      @include align-items(center);
+    }
+
+  }
+}

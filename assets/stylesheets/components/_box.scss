@@ -1,0 +1,89 @@
+.box {
+  background-color: $box-bg-color;
+  border-radius: $box-radius;
+  box-shadow: $box-shadow;
+  text-align: left;
+  width: 100%;
+  position: relative;
+  &.box-overflow {
+    overflow-y: auto;
+  }
+  &.transparent { background-color: transparent; }
+  &.no-padding {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .box-header {
+    @extend %flexbox;
+    @include flex-direction(column);
+    padding: $box-header-padding;
+    border-bottom: $box-header-border;
+    @media (min-width: 1025px) {
+      @include flex-direction(row);
+      @include justify-content(space-between);
+      @include align-items(center);
+    }
+    .box-title {
+      @include flex(1);
+      font-size: $box-title-size;
+      font-weight: $box-title-weight;
+    }
+  }
+  .box-content {
+    @extend %flexbox;
+    @include flex-direction(column);
+    padding: $box-content-padding;
+    .box-content-title {
+      font-weight: bold;
+      &.big-title {
+        font-size: 24px;
+      }
+    }
+    a {
+      word-break: break-all;
+    }
+  }
+  &.noShadow {
+    box-shadow: none;
+  }
+  .data {
+    font-size: 14px;
+  }
+  .data-title {
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+}
+
+.box-secondary {
+  color: $box-secondary-color;
+  background-color: $box-secondary-bg-color;
+  .title {
+    color: $box-secondary-title-color;
+    font-size: $box-secondary-title-size;
+    font-weight: $box-secondary-title-weight;
+    margin-bottom: 6px;
+  }
+  a {
+    color: #fff;
+    &.ant-btn {
+      color: $first-txt-color;
+    }
+  }
+  &.separated {
+    [class~="grid"], [class*="grid-"], [class*="grid_"] {
+      > [class~="col"], [class*="col-"], [class*="col_"] {
+        border-right: 2px solid #fff;
+        &:last-child {
+          border-right: 0;
+        }
+      }
+    }
+  }
+}
+
+.box-transparent {
+  color: $box-transparent-color;
+  background-color: transparent;
+  box-shadow: none;
+}

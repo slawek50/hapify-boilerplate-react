@@ -1,0 +1,59 @@
+* {
+  box-sizing: border-box;
+}
+
+body, #root, #wrapper {
+  min-height: 100vh;
+  max-height: 100vh;
+  position: relative;
+}
+
+body * {
+  @if $webfont-type == "fontface" {
+    @include webfont-type($webfont-type);
+  }
+  font-family: quote($font-family), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: $font-spacing;
+}
+body {
+  color: $first-txt-color;
+}
+
+#root {
+  @extend %flexbox;
+  #wrapper {
+    @extend %flexbox;
+    @include flex-direction(column);
+    @include layout-orientation();
+    width: 100%;
+    background-color: $app-bg-color;
+    &.env-staging { padding-bottom: 50px; }
+    main {
+      @extend %flexbox;
+      @include flex(1 1 auto);
+      @include flex-direction(column);
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
+  }
+}
+
+.container-wrapper {
+  @extend %flexbox;
+  @include flex-direction(column);
+  min-height: 100%;
+}
+
+.lines-breaks {
+  white-space: pre-line;
+}
+
+.text-center{ text-align: center; }
+.text-right { text-align: right; }
+
+img {
+  max-width: 100%;
+}

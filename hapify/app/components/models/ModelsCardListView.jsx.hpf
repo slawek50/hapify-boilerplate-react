@@ -76,8 +76,8 @@ const <<M AA>>sCardListView = ({
     <<= getSort(root.fields)>>
     buttons={(
       <div>
-        <NavLink className="btn" to={`${baseUrl}/new`}>
-          Créer un <<M A>>
+        <NavLink to={`${baseUrl}/new`}>
+          <Button>Créer un <<M A>></Button>
         </NavLink>
       </div>
     )}

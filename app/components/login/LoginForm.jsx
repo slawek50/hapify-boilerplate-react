@@ -7,10 +7,12 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 import getRules from '../../utils/RulesValidator';
 
+import appLogo from '../../../assets/images/logo-app.png';
+
 const LoginForm = ({ onSubmit, initialValues, onClickRecoverPassword }) => (
   <div className="box animated">
     <div className="box-header">
-      <div className="logo" />
+      <img src={appLogo} alt="Logo" className="logo-login" />
       <div className="separator" />
       <h1>Login</h1>
     </div>
@@ -19,20 +21,21 @@ const LoginForm = ({ onSubmit, initialValues, onClickRecoverPassword }) => (
         onFinish={(v) => onSubmit({ ...initialValues, ...v })}
         initialValues={initialValues}
         className="login-form"
+        layout="vertical"
+        hideRequiredMark
       >
         <Form.Item name="email" label="Email" rules={getRules('email', true)} hasFeedback>
-          <Input placeholder="Adresse email" prefix={<UserOutlined />} />
+          <Input placeholder="Adresse email" prefix={<UserOutlined />} size="large" />
         </Form.Item>
+
         <Form.Item name="password" label="Mot de passe" rules={getRules('password', true)} hasFeedback>
-          <Input.Password placeholder="Mot de passe" prefix={<LockOutlined />} />
+          <Input.Password placeholder="Mot de passe" prefix={<LockOutlined />} size="large" />
         </Form.Item>
 
-        <Button type="primary" htmlType="submit">Se connecter</Button>
-
-        <div className="form-separator" />
+        <Button type="primary" htmlType="submit" block>Se connecter</Button>
 
         <div className="btn-group">
-          <Button type="link" block onClick={onClickRecoverPassword}>Mot de passe oublié</Button>
+          <Button type="link" onClick={onClickRecoverPassword} block>Mot de passe oublié</Button>
         </div>
       </Form>
     </div>

@@ -1,0 +1,14 @@
+@mixin webfont-type($webfont) {
+  @font-face {
+    font-family: quote($font-family);
+    src:  url('../fonts/' + $font-family + '/' + $font-family + '.eot');
+    src:  url('../fonts/' + $font-family + '/' + $font-family + '.eot#iefix') format('embedded-opentype'),
+          url('../fonts/' + $font-family + '/' + $font-family + '.woff2') format('woff2'),
+          url('../fonts/' + $font-family + '/' + $font-family + '.ttf') format('truetype'),
+          url('../fonts/' + $font-family + '/' + $font-family + '.woff') format('woff'),
+          url('../fonts/' + $font-family + '/' + $font-family + '.svg#avenir-book') format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
+  background-color: red;
+}

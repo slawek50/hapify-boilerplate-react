@@ -1,0 +1,156 @@
+a, button {
+  @extend %flexbox;
+  @include align-items(center);
+  background: none;
+  border: none;
+  padding: 0;
+  border-radius: 0;
+  text-decoration: none;
+  color: $first-color;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: $font-family;
+  position: relative;
+  i + span, span + i {
+    margin-left: $btn-icon-margin;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.btn {
+  color: $btn-color;
+  font-size: $btn-size;
+  font-weight: $btn-weight;
+  padding: $btn-padding;
+  border-radius: $btn-radius;
+  border-width: $btn-border-width;
+  border-style: $btn-border-style;
+  border-color: $btn-border-color;
+  background-color: $btn-bg-color;
+  white-space: nowrap;
+  line-height: 1;
+  @include justify-content(center);
+  i {
+    @extend %flexbox;
+    @include justify-content(center);
+    @include align-items(center);
+    width: $btn-icon-width;
+    font-size: $btn-icon-size;
+  }
+  i + span, span + i {
+    margin-left: $btn-icon-margin;
+  }
+  &:hover {
+    background-color: darken($btn-bg-color, 6%);
+  }
+
+  &.btn-primary {
+    color: $btn-primary-color;
+    background-color: $btn-primary-bg-color;
+    border-width: $btn-primary-border-width;
+    border-style: $btn-primary-border-style;
+    border-color: $btn-primary-border-color;
+    border-radius: $btn-primary-radius;
+    box-shadow: $btn-primary-box-shadow;
+    &:hover {
+      color: lighten($btn-primary-color, 10%);
+    }
+    span { text-align: center; }
+    i + span, span + i {
+      text-align: left;
+    }
+  }
+
+  &.btn-secondary {
+    color: $btn-secondary-color;
+    background-color: $btn-secondary-bg-color;
+    border-width: $btn-secondary-border-width;
+    border-style: $btn-secondary-border-style;
+    border-color: $btn-secondary-border-color;
+  }
+  &.btn-link {
+    color: $btn-link-color;
+    background-color: transparent;
+    border: none;
+  }
+  &.btn-small {
+    font-size: $btn-small-size;
+    padding: $btn-small-padding;
+    i { font-size: $btn-small-icon-size; }
+  }
+  &.btn-big {
+    font-size: $btn-big-size;
+    padding: $btn-big-padding;
+    i { font-size: $btn-big-icon-size; }
+    i + span, span + i {
+      margin-left: $btn-big-icon-margin;
+    }
+  }
+  &.rounded { border-radius: 100%; }
+  &.btn-full { width: 100%; }
+  &.btn-main-mobile {
+    @include media-breakpoint-down(sm) {
+      position: fixed;
+      z-index: 9999;
+      bottom: $btn-main-mobile-bottom;
+      right: $btn-main-mobile-right;
+      padding: 0;
+      color: $btn-main-mobile-color;
+      background-color: $btn-main-mobile-bg-color;
+      border-radius: $btn-main-mobile-radius;
+      border-width: $btn-main-mobile-border-width;
+      border-style: $btn-main-mobile-border-style;
+      border-color: $btn-main-mobile-border-color;
+      width: $btn-main-mobile-width;
+      height: $btn-main-mobile-height;
+      box-shadow: $btn-main-mobile-shadow;
+      span {
+        display: none;
+        + i { margin-left: 0; }
+      }
+      i { font-size: $btn-main-mobile-icon-size; }
+    }
+  }
+}
+.btn-full-mobile {
+  @media (max-width: 1025px) {
+    width: 100% !important;
+  }
+}
+.btn-mobile {
+  span {
+    @include media-breakpoint-down(sm) {
+      display: none
+    }
+  }
+}
+
+.btn-group {
+  @extend %flexbox;
+  @include flex(1);
+  @include align-items(center);
+  width: 100%;
+  a, button {
+    margin: $btn-group-btn-margin;
+    &:first-child { margin-left: 0; }
+    &:last-child { margin-right: 0; }
+  }
+  &.center { @include justify-content(center); }
+  &.right { @include justify-content(flex-end); }
+  &.between { @include justify-content(space-between); }
+  &.around { @include justify-content(space-around); }
+  &.full {
+    a, button {
+      flex: 1;
+    }
+  }
+  &.absolute {
+    position: absolute;
+    z-index: 9999;
+    &.bottom {
+      bottom: 20px;
+    }
+  }
+}

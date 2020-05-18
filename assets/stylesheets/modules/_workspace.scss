@@ -1,0 +1,212 @@
+.workspace {
+  @extend %flexbox;
+  @include flex(1);
+  overflow: auto;
+  padding: $workspace-padding;
+  @include media-breakpoint-up(md) { padding: $workspace-padding-md; }
+  .container {
+    @include flex-direction($workspace-direction);
+  }
+  &.client {
+    padding: $workspace-client-padding;
+    @include media-breakpoint-up(md) { padding: $workspace-client-padding-md; }
+  }
+}
+
+.workspace-sidebar {
+  @extend %flexbox;
+  @include flex-direction(column);
+  background-color: $workspace-sidebar-bg-color;
+  width: $workspace-sidebar-xs-size;
+  @include flex(1);
+  @include media-breakpoint-up(sm) {
+    width: $workspace-sidebar-sm-size;
+    @include flex(none);
+  }
+  @include media-breakpoint-up(xl) {
+    width: $workspace-sidebar-xl-size;
+  }
+  .workspace-sidebar-header {
+    text-align: center;
+    color: $workspace-sidebar-header-color;
+    background-color: $workspace-sidebar-header-bg-color;
+    padding: $content-margin-small;
+    @extend %flexbox;
+    h2 {
+      font-size: ($workspace-sidebar-header-size - 2px);
+      margin: 0;
+      @include flex(1);
+     @include media-breakpoint-up(sm) {
+        font-size: $workspace-sidebar-header-size;
+      }
+    }
+  }
+  .workspace-sidebar-content {
+    overflow-y: auto;
+    padding: $content-margin-small;
+    flex: 1;
+    background-color: $workspace-sidebar-bg-color;
+    &.bg-color-2 {
+      background-color: $workspace-sidebar-bg-color-2;
+    }
+    .list-item {
+      @extend %flexbox;
+      @include flex-direction(column);
+      background-color: $workspace-content-list-bg-color;
+      padding: $workspace-content-list-padding;
+      a {
+        font-weight: $workspace-content-list-item-weight;
+        color: $workspace-content-list-item-color;
+        border-radius: $workspace-content-list-item-radius;
+        background-color: $workspace-content-list-item-bg-color;
+        margin: $workspace-content-list-item-margin;
+        padding: $workspace-content-list-item-padding;
+        border-width: $workspace-content-list-item-border-width;
+        border-style: $workspace-content-list-item-border-style;
+        border-color: $workspace-content-list-item-border-color;
+        &:hover {
+          font-weight: $workspace-content-list-item-hover-weight;
+          color: $workspace-content-list-item-hover-color;
+          border-radius: $workspace-content-list-item-hover-radius;
+          background-color: $workspace-content-list-item-hover-bg-color;
+          margin: $workspace-content-list-item-hover-margin;
+          padding: $workspace-content-list-item-hover-padding;
+          border-width: $workspace-content-list-item-hover-border-width;
+          border-style: $workspace-content-list-item-hover-border-style;
+          border-color: $workspace-content-list-item-hover-border-color;
+        }
+        &.selected {
+          font-weight: $workspace-content-list-item-hover-weight;
+          color: $workspace-content-list-item-hover-color;
+          border-radius: $workspace-content-list-item-hover-radius;
+          background-color: $workspace-content-list-item-hover-bg-color;
+          margin: $workspace-content-list-item-selected-margin;
+          padding: $workspace-content-list-item-selected-padding;
+          border-width: $workspace-content-list-item-hover-border-width;
+          border-style: $workspace-content-list-item-hover-border-style;
+          border-color: $workspace-content-list-item-hover-border-color;
+        }
+        &:last-child {
+          border-bottom: 1px solid transparent;
+        }
+      }
+    }
+  }
+}
+.modal-content .workspace-sidebar {
+  width: 100%;
+}
+
+.workspace-header {
+  color: $workspace-header-color;
+  background-color: $workspace-header-bg-color;
+  border-width: $workspace-header-border-width;
+  border-style: $workspace-header-border-style;
+  border-color: $workspace-header-border-color;
+  padding: $content-margin-small;
+  overflow: $workspace-header-overflow;
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: rgba(#000,.05);
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(#000,.3);
+  }
+  &::-webkit-scrollbar-corner {
+    background-color: transparent;
+  }
+  @include media-breakpoint-up(sm) {
+    flex-basis: $workspace-header-sm-flex-basis;
+    padding: $content-margin-medium;
+  }
+  @include media-breakpoint-up(lg) { padding: $content-margin-medium $content-margin-large; }
+  &.search-block {
+    h2 {
+      @include media-breakpoint-down(sm) {
+        display: none;
+      }
+    }
+    .search-bar * {
+      margin-bottom: 0;
+    }
+    .search-bar .ant-btn {
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+    .search-options .field {
+      margin-top: 14px;
+    }
+    @include media-breakpoint-down(sm) {
+      .search-options {
+        display: none
+      }
+    }
+  }
+  .workspace-header-title {
+    @extend %flexbox;
+    @include justify-content(space-between);
+    @include align-items(center);
+    @include media-breakpoint-up(sm) {
+      border-bottom: 1px solid #fff;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+    }
+    h2 {
+      margin: 0;
+      font-weight: normal;
+    }
+  }
+  input, textarea, select {
+    border-radius: $form-2-input-radius;
+  }
+  .Select {
+    &.Select--single, &.Select--multi  {
+      > .Select-control {
+        border-radius: $form-2-input-radius;
+      }
+    }
+  }
+}
+
+.workspace-content {
+  @extend %flexbox;
+  @include flex-direction(column);
+  @include align-items(flex-start);
+  @include flex(1);
+  overflow-y: auto;
+  padding: $content-margin-small;
+  @include media-breakpoint-up(sm) { padding: $content-margin-medium; }
+  @include media-breakpoint-up(lg) { padding: $content-margin-medium $content-margin-large; }
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: rgba(#000,.05);
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(#000,.3);
+  }
+  &::-webkit-scrollbar-corner {
+    background-color: transparent;
+  }
+  &.bg-color-2 {
+    background-color: $workspace-content-bg-color-2;
+  }
+  &.edition {
+    background-color: lighten($first-color, 18%);
+    @include media-breakpoint-down(sm) {
+      flex: 5;
+    }
+  }
+  > .btn-group:first-child {
+    margin-bottom: 16px;
+  }
+}
+
+

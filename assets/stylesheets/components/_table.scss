@@ -1,0 +1,194 @@
+.table {
+  font-size: 15px;
+  .tr {
+    padding: $gl-gutter ($gl-gutter/2) 0;
+    .td {
+      &.td-uncropping {
+        white-space: normal;
+      }
+      &.td-buttons {
+        @extend %flexbox;
+        @include justify-content(flex-end);
+        max-width: none;
+        height: auto;
+        a, button {
+          &:first-child {
+            margin-left: 0;
+          }
+          &:last-child {
+            margin-right: 0;
+          }
+          @include media-breakpoint-up(md) {
+            &.ant-btn {
+              background-color: transparent;
+            }
+          }
+        }
+        a, button {
+          margin: 0 $table-btn-margin;
+        }
+      }
+      &.td-bold { font-weight: 600; }
+      &.td-small { font-size: 13px; }
+    }
+  }
+
+  @for $i from 0 through 10 {
+    .cln-#{$i}btn {
+      @include flex(1 1 100%);
+      overflow: unset !important;
+      @include media-breakpoint-up(md) {
+        @include flex(0);
+        .td {
+          width: (
+            ($i *
+              ($btn-icon-width +
+                (2 * $btn-padding-horizontal) +
+                (2 * $btn-border-width)
+              )
+            ) +
+            (
+              ($i * (2 * $table-btn-margin)) -
+              (2 * $table-btn-margin)
+            )
+          );
+        }
+      }
+    }
+  }
+  .col-date { width: 100px; }
+}
+
+.thead {
+  @include media-breakpoint-down(sm) {
+    .grid {
+      margin: -4px;
+      &:before {
+        content: 'Trier par :';
+        color: #fff;
+        display: flex;
+        margin-left: 4px;
+        align-items: center;
+        order: -1;
+      }
+    }
+    [class~="col"], [class*="col-"], [class*="col_"] {
+      @include flex(0);
+      padding: 0;
+    }
+    .tr { padding: 0; }
+    .th {
+      color: #fff;
+      background-color: rgba(#000, .3);
+      padding: 8px 10px;
+      margin: 4px;
+      border-radius: $global-radius;
+      white-space: nowrap;
+      &:hover {
+        background-color: rgba(#000, .4);
+        box-shadow: 0 2px 4px rgba(#000,.1);
+      }
+      &.sorted {
+        color: #000;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(#000,.1);
+      }
+    }
+    .cln-sorted {
+      order: -1;
+      flex: 1 0 80%;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+  .tr {
+    @include media-breakpoint-up(md) {
+      border-bottom: 1px solid rgba(#000, .3);
+    }
+  }
+
+  .th {
+    @include flexbox();
+    @include align-items(center);
+    &:hover {
+      cursor: pointer;
+    }
+    i {
+      margin-left: 10px;
+      width: 10px;
+    }
+  }
+}
+
+.tbody {
+  [class~="col"], [class*="col-"], [class*="col_"] {
+    overflow: hidden;
+  }
+  .tr {
+    margin-top: -1px;
+    position: relative;
+    @include media-breakpoint-up(md) {
+      border-width: 1px 0;
+      border-style: solid;
+      border-color: #E2E2E2;
+      background-color: rgba(#000, .1);
+      &:nth-child(even) {
+        background-color: rgba(#000, .2);
+      }
+      &:hover {
+        background-color: rgba(#000, .3);
+        z-index: 2;
+      }
+    }
+    .td {
+      @include flexbox();
+      @include align-items(center);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      height: 100%;
+      a {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+      }
+    }
+    .grid {
+      overflow: hidden;
+    }
+  }
+}
+
+
+
+@include media-breakpoint-up(md) {
+  .table-boxed {
+    @include flexbox();
+    @include flex-direction(column);
+    .table {
+      @include flex(1);
+      padding: 4px 16px;
+      background-color: $box-bg-color;
+      border-radius: $box-radius;
+      box-shadow: $box-shadow;
+      .tbody {
+        .grid {
+          @include media-breakpoint-down(sm) {
+            padding: 10px 5px 0;
+            background-color: #fff;
+            border-radius: $global-radius;
+            margin-bottom: 10px;
+            box-shadow: 0 12px 60px -16px rgba(#000, .4);
+            .td-buttons {
+              margin: 0 ((-$gl-gutter/2) - 5px) (-$gl-gutter-vertical);
+              padding: 10px (($gl-gutter/2) + 5px);
+              background-color: #efefef;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

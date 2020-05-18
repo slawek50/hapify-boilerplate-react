@@ -1,0 +1,101 @@
+.login {
+  flex: 1;
+  overflow: hidden;
+  @if $login-background-type == "image" {
+    background-image: $login-bg-picture;
+    background-repeat: $login-bg-repeat;
+    background-size: cover;
+  }
+  @if $login-background-type == "gradient" {
+    @include gradient-directional(
+      $deg: $login-bg-deg,
+      $start-color: $login-bg-color-1,
+      $end-color: $login-bg-color-2,
+      $start-percent: $login-bg-color-start,
+      $end-percent: $login-bg-color-end);
+  }
+  .login-overflow {
+    @extend %flexbox;
+    @include align-items($login-overflow-alignment);
+    @include justify-content($login-overflow-justify);
+    width: 100%;
+    height: 100%;
+    @if $login-overlay-type == "gradient" {
+      @include gradient-directional(
+        $deg: $login-bg-overlay-deg,
+        $start-color: $login-bg-overlay-color-1,
+        $end-color: $login-bg-overlay-color-2,
+        $start-percent: $login-bg-overlay-color-start,
+        $end-percent: $login-bg-overlay-color-end);
+    } @else if $login-overlay-type == "image" {
+      background-image: $login-overlay-picture;
+      background-repeat: $login-overlay-repeat;
+      background-size: $login-overlay-size;
+      background-position: $login-overlay-position;
+    }
+    .box {
+      @extend %flexbox;
+      @include flex-direction($login-box-direction);
+      @include justify-content($login-box-justify);
+      box-shadow: $login-box-shadow;
+      border-radius: $login-box-radius;
+      width: $login-box-width;
+      color: $login-box-color;
+      background-color: $login-box-bg-color;
+      @if $login-box-position=='center' {
+        -webkit-animation-name:fadeInUp;
+        animation-name:fadeInUp
+      } @else if $login-box-position=='fullLeft' {
+        -webkit-animation-name:fadeInLeft;
+        animation-name:fadeInLeft
+      } @else if $login-box-position=='fullRight' {
+        -webkit-animation-name:fadeInRight;
+        animation-name:fadeInRight;
+      }
+      .box-header {
+        @include flex-direction(column);
+        padding: $login-box-header-padding;
+        h1 {
+          @include flex(1);
+          font-size: $login-title-size;
+          font-weight: 600;
+          text-align: center;
+          margin: 0;
+        }
+        .separator {
+          width: $login-separator-width;
+          height: $login-separator-height;
+          background: $login-separator-color;
+          margin: $login-separator-margin;
+        }
+        .logo-login {
+          @include media-breakpoint-down(xs) {
+            margin: $login-mobile-logo-margin;
+          }
+          @include media-breakpoint-up(sm) {
+            margin: $login-desktop-logo-margin;
+          }
+        }
+      }
+      .box-content {
+        padding: $login-box-content-padding;
+        button[type="submit"] {
+          font-size: $login-btn-submit-font-size;
+          border: $login-btn-submit-border;
+          background-color: $login-btn-submit-bg-color;
+          border-radius: $login-btn-submit-radius;
+          color: $login-btn-submit-color;
+          margin: $login-btn-submit-margin;
+          height: auto;
+        }
+        .ant-btn-link {
+          color: $login-btn-link-color;
+        }
+        p {
+          margin-top: 0;
+          margin-bottom: 50px;
+        }
+      }
+    }
+  }
+}

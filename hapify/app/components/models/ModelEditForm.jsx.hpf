@@ -23,7 +23,12 @@ import { UPLOADS_URL } from '../../configs/Constants';
 const <<M AA>>EditForm = ({
   onSubmit, initialValues, baseUrl,<<@ F tE/hd/pr/in f>> <<f.model aA>>s,<<@>>
 }) => (
-  <Form onFinish={(v) => onSubmit({ ...initialValues, ...v })} initialValues={initialValues}>
+  <Form
+    onFinish={(v) => onSubmit({ ...initialValues, ...v })}
+    initialValues={initialValues}
+    layout="vertical"
+    hideRequiredMark
+  >
     <div>
       <<@ F /hd/pr/in f>>
       <<= getComponent(f) >>

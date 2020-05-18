@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   get, isString, isArray, isFunction, map, orderBy,
 } from 'lodash';
-import { Input, Select, Button } from 'antd';
+import { Input, Select } from 'antd';
 import { UpOutlined, DownOutlined } from '@ant-design/icons';
 
 import sharedSelector from '../../selectors/SharedSelector';
@@ -89,7 +89,7 @@ const TableListView = ({
             <div className="tr">
               <div className="grid">
                 {map(cols, (col, colKey) => col && (
-                  <Button
+                  <div
                     key={colKey}
                     className={col.className + (sort.by === colKey ? ' cln-sorted' : '')}
                     onClick={() => setOrder(colKey)}
@@ -100,7 +100,7 @@ const TableListView = ({
                         sort.order === 'asc' ? <UpOutlined /> : <DownOutlined />
                       )}
                     </div>
-                  </Button>
+                  </div>
                 ))}
                 {rowButtons && rowButtons()}
               </div>
@@ -112,7 +112,7 @@ const TableListView = ({
             <div className="tr" key={rowKey}>
               <div className="grid">
                 {map(cols, (col, colKey) => col && (
-                  <Button
+                  <div
                     key={colKey}
                     className={col.className}
                     onClick={onClickRow ? () => onClickRow(row) : null}
@@ -124,7 +124,7 @@ const TableListView = ({
                         || row[colKey]
                       }
                     </div>
-                  </Button>
+                  </div>
                 ))}
                 {rowButtons && rowButtons(row)}
               </div>

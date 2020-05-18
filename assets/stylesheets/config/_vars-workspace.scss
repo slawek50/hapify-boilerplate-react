@@ -1,0 +1,54 @@
+// Workspace
+$workspace-direction: column;
+$workspace-padding: 20px 0;
+$workspace-padding-md: $workspace-padding;
+
+$workspace-client-padding: 10px 0;
+$workspace-client-padding-md: $workspace-client-padding;
+// Workspace sidebar
+$workspace-sidebar-xs-size: 100%;
+$workspace-sidebar-sm-size: 280px;
+$workspace-sidebar-xl-size: 400px;
+$workspace-sidebar-bg-color: #f5f5f5;
+$workspace-sidebar-bg-color-2: #fff;
+// Workspace Sidebar Header
+$workspace-sidebar-header-size: 20px;
+$workspace-sidebar-header-color: #fff;
+$workspace-sidebar-header-bg-color: $first-color;
+
+// Workspace Header
+$workspace-header-overflow: visible;
+$workspace-header-color: #fff;
+$workspace-header-bg-color: $first-color;
+$workspace-header-border-width: 0;
+$workspace-header-border-style: solid;
+$workspace-header-border-color: transparent;
+$workspace-header-sm-flex-basis: auto;
+// Workspace Content
+$workspace-content-bg-color-2: #fff;
+// Workspace Content List
+$workspace-content-list-bg-color: transparent;
+$workspace-content-list-padding: 14px;
+// Workspace Content List Item
+$workspace-content-list-item-weight: normal;
+$workspace-content-list-item-color: $first-color;
+$workspace-content-list-item-radius: 0;
+$workspace-content-list-item-border-width: 0 0 1px 0;
+$workspace-content-list-item-border-style: solid;
+$workspace-content-list-item-border-color: darken($workspace-sidebar-bg-color, 10%);
+$workspace-content-list-item-bg-color: transparent;
+$workspace-content-list-item-padding: 10px;
+$workspace-content-list-item-margin: 0;
+// // Workspace Content List Item Hover
+$workspace-content-list-item-hover-weight: bold;
+$workspace-content-list-item-hover-color: $first-color;
+$workspace-content-list-item-hover-radius: 0;
+$workspace-content-list-item-hover-border-width: $workspace-content-list-item-border-width;
+$workspace-content-list-item-hover-border-style: solid;
+$workspace-content-list-item-hover-border-color: darken($workspace-sidebar-bg-color, 10%);
+$workspace-content-list-item-hover-bg-color: $app-bg-color;
+$workspace-content-list-item-hover-padding: $workspace-content-list-item-padding;
+$workspace-content-list-item-hover-margin: $workspace-content-list-item-margin;
+// Workspace Content List Item Selected
+$workspace-content-list-item-selected-padding: $workspace-content-list-item-padding;
+$workspace-content-list-item-selected-margin: $workspace-content-list-item-margin;

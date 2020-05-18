@@ -31,7 +31,7 @@ const PageHeader = ({
         <div className="page-header-left">
           <Button
             icon={<MenuOutlined />}
-            className="menu-button btn"
+            className="menu-button"
             onClick={() => setConf('menuIsTiny', !menuIsTiny)}
           />
           <div className="page-header-title">

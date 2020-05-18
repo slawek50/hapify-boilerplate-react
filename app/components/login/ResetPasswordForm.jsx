@@ -7,10 +7,12 @@ import { LockOutlined } from '@ant-design/icons';
 
 import getRules from '../../utils/RulesValidator';
 
+import appLogo from '../../../assets/images/logo-app.png';
+
 const ResetPasswordForm = ({ onSubmit, initialValues }) => (
   <div className="box animated fadeInDown">
     <div className="box-header">
-      <div className="logo" />
+      <img src={appLogo} alt="Logo" className="logo-login" />
       <div className="separator" />
       <h1>Réinitialisation du mot de passe</h1>
     </div>
@@ -20,10 +22,13 @@ const ResetPasswordForm = ({ onSubmit, initialValues }) => (
         onFinish={(v) => onSubmit({ ...initialValues, ...v })}
         initialValues={initialValues}
         className="login-form"
+        layout="vertical"
+        hideRequiredMark
       >
         <Form.Item name="password" label="Mot de passe" rules={getRules('password', true)} hasFeedback>
-          <Input.Password placeholder="Mot de passe" prefix={<LockOutlined />} />
+          <Input.Password placeholder="Mot de passe" prefix={<LockOutlined />} size="large" />
         </Form.Item>
+
         <Form.Item
           name="verification"
           label="Vérification"
@@ -41,7 +46,7 @@ const ResetPasswordForm = ({ onSubmit, initialValues }) => (
           <Input.Password placeholder="Vérification" prefix={<LockOutlined />} />
         </Form.Item>
 
-        <Button type="primary" htmlType="submit">Enregistrer</Button>
+        <Button type="primary" htmlType="submit" block>Enregistrer</Button>
       </Form>
     </div>
   </div>

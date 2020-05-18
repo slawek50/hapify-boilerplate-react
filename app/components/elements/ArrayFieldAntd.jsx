@@ -17,21 +17,14 @@ const ArrayFieldAntd = ({
               {children(field)}
             </Col>
             {removable && (
-              <Col flex="none">
-                <Button
-                  onClick={() => remove(field.name)}
-                  icon={<CloseOutlined />}
-                />
+              <Col>
+                <Button onClick={() => remove(field.name)} icon={<CloseOutlined />} />
               </Col>
             )}
           </Row>
         ))}
         <Form.Item>
-          <Button
-            type="dashed"
-            block
-            onClick={() => add()}
-          >
+          <Button type="dashed" onClick={() => add()} block>
             <PlusOutlined />
             {addLabel}
           </Button>

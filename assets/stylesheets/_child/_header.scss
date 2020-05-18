@@ -1,0 +1,42 @@
+header.header, .page-header {
+  background-color: rgba(#000,.3);
+  @include media-breakpoint-up(md) {
+    background-color: transparent;
+  }
+}
+
+.main-nav > ul li a {
+  border-bottom: 1px solid transparent;
+  &.active {
+    border-bottom: 1px solid #fff;
+  }
+}
+
+.user-actions {
+  a, button {
+    width: 38px;
+    box-shadow: none;
+  }
+}
+
+.user-site {
+  @extend %flexbox;
+  a, button {
+    color: $user-action-btn-color;
+    border-radius: $user-action-btn-radius;
+    padding: $user-action-btn-padding;
+    margin: 0 4px;
+    background-color: $user-action-btn-bg-color;
+    &:hover {
+      color: $user-action-btn-hover-color;
+      padding: $user-action-btn-hover-padding;
+      background-color: $user-action-btn-hover-bg-color;
+    }
+  }
+}
+
+// TODO BTN PROFIL
+.btn-profil {
+  display: none;
+}
+

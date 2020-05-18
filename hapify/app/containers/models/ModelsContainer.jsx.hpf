@@ -16,9 +16,12 @@ import <<M AA>>sCardListView from '../../components/<<M aA>>s/<<M AA>>sCardListV
  
 const modalConf = {
   visible: true,
+  footer: null,
+};
+const modalEditConf = {
+  ...modalConf,
   closable: false,
   maskClosable: false,
-  footer: null,
 };
  
 const RenderEditDetailsModalsRouter = ({
@@ -29,7 +32,7 @@ const RenderEditDetailsModalsRouter = ({
       exact
       path={`${url}/new`}
       render={() => (
-        <Modal {...modalConf} onCancel={() => push(url)}>
+        <Modal {...modalEditConf} onCancel={() => push(url)}>
           <<<M AA>>EditForm
             initialValues={{}}
             onSubmit={(v) => {
@@ -45,7 +48,7 @@ const RenderEditDetailsModalsRouter = ({
       exact
       path={`${url}/:<<M aA>>Id/edit`}
       render={(subProps) => (
-        <Modal {...modalConf} onCancel={() => push(url)}>
+        <Modal {...modalEditConf} onCancel={() => push(url)}>
           <<<M AA>>EditForm
             enableReinitialize
             initialValues={<<= getInitialValues('subProps.match') >>}

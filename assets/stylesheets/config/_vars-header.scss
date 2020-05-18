@@ -1,0 +1,203 @@
+// Header
+$header-container-padding: 0 20px;
+$header-container-padding-md: 0;
+
+$mobile-header-padding: 10px 0 20px;
+$header-width: auto;
+$header-padding: 10px 0;
+$mobile-menu-link-color: $first-color;
+$menu-link-color: rgba(#fff,.7);
+$tiny-header-padding: 10px 0;
+
+// Header Background Style
+$header-bg-style: 'none'; // image, gradient, color, none
+$header-isShadowed: 'none'; // yes or no
+// Header Background Color
+$header-bg-color: $first-color;
+// Header Background Gradient
+$header-bg-gradient-deg: 90deg;
+$header-bg-gradient-color-1: #00be1d; //#CE0F34;
+$header-bg-gradient-color-2: #008b15; //#931A29;
+$header-bg-gradient-color-start: 0%;
+$header-bg-gradient-color-end: 100%;
+// Header Background Image
+$header-bg-picture: url("../images/login-bg.jpg");
+// Header Shadow
+$header-shadow: none;
+
+
+$header-menu-direction: column;
+$header-menu-align: stretch;
+$header-menu-justify: flex-start;
+$tiny-header-menu-align: center;
+
+// Logo Block
+$mobile-logo-block-justify: flex-start;
+$mobile-logo-block-padding: 0;
+$mobile-logo-block-margin: 0;
+$logo-block-justify: center;
+$logo-block-padding: 0;
+$logo-block-bg-color: transparent;
+$logo-block-margin: 10px 0;
+$tiny-logo-block-justify: flex-start;
+$tiny-logo-block-padding: 10px 0 0;
+$tiny-logo-block-margin: 0;
+// Logo
+$mobile-logo-width: 75%;
+$mobile-logo-height: auto;
+$mobile-logo-padding: 0;
+$logo-width: auto;
+$logo-height: $mobile-logo-height;
+$logo-padding: $mobile-logo-padding;
+$tiny-logo-width: 43px;
+$tiny-logo-height: auto;
+
+// User Block
+$mobile-user-block-order: 0;
+$mobile-user-block-direction: row;
+$mobile-user-block-alignment: center;
+$mobile-user-block-justify: flex-start;
+$mobile-user-block-padding: 14px 20px;
+$mobile-user-block-margin: 0;
+$mobile-user-block-bg-color: $first-color;
+$user-block-order: 1;
+$user-block-direction: row;
+$user-block-alignment: center;
+$user-block-justify: flex-start;
+$user-block-padding: 0;
+$user-block-margin: 0 10px;
+$user-block-bg-color: transparent;
+$tiny-user-block-direction: column;
+$tiny-user-block-alignment: flex-start;
+$tiny-user-block-justify: center;
+$tiny-user-block-order: 1;
+$tiny-user-block-padding: 10px 0px;
+$tiny-user-block-margin: 10px 8px 0;
+// User Profil
+$user-profil-display: flex; // none or flex
+$user-profil-direction: row;
+$user-profil-alignment: center;
+$user-profil-justify: flex-start;
+$user-profil-flex: 1;
+$user-profil-padding: 4px 16px 4px 4px;
+$user-profil-margin: 0 8px 0 0;
+$user-profil-radius: 30px;
+$user-profil-bg-color: rgba(#000, .5);
+$tiny-user-profil-direction: column;
+$tiny-user-profil-alignment: center;
+$tiny-user-profil-justify: flex-start;
+$tiny-user-profil-padding: 0;
+$tiny-user-profil-margin: 0;
+$tiny-user-profil-bg-color: transparent;
+// User Block Name
+$user-name-size: 14px;
+$user-name-color: $menu-link-color;
+$user-name-margin: 0 0 0 10px;
+$user-name-display: block;
+$tiny-user-name-display: none;
+// user Block Avatar
+$user-avatar-width: 30px;
+$user-avatar-width-mobile: 40px;
+$user-avatar-radius: 100%;
+$user-avatar-bg-color: rgba(#000,.3);
+// user Block Initial
+$user-initial-size: 18px;
+$user-initial-weight: bold;
+$user-initial-color: #fff;
+$user-initial-bg-color: #ef8b33;
+
+// User Actions
+$tiny-user-actions-direction: column;
+// User Actions Buttons
+$user-action-btn-color: #fff;
+$user-action-btn-radius: $global-radius;
+
+$user-action-btn-padding: 8px;
+$user-action-btn-margin: 0 0 0 3px;
+$user-action-btn-bg-color: rgba(#000,.3);
+$tiny-user-action-btn-color: $user-action-btn-color;
+$tiny-user-action-btn-radius: $user-action-btn-radius;
+$tiny-user-action-btn-margin: 10px 0 0 0;
+$tiny-user-action-btn-bg-color: $user-action-btn-bg-color;
+// User Actions Buttons Hover
+$user-action-btn-hover-color: $user-action-btn-color;
+$user-action-btn-hover-padding: $user-action-btn-padding;
+$user-action-btn-hover-bg-color: rgba(#000,.2);
+$tiny-user-action-btn-hover-color: $user-action-btn-hover-color;
+$tiny-user-action-btn-hover-bg-color: $user-action-btn-hover-bg-color;
+
+// Menu button
+$header-menu-button-color: #fff;
+
+// Main menu
+$mobile-menu-padding: 30px 0 0;
+$mobile-menu-shadow: 4px 0 22px -3px rgba(0,0,0,.4);
+$mobile-menu-bg-color: #fff;
+$mobile-menu-width: 300px;
+$menu-flex: 1;
+$menu-padding: 0;
+$menu-height: auto;
+$menu-align: center;
+$menu-justify: flex-end;
+$menu-bg-color: transparent;
+
+// Main menu - List
+$mobile-menu-list-flex: 1;
+$mobile-menu-list-margin: 20px 0 0;
+$mobile-menu-list-padding: 0 20px;
+$menu-list-flex: none;
+$menu-list-margin: 0;
+$menu-list-padding: 0;
+
+// Main menu - Links
+$mobile-menu-link-size: 15px;
+$mobile-menu-link-margin: 4px 0;
+$mobile-menu-link-padding: 6px 12px;
+$mobile-menu-link-weight: $global-weight;
+$mobile-menu-link-border-radius: 30px;
+$menu-link-margin: 0 10px;
+$menu-link-padding: 6px 0;
+$menu-link-weight: $global-weight;
+$menu-link-border-radius: 0;
+$menu-link-height: auto;
+// Main menu - Links Hover
+$mobile-menu-link-hover-color: #fff;
+$mobile-menu-link-hover-bg-color: $first-color;
+$menu-link-hover-color: #fff;
+$menu-link-hover-bg-color: transparent;
+// Main menu - Links Active
+$mobile-menu-link-active-color: #fff;
+$mobile-menu-link-active-bg-color: $first-color;
+$menu-link-active-color: #fff;
+$menu-link-active-bg-color: transparent;
+$tiny-menu-link-active-color: #fff;
+$tiny-menu-link-active-bg-color: rgba(#000,.4);
+
+// Main menu - Icon
+$menu-link-icon-size: 18px;
+$tiny-menu-link-icon-size: $menu-link-icon-size;
+$menu-link-icon-margin: 0 0 0 12px;
+$menu-link-arrow-size: 10px;
+$menu-link-arrow-margin: 0 0 0 30px;
+
+// Main menu - Links indicator
+$menu-link-indicator-bg-color: $first-color;
+$menu-link-indicator-border-radius: 12px;
+$menu-link-indicator-color: #fff;
+$menu-link-indicator-padding: 5px;
+$menu-link-indicator-flex-basis: 25px;
+$menu-link-indicator-height: auto;
+
+// Main menu - Tiny
+$tiny-menu-link-margin: 0;
+$tiny-menu-link-padding: 16px 10px;
+$tiny-menu-link-border-radius: 0;
+
+// Main menu - Titles
+$mobile-menu-title-color: $first-color;
+$mobile-menu-title-padding: 10px 10px;
+$menu-title-color: $menu-link-color;
+$menu-title-padding: 26px 30px 12px;
+$menu-title-margin: 0;
+$menu-title-size: 15px;
+$menu-title-weight: $global-weight;

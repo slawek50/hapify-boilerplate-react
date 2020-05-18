@@ -1,0 +1,74 @@
+// Login
+$login-box-position: fullLeft; // center, fullLeft, fullRight
+
+// If $login-box-position is center
+$login-overflow-justify: center;
+$login-overflow-alignment: center;
+@if $login-box-position=='fullLeft' {
+  $login-overflow-justify: flex-start;
+  $login-overflow-alignment: stretch;
+}  @else if $login-box-position=='fullRight' {
+  $login-overflow-justify: flex-end;
+  $login-overflow-alignment: stretch;
+}
+
+// Login Background
+$login-background-type: 'gradient'; // image or gradient
+$login-overlay-type: 'image'; // image, gradient or none
+// If Gradient Background
+$login-bg-deg: 120deg;
+$login-bg-color-1: #00be1d; //#CE0F34;
+$login-bg-color-2: #008b15; //#931A29;
+$login-bg-color-start: 60%;
+$login-bg-color-end: 100%;
+// If Image Background
+$login-bg-picture: url("../images/login-bg.jpg");
+$login-bg-repeat: no-repeat;
+// If Gradient Overlay
+$login-bg-overlay-deg: 120deg;
+$login-bg-overlay-color-1: rgba(#00ff00, .4);
+$login-bg-overlay-color-start: 0%;
+$login-bg-overlay-color-2: rgba(#0000ff, .4);;
+$login-bg-overlay-color-end: 100%;
+// If Image Overlay
+$login-overlay-picture: url("../images/login-overlay-image.png");
+$login-overlay-repeat: no-repeat;
+$login-overlay-position: bottom right;
+$login-overlay-size: cover;
+// Login Logo Mobile
+$login-mobile-logo-margin: 0 auto 0;
+
+// Login Logo Desktop
+$login-desktop-logo-margin: $login-mobile-logo-margin;
+
+// Login Title
+$login-title-size: 0;
+// Login Title Separator
+$login-separator-height: 1px;
+$login-separator-width: 32px;
+$login-separator-margin: 20px auto 0;
+$login-separator-color: #bdbdbd;
+// Login Box
+$login-box-direction: column;
+$login-box-justify: center;
+$login-box-width: 422px;
+$login-box-color: inherit;
+$login-box-shadow: 10px 0 30px rgba(#000,.2);
+$login-box-radius: 0;
+$login-box-bg-color: #fff;
+$login-box-padding-vertical: 20px;
+$login-box-padding-horizontal: 60px;
+$login-box-padding: $login-box-padding-vertical $login-box-padding-horizontal;
+$login-box-header-padding: $login-box-padding;
+$login-box-content-padding: $login-box-padding;
+// Login Button Primary
+$login-btn-submit-font-size: 18px;
+$login-btn-submit-border: none;
+$login-btn-submit-bg-color: $first-color;
+$login-btn-submit-radius: $global-radius;
+$login-btn-submit-color: #fff;
+$login-btn-submit-margin: 14px 0 8px;
+// Login Button Link
+$login-btn-link-color: $first-color;
+
+

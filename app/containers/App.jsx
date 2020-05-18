@@ -9,7 +9,7 @@ import configureStore from '../store/configureStore';
 
 import Router from './Router';
 
-// import '../../assets/stylesheets/app.scss';
+import '../../assets/stylesheets/app.scss';
 
 // Import Favicons directory
 // import '../../assets/favicons/android-chrome-144x144.png';

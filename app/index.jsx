@@ -6,6 +6,7 @@ import moment from 'moment';
 import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 import registerEvents from 'serviceworker-webpack-plugin/lib/browser/registerEvents';
 import applyUpdate from 'serviceworker-webpack-plugin/lib/browser/applyUpdate';
+import { subscribePushAndReload } from './utils/DeviceUtils';
 
 import App from './containers/App';
 
@@ -17,7 +18,7 @@ if ('serviceWorker' in navigator) {
   registerEvents(registration, {
     onInstalled: () => {
       console.log('onInstalled');
-      window.location.reload();
+      registration.then((res) => subscribePushAndReload(res));
     },
     onUpdateReady: () => {
       console.log('onUpdateReady');
@@ -31,7 +32,7 @@ if ('serviceWorker' in navigator) {
     },
     onUpdated: () => {
       console.log('onUpdated');
-      window.location.reload();
+      registration.then((res) => subscribePushAndReload(res));
     },
   });
 }

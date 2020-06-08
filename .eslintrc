@@ -29,5 +29,7 @@
     'FileReader': true,
     'File': true,
     'Image': true,
+    'Notification': true,
+    'clients': true,
   },
 }

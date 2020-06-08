@@ -3,6 +3,7 @@
 /* eslint no-restricted-globals: "off" */
 
 import fetch from 'isomorphic-fetch';
+import { get } from 'lodash';
 
 const DEBUG = false;
 
@@ -148,4 +149,54 @@ self.addEventListener('fetch', (event) => {
   });
 
   event.respondWith(fetchResult);
+});
+
+const showDeviceNotification = (registration, data) => {
+  if (Notification.permission === 'granted') {
+    return registration.showNotification(data.title, {
+      body: data.body,
+      image: '/favicons/logo-app.png',
+      requireInteraction: true,
+      actions: [{ action: 'syncReader', title: 'Sync reader now.' }],
+      tag: 'tag-push-message',
+      data: {
+        ...data,
+        otherInfo: 'Other infos goes here...',
+      },
+    });
+  }
+  return Notification.requestPermission((status) => {
+    console.log('Notification permission status:', status);
+  });
+};
+
+self.addEventListener('push', (event) => {
+  try {
+    event.waitUntil(showDeviceNotification(self.registration, event.data.json()));
+  } catch (err) {
+    event.waitUntil(showDeviceNotification(self.registration, {
+      title: event.data.text(),
+    }));
+  }
+});
+
+const focusOrOpenWindow = (url = '/') => clients.matchAll().then((clientList) => {
+  if (clientList && clientList[0]) {
+    clientList[0].navigate(url);
+    clientList[0].focus();
+  } else {
+    clients.openWindow(url);
+  }
+});
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+
+  if (event.action === 'syncReader') {
+    console.log('syncReader');
+  } else if (event.notification.tag === 'tag-push-message') {
+    event.waitUntil(focusOrOpenWindow(get(event, 'notification.data.urlToOpen')));
+  } else {
+    event.waitUntil(focusOrOpenWindow(get(event, 'notification.data.urlToOpen')));
+  }
 });

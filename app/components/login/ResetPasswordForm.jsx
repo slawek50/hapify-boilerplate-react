@@ -9,7 +9,7 @@ import getRules from '../../utils/RulesValidator';
 
 import appLogo from '../../../assets/images/logo-app.png';
 
-const ResetPasswordForm = ({ onSubmit, initialValues }) => (
+const ResetPasswordForm = ({ onSubmit }) => (
   <div className="box animated fadeInDown">
     <div className="box-header">
       <img src={appLogo} alt="Logo" className="logo-login" />
@@ -19,8 +19,7 @@ const ResetPasswordForm = ({ onSubmit, initialValues }) => (
     <div className="box-content">
       <p className="text-center">Veillez saisir votre nouveau mot de passe.</p>
       <Form
-        onFinish={(v) => onSubmit({ ...initialValues, ...v })}
-        initialValues={initialValues}
+        onFinish={(v) => onSubmit(v)}
         className="login-form"
         layout="vertical"
         hideRequiredMark
@@ -54,7 +53,6 @@ const ResetPasswordForm = ({ onSubmit, initialValues }) => (
 
 ResetPasswordForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  initialValues: PropTypes.shape().isRequired,
 };
 
 export default (ResetPasswordForm);

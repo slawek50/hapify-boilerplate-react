@@ -124,7 +124,7 @@ export default (store) => (next) => (action) => {
       type: successType,
     }));
     if (successNext) {
-      executeAllActions(successNext, store)
+      return executeAllActions(successNext, store)
       .then((successNextResponse) => {
         if (successMessage) {
           notification.success({ message: successMessage });
@@ -158,8 +158,8 @@ export default (store) => (next) => (action) => {
       data: error.data,
     }));
     if (errorNext) {
-      executeAllActions(errorNext, store);
+      return executeAllActions(errorNext, store);
     }
-    return null;
+    throw error.message;
   });
 };

@@ -9,7 +9,7 @@ import getRules from '../../utils/RulesValidator';
 
 import appLogo from '../../../assets/images/logo-app.png';
 
-const LoginForm = ({ onSubmit, initialValues, onClickRecoverPassword }) => (
+const LoginForm = ({ onSubmit, onClickRecoverPassword }) => (
   <div className="box animated">
     <div className="box-header">
       <img src={appLogo} alt="Logo" className="logo-login" />
@@ -18,8 +18,7 @@ const LoginForm = ({ onSubmit, initialValues, onClickRecoverPassword }) => (
     </div>
     <div className="box-content">
       <Form
-        onFinish={(v) => onSubmit({ ...initialValues, ...v })}
-        initialValues={initialValues}
+        onFinish={(v) => onSubmit(v)}
         className="login-form"
         layout="vertical"
         hideRequiredMark
@@ -44,7 +43,6 @@ const LoginForm = ({ onSubmit, initialValues, onClickRecoverPassword }) => (
 
 LoginForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  initialValues: PropTypes.shape().isRequired,
   onClickRecoverPassword: PropTypes.func.isRequired,
 };
 

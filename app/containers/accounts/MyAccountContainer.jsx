@@ -14,14 +14,12 @@ const AccountsContainer = ({
   <BaseLayout title="AccountsContainer" isBoxContent>
     <AccountEditForm
       initialValues={{
-        account_id: user.account_id,
+        _id: user._id,
         role: user.role,
         name: user.name,
         email: user.email,
       }}
-      onSubmit={(v) => {
-        props.updateUser(v, true);
-      }}
+      onSubmit={(v) => props.updateUser(v)}
       isMyAccount
     />
   </BaseLayout>

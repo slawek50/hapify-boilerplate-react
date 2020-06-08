@@ -9,7 +9,7 @@ import getRules from '../../utils/RulesValidator';
 
 import appLogo from '../../../assets/images/logo-app.png';
 
-const PasswordRecoverForm = ({ onSubmit, initialValues, onClickCancel }) => (
+const PasswordRecoverForm = ({ onSubmit, onClickCancel }) => (
   <div className="box animated fadeInDown">
     <div className="box-header">
       <img src={appLogo} alt="Logo" className="logo-login" />
@@ -19,8 +19,7 @@ const PasswordRecoverForm = ({ onSubmit, initialValues, onClickCancel }) => (
     <div className="box-content">
       <p className="text-center">Veillez saisir votre adresse email afin de recevoir un nouveau mot de passe.</p>
       <Form
-        onFinish={(v) => onSubmit({ ...initialValues, ...v })}
-        initialValues={initialValues}
+        onFinish={(v) => onSubmit(v)}
         className="login-form"
         layout="vertical"
         hideRequiredMark
@@ -41,7 +40,6 @@ const PasswordRecoverForm = ({ onSubmit, initialValues, onClickCancel }) => (
 
 PasswordRecoverForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  initialValues: PropTypes.shape().isRequired,
   onClickCancel: PropTypes.func.isRequired,
 };
 

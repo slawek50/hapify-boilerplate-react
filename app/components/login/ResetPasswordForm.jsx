@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Form, Input, Button,
-} from 'antd';
+import Button from 'antd/lib/button';
+import Form from 'antd/lib/form';
+import Input from 'antd/lib/input';
 import { LockOutlined } from '@ant-design/icons';
 
 import getRules from '../../utils/RulesValidator';

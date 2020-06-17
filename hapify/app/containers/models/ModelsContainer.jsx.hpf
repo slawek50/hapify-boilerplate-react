@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter, Switch, Route } from 'react-router-dom';
 import { keys<<? F em>>, map, get<<?>> } from 'lodash';
-import { Modal } from 'antd';
+import Modal from 'antd/lib/modal';
  
 import { create<<M AA>>, update<<M AA>>, delete<<M AA>> } from '../../store/modules/entities/<<M aA>>s';
  

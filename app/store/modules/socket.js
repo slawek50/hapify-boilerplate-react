@@ -1,4 +1,4 @@
-import { notification } from 'antd';
+import notification from 'antd/lib/notification';
 
 export const SOCKET_BASE_TYPE = 'rswa/socket/';
 

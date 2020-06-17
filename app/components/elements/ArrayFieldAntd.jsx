@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Form, Row, Col, Button,
-} from 'antd';
+import Button from 'antd/lib/button';
+import Form from 'antd/lib/form';
+import Row from 'antd/lib/row';
+import Col from 'antd/lib/col';
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
 
 const ArrayFieldAntd = ({

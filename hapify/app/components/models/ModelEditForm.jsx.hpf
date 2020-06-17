@@ -92,32 +92,30 @@ function getImportLodash() {
 function getImportFieldComponents() {
     const imports = new Set(['Button', 'Form']);
     if (hasType('string')) {
-        imports.add('Input');
+        imports.add(`import Input from 'antd/lib/input';`);
     }
     if (hasType('number')) {
-        imports.add('InputNumber');
+        imports.add(`import InputNumber from 'antd/lib/input-number';`);
     }
     if (hasType('boolean')) {
-        imports.add('Switch');
+        imports.add(`import Switch from 'antd/lib/switch';`);
     }
     if (hasType('datetime', 'time')) {
-        imports.add('DatePicker');
+        imports.add(`import DatePicker from 'antd/lib/date-picker';`);
     }
     if (hasType('time')) {
-        imports.add('TimePicker');
+        imports.add(`import TimePicker from 'antd/lib/time-picker';`);
     }
     if (hasType('file')) {
-        imports.add('Upload');
+        imports.add(`import Upload from 'antd/lib/upload';`);
     }
     if (hasType('entity')) {
-        imports.add('Select');
+        imports.add(`import Select from 'antd/lib/select';`);
     }
-    
+
     if (imports.size === 0) return '';
 
-    return `import {
-  ${[...imports].join(', ')},
-} from 'antd';`;
+    return [...imports].join('\n');
 }
 
 function getComponent(field) {

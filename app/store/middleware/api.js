@@ -2,7 +2,7 @@ import { normalize } from 'normalizr';
 import fetch from 'isomorphic-fetch';
 import FormData from 'form-data';
 import { map } from 'lodash';
-import { notification } from 'antd';
+import notification from 'antd/lib/notification';
 
 import { CALL_API } from '../Schemas';
 import { API_URL } from '../../configs/Constants';

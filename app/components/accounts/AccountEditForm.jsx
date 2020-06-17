@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Button, Form, Input, Select,
-} from 'antd';
+import Button from 'antd/lib/button';
+import Form from 'antd/lib/form';
+import Input from 'antd/lib/input';
+import Select from 'antd/lib/select';
 import { map } from 'lodash';
 
 import getRules from '../../utils/RulesValidator';

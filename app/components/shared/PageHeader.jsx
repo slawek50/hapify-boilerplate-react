@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
-import { Button } from 'antd';
+import Button from 'antd/lib/button';
 import { MenuOutlined } from '@ant-design/icons';
 
 import { upperFirst } from '../../utils/StringUtils';

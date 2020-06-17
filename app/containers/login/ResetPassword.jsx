@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { notification } from 'antd';
+import notification from 'antd/lib/notification';
 
 import { getJSONFromUrlParams } from '../../utils/URLParser';
 

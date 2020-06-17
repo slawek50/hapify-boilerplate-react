@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import {
   isString, isArray, isFunction, map, orderBy,
 } from 'lodash';
-import { Input, Select } from 'antd';
+import Input from 'antd/lib/input';
+import Select from 'antd/lib/select';
 
 import sharedSelector from '../../selectors/SharedSelector';
 

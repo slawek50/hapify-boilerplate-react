@@ -8,7 +8,9 @@ import { capitalize<<? F tE/hd/pr>>, get<<?>><<? F ml/hd>>, map<<?>> } from 'lod
 <<? F tD/hd/pr>>
 import moment from 'moment';
 <<?>>
-import { Modal, Button, Tooltip } from 'antd';
+import Modal from 'antd/lib/modal';
+import Button from 'antd/lib/button';
+import Tooltip from 'antd/lib/tooltip';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
  
 <<= getImportConstants() >>

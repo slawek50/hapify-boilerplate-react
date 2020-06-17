@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import {
   get, isString, isArray, isFunction, map, orderBy,
 } from 'lodash';
-import { Input, Select } from 'antd';
+import Input from 'antd/lib/input';
+import Select from 'antd/lib/select';
 import { UpOutlined, DownOutlined } from '@ant-design/icons';
 
 import sharedSelector from '../../selectors/SharedSelector';

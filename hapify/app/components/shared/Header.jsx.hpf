@@ -25,6 +25,14 @@ const Header = ({
         <NavLink to="/" className="logo-block">
           <img src={appLogo} alt="Logo" className="logo" />
         </NavLink>
+        <div
+          className={classNames(
+            'main-nav-mask',
+            { 'animated opened': menuIsOpen === true },
+            { 'animated closed': menuIsOpen === false },
+          )}
+          onClick={() => setConf('menuIsOpen', !menuIsOpen)}
+        />
         <nav
           className={classNames(
             'main-nav',

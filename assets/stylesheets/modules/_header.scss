@@ -106,6 +106,20 @@
         }
       }
     }
+    .main-nav-mask {
+      display: none;
+      background-color: $mobile-menu-mask-bg-color;
+      -webkit-animation-name: fadeIn;
+      animation-name: fadeIn;
+      position: absolute;
+      bottom: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      &.opened {
+        display: block;
+      }
+    }
     .main-nav {
       display: none;
       @include flex($menu-flex);
@@ -128,9 +142,6 @@
         -webkit-animation-name: fadeInLeft;
         animation-name: fadeInLeft;
         display: flex;
-      }
-      &.opened + .menu-mask {
-        display: block;
       }
 
       @include media-breakpoint-up(md) {
@@ -281,6 +292,7 @@
     }
     .menu-button {
       color: $header-menu-button-color;
+      background: $header-menu-button-bg;
     }
     @include media-breakpoint-up(sm) {
       &.tiny {
@@ -450,20 +462,5 @@
       background-color: $user-avatar-bg-color;
       img { max-width: 100%; }
     }
-  }
-}
-
-.menu-mask {
-  display: none;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  z-index: 2;
-  background: rgba(#000,.5);
-
-  @include media-breakpoint-up(sm) {
-    display: none;
   }
 }

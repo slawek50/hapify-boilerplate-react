@@ -128,11 +128,13 @@ $tiny-user-action-btn-hover-bg-color: $user-action-btn-hover-bg-color;
 
 // Menu button
 $header-menu-button-color: #fff;
+$header-menu-button-bg: transparent;
 
 // Main menu
 $mobile-menu-padding: 30px 0 0;
 $mobile-menu-shadow: 4px 0 22px -3px rgba(0,0,0,.4);
 $mobile-menu-bg-color: #fff;
+$mobile-menu-mask-bg-color: rgba(#000,.6);
 $mobile-menu-width: 300px;
 $menu-flex: 1;
 $menu-padding: 0;

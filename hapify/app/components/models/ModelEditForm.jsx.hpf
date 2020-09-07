@@ -90,7 +90,7 @@ function getImportLodash() {
 }
 
 function getImportFieldComponents() {
-    const imports = new Set(['Button', 'Form']);
+    const imports = new Set([`import Button from 'antd/lib/button';`, `import Form from 'antd/lib/form';`]);
     if (hasType('string')) {
         imports.add(`import Input from 'antd/lib/input';`);
     }

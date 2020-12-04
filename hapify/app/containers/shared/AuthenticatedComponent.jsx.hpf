@@ -8,9 +8,9 @@ import { isUserAgentMobile } from '../../utils/DeviceUtils';
  
 import { loadOption } from '../../store/modules/options';
 
-<<@ M /pMHd m>>
-import { load<<m AA>>s } from '../../store/modules/entities/<<m aA>>s';
-<<@>>
+<<for Models not mainlyHidden m>>
+import { load<<m pascal>>s } from '../../store/modules/entities/<<m camel>>s';
+<<endfor>>
  
 import { isAdmin, isUser } from '../../utils/RolesUtils';
  
@@ -56,11 +56,11 @@ class AuthenticatedComponent extends React.PureComponent {
     }
     // Only Admins
     if (isAdmin(props.user)) {
-      <<@ M /pMHd m>>
-      if (isNotLoaded('<<m aA>>s')) {
-        props.load<<m AA>>s();
+      <<for Models not mainlyHidden m>>
+      if (isNotLoaded('<<m camel>>s')) {
+        props.load<<m pascal>>s();
       }
-      <<@>>
+      <<endfor>>
     }
     // Only desktop
     if (!isUserAgentMobile) {
@@ -84,9 +84,9 @@ class AuthenticatedComponent extends React.PureComponent {
 AuthenticatedComponent.propTypes = {
   loadOption: PropTypes.func.isRequired,
  
-  <<@ M /pMHd m>>
-  load<<m AA>>s: PropTypes.func.isRequired,
-  <<@>>
+  <<for Models not mainlyHidden m>>
+  load<<m pascal>>s: PropTypes.func.isRequired,
+  <<endfor>>
  
   children: PropTypes.node.isRequired,
  
@@ -103,9 +103,9 @@ AuthenticatedComponent.propTypes = {
     appstorage: PropTypes.string.isRequired,
     options: PropTypes.string.isRequired,
  
-    <<@ M /pMHd m>>
-    <<m aA>>s: PropTypes.string.isRequired,
-    <<@>>
+    <<for Models not mainlyHidden m>>
+    <<m camel>>s: PropTypes.string.isRequired,
+    <<endfor>>
   }).isRequired,
   match: PropTypes.shape().isRequired,
 };
@@ -118,8 +118,8 @@ export default connect(
   {
     loadOption,
  
-    <<@ M /pMHd m>>
-    load<<m AA>>s,
-    <<@>>
+    <<for Models not mainlyHidden m>>
+    load<<m pascal>>s,
+    <<endfor>>
   },
 )(withRouter(AuthenticatedComponent));

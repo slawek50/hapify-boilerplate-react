@@ -8,16 +8,16 @@ import { schema } from 'normalizr';
  
 // Read more about Normalizr: https://github.com/gaearon/normalizr
  
-<<@ M /pMHd m>>
-const <<m aA>>Schema = new schema.Entity('<<m aA>>s', {}, { idAttribute: '<<m.fields.primary R>>' });
-<<@>>
+<<for Models not mainlyHidden m>>
+const <<m camel>>Schema = new schema.Entity('<<m camel>>s', {}, { idAttribute: '<<m.fields.primary raw>>' });
+<<endfor>>
  
 // Schemas for API responses.
 export const Schemas = {
-  <<@ M /pMHd m>>
-  <<m A_A>>: <<m aA>>Schema,
-  <<m A_A>>_ARRAY: new schema.Array(<<m aA>>Schema),
-  <<@>>
+  <<for Models not mainlyHidden m>>
+  <<m constant>>: <<m camel>>Schema,
+  <<m constant>>_ARRAY: new schema.Array(<<m camel>>Schema),
+  <<endfor>>
 };
  
 // Action key that carries API call info interpreted by this Redux middleware.

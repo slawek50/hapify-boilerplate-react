@@ -2,17 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter, Switch, Route } from 'react-router-dom';
-import { keys<<? F em>>, map, get<<?>> } from 'lodash';
+import { keys<<if Fields embedded>>, map, get<<endif>> } from 'lodash';
 import Modal from 'antd/lib/modal';
  
-import { create<<M AA>>, update<<M AA>>, delete<<M AA>> } from '../../store/modules/entities/<<M aA>>s';
+import { create<<Model pascal>>, update<<Model pascal>>, delete<<Model pascal>> } from '../../store/modules/entities/<<Model camel>>s';
  
 import BaseLayout from '../shared/BaseLayout';
  
-import <<M AA>>DetailView from '../../components/<<M aA>>s/<<M AA>>DetailView';
-import <<M AA>>EditForm from '../../components/<<M aA>>s/<<M AA>>EditForm';
-import <<M AA>>sTableListView from '../../components/<<M aA>>s/<<M AA>>sTableListView';
-import <<M AA>>sCardListView from '../../components/<<M aA>>s/<<M AA>>sCardListView';
+import <<Model pascal>>DetailView from '../../components/<<Model camel>>s/<<Model pascal>>DetailView';
+import <<Model pascal>>EditForm from '../../components/<<Model camel>>s/<<Model pascal>>EditForm';
+import <<Model pascal>>sTableListView from '../../components/<<Model camel>>s/<<Model pascal>>sTableListView';
+import <<Model pascal>>sCardListView from '../../components/<<Model camel>>s/<<Model pascal>>sCardListView';
  
 const modalConf = {
   visible: true,
@@ -25,7 +25,7 @@ const modalEditConf = {
 };
  
 const RenderEditDetailsModalsRouter = ({
-  url, create<<M AA>>, update<<M AA>>, del<<M AA>>, push, <<M aA>>s,
+  url, create<<Model pascal>>, update<<Model pascal>>, del<<Model pascal>>, push, <<Model camel>>s,
 }) => (
   <Switch>
     <Route
@@ -33,10 +33,10 @@ const RenderEditDetailsModalsRouter = ({
       path={`${url}/new`}
       render={() => (
         <Modal {...modalEditConf} onCancel={() => push(url)}>
-          <<<M AA>>EditForm
+          <<<Model pascal>>EditForm
             initialValues={{}}
             onSubmit={(v) => {
-              create<<M AA>>(v)
+              create<<Model pascal>>(v)
               .then(() => push(url));
             }}
             baseUrl={url}
@@ -46,14 +46,14 @@ const RenderEditDetailsModalsRouter = ({
     />
     <Route
       exact
-      path={`${url}/:<<M aA>>Id/edit`}
+      path={`${url}/:<<Model camel>>Id/edit`}
       render={(subProps) => (
         <Modal {...modalEditConf} onCancel={() => push(url)}>
-          <<<M AA>>EditForm
+          <<<Model pascal>>EditForm
             enableReinitialize
             initialValues={<<= getInitialValues('subProps.match') >>}
             onSubmit={(v) => {
-              update<<M AA>>(v)
+              update<<Model pascal>>(v)
               .then(() => push(url));
             }}
             baseUrl={url}
@@ -63,14 +63,14 @@ const RenderEditDetailsModalsRouter = ({
     />
     <Route
       exact
-      path={`${url}/:<<M aA>>Id`}
+      path={`${url}/:<<Model camel>>Id`}
       render={(subProps) => (
         <Modal {...modalConf} onCancel={() => push(url)}>
-          <<<M AA>>DetailView
-            <<M aA>>={<<M aA>>s[subProps.match.params.<<M aA>>Id]}
+          <<<Model pascal>>DetailView
+            <<Model camel>>={<<Model camel>>s[subProps.match.params.<<Model camel>>Id]}
             baseUrl={url}
             onClickDelete={() => {
-              del<<M AA>>(subProps.match.params.<<M aA>>Id)
+              del<<Model pascal>>(subProps.match.params.<<Model camel>>Id)
               .then(() => push(url));
             }}
           />
@@ -82,37 +82,37 @@ const RenderEditDetailsModalsRouter = ({
  
 RenderEditDetailsModalsRouter.propTypes = {
   url: PropTypes.string.isRequired,
-  create<<M AA>>: PropTypes.func.isRequired,
-  update<<M AA>>: PropTypes.func.isRequired,
-  del<<M AA>>: PropTypes.func.isRequired,
+  create<<Model pascal>>: PropTypes.func.isRequired,
+  update<<Model pascal>>: PropTypes.func.isRequired,
+  del<<Model pascal>>: PropTypes.func.isRequired,
   push: PropTypes.func.isRequired,
-  <<M aA>>s: PropTypes.objectOf(PropTypes.shape()).isRequired,
+  <<Model camel>>s: PropTypes.objectOf(PropTypes.shape()).isRequired,
 };
  
-const <<M AA>>sContainer = ({
-  match: { url }, history: { push }, <<M aA>>s, ...props
+const <<Model pascal>>sContainer = ({
+  match: { url }, history: { push }, <<Model camel>>s, ...props
 }) => (
-  <BaseLayout title="<<M AA>>sContainer">
+  <BaseLayout title="<<Model pascal>>sContainer">
     <Switch>
       <Route
         path={`${url}/cards`}
         render={({ match }) => (
           <>
-            <<<M AA>>sCardListView
-              <<M aA>>s={<<M aA>>s}
+            <<<Model pascal>>sCardListView
+              <<Model camel>>s={<<Model camel>>s}
               baseUrl={match.url}
-              onClickDelete={(<<M aA>>Id) => {
-                props.delete<<M AA>>(<<M aA>>Id)
+              onClickDelete={(<<Model camel>>Id) => {
+                props.delete<<Model pascal>>(<<Model camel>>Id)
                 .then(() => push(match.url));
               }}
             />
             <RenderEditDetailsModalsRouter
               url={match.url}
-              create<<M AA>>={props.create<<M AA>>}
-              update<<M AA>>={props.update<<M AA>>}
-              del<<M AA>>={props.delete<<M AA>>}
+              create<<Model pascal>>={props.create<<Model pascal>>}
+              update<<Model pascal>>={props.update<<Model pascal>>}
+              del<<Model pascal>>={props.delete<<Model pascal>>}
               push={push}
-              <<M aA>>s={<<M aA>>s}
+              <<Model camel>>s={<<Model camel>>s}
             />
           </>
         )}
@@ -121,21 +121,21 @@ const <<M AA>>sContainer = ({
         path={`${url}/table`}
         render={({ match }) => (
           <>
-            <<<M AA>>sTableListView
-              <<M aA>>s={<<M aA>>s}
+            <<<Model pascal>>sTableListView
+              <<Model camel>>s={<<Model camel>>s}
               baseUrl={match.url}
-              onClickDelete={(<<M aA>>Id) => {
-                props.delete<<M AA>>(<<M aA>>Id)
+              onClickDelete={(<<Model camel>>Id) => {
+                props.delete<<Model pascal>>(<<Model camel>>Id)
                 .then(() => push(match.url));
               }}
             />
             <RenderEditDetailsModalsRouter
               url={match.url}
-              create<<M AA>>={props.create<<M AA>>}
-              update<<M AA>>={props.update<<M AA>>}
-              del<<M AA>>={props.delete<<M AA>>}
+              create<<Model pascal>>={props.create<<Model pascal>>}
+              update<<Model pascal>>={props.update<<Model pascal>>}
+              del<<Model pascal>>={props.delete<<Model pascal>>}
               push={push}
-              <<M aA>>s={<<M aA>>s}
+              <<Model camel>>s={<<Model camel>>s}
             />
           </>
         )}
@@ -144,11 +144,11 @@ const <<M AA>>sContainer = ({
         exact
         path={`${url}/new`}
         render={() => (
-          <<<M AA>>EditForm
+          <<<Model pascal>>EditForm
             initialValues={{}}
             onSubmit={(v) => {
-              props.create<<M AA>>(v)
-              .then(({ response }) => push(`${url}/${keys(response.entities.<<M aA>>s)[0]}`));
+              props.create<<Model pascal>>(v)
+              .then(({ response }) => push(`${url}/${keys(response.entities.<<Model camel>>s)[0]}`));
             }}
             baseUrl={url}
           />
@@ -156,14 +156,14 @@ const <<M AA>>sContainer = ({
       />
       <Route
         exact
-        path={`${url}/:<<M aA>>Id/edit`}
+        path={`${url}/:<<Model camel>>Id/edit`}
         render={({ match }) => (
-          <<<M AA>>EditForm
+          <<<Model pascal>>EditForm
             enableReinitialize
             initialValues={<<= getInitialValues('match') >>}
             onSubmit={(v) => {
-              props.update<<M AA>>(v)
-              .then(() => push(`${url}/${match.params.<<M aA>>Id}`));
+              props.update<<Model pascal>>(v)
+              .then(() => push(`${url}/${match.params.<<Model camel>>Id}`));
             }}
             baseUrl={url}
           />
@@ -171,13 +171,13 @@ const <<M AA>>sContainer = ({
       />
       <Route
         exact
-        path={`${url}/:<<M aA>>Id`}
+        path={`${url}/:<<Model camel>>Id`}
         render={({ match }) => (
-          <<<M AA>>DetailView
-            <<M aA>>={<<M aA>>s[match.params.<<M aA>>Id]}
+          <<<Model pascal>>DetailView
+            <<Model camel>>={<<Model camel>>s[match.params.<<Model camel>>Id]}
             baseUrl={url}
             onClickDelete={() => {
-              props.delete<<M AA>>(match.params.<<M aA>>Id)
+              props.delete<<Model pascal>>(match.params.<<Model camel>>Id)
               .then(() => push(url));
             }}
           />
@@ -187,12 +187,12 @@ const <<M AA>>sContainer = ({
   </BaseLayout>
 );
  
-<<M AA>>sContainer.propTypes = {
-  create<<M AA>>: PropTypes.func.isRequired,
-  update<<M AA>>: PropTypes.func.isRequired,
-  delete<<M AA>>: PropTypes.func.isRequired,
+<<Model pascal>>sContainer.propTypes = {
+  create<<Model pascal>>: PropTypes.func.isRequired,
+  update<<Model pascal>>: PropTypes.func.isRequired,
+  delete<<Model pascal>>: PropTypes.func.isRequired,
  
-  <<M aA>>s: PropTypes.objectOf(PropTypes.shape()).isRequired,
+  <<Model camel>>s: PropTypes.objectOf(PropTypes.shape()).isRequired,
  
   match: PropTypes.shape({
     url: PropTypes.string.isRequired,
@@ -204,10 +204,10 @@ const <<M AA>>sContainer = ({
  
 export default connect(
   (state) => ({
-    <<M aA>>s: state.data.entities.<<M aA>>s,
+    <<Model camel>>s: state.data.entities.<<Model camel>>s,
   }),
-  { create<<M AA>>, update<<M AA>>, delete<<M AA>> },
-)(withRouter(<<M AA>>sContainer));
+  { create<<Model pascal>>, update<<Model pascal>>, delete<<Model pascal>> },
+)(withRouter(<<Model pascal>>sContainer));
 
 <<<
 function getInitialValues(match) {

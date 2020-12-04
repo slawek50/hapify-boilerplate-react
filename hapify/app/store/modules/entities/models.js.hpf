@@ -3,131 +3,131 @@ import { omit } from 'lodash';
  
 import { CALL_API, Schemas } from '../../Schemas';
  
-const FETCH_ALL_<<M A_A>>S_REQUEST = 'rswa/<<M aA>>s/FETCH_ALL_<<M A_A>>S_REQUEST';
-export const FETCH_ALL_<<M A_A>>S_SUCCESS = 'rswa/<<M aA>>s/FETCH_ALL_<<M A_A>>S_SUCCESS';
-const FETCH_ALL_<<M A_A>>S_FAILURE = 'rswa/<<M aA>>s/FETCH_ALL_<<M A_A>>S_FAILURE';
-const FETCH_<<M A_A>>_REQUEST = 'rswa/<<M aA>>s/FETCH_<<M A_A>>_REQUEST';
-const FETCH_<<M A_A>>_SUCCESS = 'rswa/<<M aA>>s/FETCH_<<M A_A>>_SUCCESS';
-const FETCH_<<M A_A>>_FAILURE = 'rswa/<<M aA>>s/FETCH_<<M A_A>>_FAILURE';
-const CREATE_<<M A_A>>_REQUEST = 'rswa/<<M aA>>s/CREATE_<<M A_A>>_REQUEST';
-const CREATE_<<M A_A>>_SUCCESS = 'rswa/<<M aA>>s/CREATE_<<M A_A>>_SUCCESS';
-const CREATE_<<M A_A>>_FAILURE = 'rswa/<<M aA>>s/CREATE_<<M A_A>>_FAILURE';
-const UPDATE_<<M A_A>>_REQUEST = 'rswa/<<M aA>>s/UPDATE_<<M A_A>>_REQUEST';
-const UPDATE_<<M A_A>>_SUCCESS = 'rswa/<<M aA>>s/UPDATE_<<M A_A>>_SUCCESS';
-const UPDATE_<<M A_A>>_FAILURE = 'rswa/<<M aA>>s/UPDATE_<<M A_A>>_FAILURE';
-const DELETE_<<M A_A>>_REQUEST = 'rswa/<<M aA>>s/DELETE_<<M A_A>>_REQUEST';
-const DELETE_<<M A_A>>_SUCCESS = 'rswa/<<M aA>>s/DELETE_<<M A_A>>_SUCCESS';
-const DELETE_<<M A_A>>_FAILURE = 'rswa/<<M aA>>s/DELETE_<<M A_A>>_FAILURE';
+const FETCH_ALL_<<Model constant>>S_REQUEST = 'rswa/<<Model camel>>s/FETCH_ALL_<<Model constant>>S_REQUEST';
+export const FETCH_ALL_<<Model constant>>S_SUCCESS = 'rswa/<<Model camel>>s/FETCH_ALL_<<Model constant>>S_SUCCESS';
+const FETCH_ALL_<<Model constant>>S_FAILURE = 'rswa/<<Model camel>>s/FETCH_ALL_<<Model constant>>S_FAILURE';
+const FETCH_<<Model constant>>_REQUEST = 'rswa/<<Model camel>>s/FETCH_<<Model constant>>_REQUEST';
+const FETCH_<<Model constant>>_SUCCESS = 'rswa/<<Model camel>>s/FETCH_<<Model constant>>_SUCCESS';
+const FETCH_<<Model constant>>_FAILURE = 'rswa/<<Model camel>>s/FETCH_<<Model constant>>_FAILURE';
+const CREATE_<<Model constant>>_REQUEST = 'rswa/<<Model camel>>s/CREATE_<<Model constant>>_REQUEST';
+const CREATE_<<Model constant>>_SUCCESS = 'rswa/<<Model camel>>s/CREATE_<<Model constant>>_SUCCESS';
+const CREATE_<<Model constant>>_FAILURE = 'rswa/<<Model camel>>s/CREATE_<<Model constant>>_FAILURE';
+const UPDATE_<<Model constant>>_REQUEST = 'rswa/<<Model camel>>s/UPDATE_<<Model constant>>_REQUEST';
+const UPDATE_<<Model constant>>_SUCCESS = 'rswa/<<Model camel>>s/UPDATE_<<Model constant>>_SUCCESS';
+const UPDATE_<<Model constant>>_FAILURE = 'rswa/<<Model camel>>s/UPDATE_<<Model constant>>_FAILURE';
+const DELETE_<<Model constant>>_REQUEST = 'rswa/<<Model camel>>s/DELETE_<<Model constant>>_REQUEST';
+const DELETE_<<Model constant>>_SUCCESS = 'rswa/<<Model camel>>s/DELETE_<<Model constant>>_SUCCESS';
+const DELETE_<<Model constant>>_FAILURE = 'rswa/<<Model camel>>s/DELETE_<<Model constant>>_FAILURE';
  
-export const <<M aA>>sActionsHandlers = {
-  [FETCH_ALL_<<M A_A>>S_REQUEST]: (state) => flow(
-    set('loaded.<<M aA>>s', 'loading'),
+export const <<Model camel>>sActionsHandlers = {
+  [FETCH_ALL_<<Model constant>>S_REQUEST]: (state) => flow(
+    set('loaded.<<Model camel>>s', 'loading'),
   )(state),
-  [FETCH_ALL_<<M A_A>>S_SUCCESS]: (state, action) => flow(
-    set('entities.<<M aA>>s', action.response.entities.<<M aA>>s || {}),
-    set('loaded.<<M aA>>s', 'loaded'),
+  [FETCH_ALL_<<Model constant>>S_SUCCESS]: (state, action) => flow(
+    set('entities.<<Model camel>>s', action.response.entities.<<Model camel>>s || {}),
+    set('loaded.<<Model camel>>s', 'loaded'),
   )(state),
-  [FETCH_ALL_<<M A_A>>S_FAILURE]: (state) => flow(
-    set('loaded.<<M aA>>s', 'error'),
+  [FETCH_ALL_<<Model constant>>S_FAILURE]: (state) => flow(
+    set('loaded.<<Model camel>>s', 'error'),
   )(state),
-  [FETCH_<<M A_A>>_SUCCESS]: (state, action) => flow(
-    set('entities.<<M aA>>s', action.response.entities.<<M aA>>s),
+  [FETCH_<<Model constant>>_SUCCESS]: (state, action) => flow(
+    set('entities.<<Model camel>>s', action.response.entities.<<Model camel>>s),
   )(state),
-  [CREATE_<<M A_A>>_SUCCESS]: (state, action) => flow(
-    set('entities.<<M aA>>s', {
-      ...state.entities.<<M aA>>s,
-      ...action.response.entities.<<M aA>>s,
+  [CREATE_<<Model constant>>_SUCCESS]: (state, action) => flow(
+    set('entities.<<Model camel>>s', {
+      ...state.entities.<<Model camel>>s,
+      ...action.response.entities.<<Model camel>>s,
     }),
   )(state),
-  [DELETE_<<M A_A>>_SUCCESS]: (state, action) => flow(
-    set('entities.<<M aA>>s', omit(state.entities.<<M aA>>s, action.id)),
+  [DELETE_<<Model constant>>_SUCCESS]: (state, action) => flow(
+    set('entities.<<Model camel>>s', omit(state.entities.<<Model camel>>s, action.id)),
   )(state),
 };
  
-export function load<<M AA>> (id) {
+export function load<<Model pascal>> (id) {
   return {
     id,
     [CALL_API]: {
       types: [
-        FETCH_<<M A_A>>_REQUEST,
-        FETCH_<<M A_A>>_SUCCESS,
-        FETCH_<<M A_A>>_FAILURE,
+        FETCH_<<Model constant>>_REQUEST,
+        FETCH_<<Model constant>>_SUCCESS,
+        FETCH_<<Model constant>>_FAILURE,
       ],
       method: 'GET',
-      endpoint: `/admin/<<M a-a>>/${id}`,
-      schema: Schemas.<<M A_A>>,
+      endpoint: `/admin/<<Model kebab>>/${id}`,
+      schema: Schemas.<<Model constant>>,
     },
   };
 }
  
-export function load<<M AA>>s () {
+export function load<<Model pascal>>s () {
   return {
     [CALL_API]: {
       types: [
-        FETCH_ALL_<<M A_A>>S_REQUEST,
-        FETCH_ALL_<<M A_A>>S_SUCCESS,
-        FETCH_ALL_<<M A_A>>S_FAILURE,
+        FETCH_ALL_<<Model constant>>S_REQUEST,
+        FETCH_ALL_<<Model constant>>S_SUCCESS,
+        FETCH_ALL_<<Model constant>>S_FAILURE,
       ],
       method: 'GET',
-      endpoint: '/admin/<<M a-a>>?_page=0&_limit=10',
-      schema: Schemas.<<M A_A>>_ARRAY,
-      // successMessage: '<<M A>>s fetched successfully',
+      endpoint: '/admin/<<Model kebab>>?_page=0&_limit=10',
+      schema: Schemas.<<Model constant>>_ARRAY,
+      // successMessage: '<<Model capital>>s fetched successfully',
     },
   };
 }
  
-export function create<<M AA>> (<<M aA>>) {
+export function create<<Model pascal>> (<<Model camel>>) {
   return {
     [CALL_API]: {
       types: [
-        CREATE_<<M A_A>>_REQUEST,
-        CREATE_<<M A_A>>_SUCCESS,
-        CREATE_<<M A_A>>_FAILURE,
+        CREATE_<<Model constant>>_REQUEST,
+        CREATE_<<Model constant>>_SUCCESS,
+        CREATE_<<Model constant>>_FAILURE,
       ],
       method: 'POST',
-      endpoint: '/admin/<<M a-a>>',
-      schema: Schemas.<<M A_A>>,
-      body: <<M aA>>,
-      successMessage: '<<M A>>s created successfully',
+      endpoint: '/admin/<<Model kebab>>',
+      schema: Schemas.<<Model constant>>,
+      body: <<Model camel>>,
+      successMessage: '<<Model capital>>s created successfully',
     },
   };
 }
  
-export function update<<M AA>> (<<M aA>>) {
+export function update<<Model pascal>> (<<Model camel>>) {
   return {
     [CALL_API]: {
       types: [
-        UPDATE_<<M A_A>>_REQUEST,
-        UPDATE_<<M A_A>>_SUCCESS,
-        UPDATE_<<M A_A>>_FAILURE,
+        UPDATE_<<Model constant>>_REQUEST,
+        UPDATE_<<Model constant>>_SUCCESS,
+        UPDATE_<<Model constant>>_FAILURE,
       ],
       method: 'PATCH',
-      endpoint: `/admin/<<M a-a>>/${<<M aA>>.<<P R>>}`,
+      endpoint: `/admin/<<Model kebab>>/${<<Model camel>>.<<PrimaryField raw>>}`,
       body: {
-        <<@ F /hd/pr/in f>>
-        <<f a_a>>: <<M aA>>.<<f a_a>>,
-        <<@>>
+        <<for Fields not hidden and not primary and not internal f>>
+        <<f snake>>: <<Model camel>>.<<f snake>>,
+        <<endfor>>
       },
-      successMessage: '<<M A>>s updated successfully',
+      successMessage: '<<Model capital>>s updated successfully',
       successNext: [
-        () => load<<M AA>>(<<M aA>>.<<P R>>),
+        () => load<<Model pascal>>(<<Model camel>>.<<PrimaryField raw>>),
       ],
     },
   };
 }
  
-export function delete<<M AA>> (id) {
+export function delete<<Model pascal>> (id) {
   return {
     id,
     [CALL_API]: {
       types: [
-        DELETE_<<M A_A>>_REQUEST,
-        DELETE_<<M A_A>>_SUCCESS,
-        DELETE_<<M A_A>>_FAILURE,
+        DELETE_<<Model constant>>_REQUEST,
+        DELETE_<<Model constant>>_SUCCESS,
+        DELETE_<<Model constant>>_FAILURE,
       ],
       method: 'DELETE',
-      endpoint: `/admin/<<M a-a>>/${id}`,
-      successMessage: '<<M A>>s deleted successfully',
+      endpoint: `/admin/<<Model kebab>>/${id}`,
+      successMessage: '<<Model capital>>s deleted successfully',
     },
   };
 }

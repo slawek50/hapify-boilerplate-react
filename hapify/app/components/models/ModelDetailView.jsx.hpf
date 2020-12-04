@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-<<? F tE/hd/pr>>
+<<if Fields entity and not hidden and not primary>>
 import { connect } from 'react-redux';
-<<?>>
-import { capitalize<<? F tE/hd/pr>>, get<<?>><<? F ml/hd>>, map<<?>> } from 'lodash';
-<<? F tD/hd/pr>>
+<<endif>>
+import { capitalize<<if Fields entity and not hidden and not primary>>, get<<endif>><<if Fields multiple and not hidden>>, map<<endif>> } from 'lodash';
+<<if Fields datetime and not hidden and not primary>>
 import moment from 'moment';
-<<?>>
+<<endif>>
 import { NavLink } from 'react-router-dom';
 import Modal from 'antd/lib/modal';
 import Button from 'antd/lib/button';
@@ -14,25 +14,25 @@ import { DeleteOutlined } from '@ant-design/icons';
  
 <<= getImportConstants() >>
  
-const <<M AA>>DetailView = ({
-  <<M aA>> = {}, baseUrl, onClickDelete<<@ F tE/hd/em f>>, <<f.model aA>>s<<@>>,
+const <<Model pascal>>DetailView = ({
+  <<Model camel>> = {}, baseUrl, onClickDelete<<for Fields entity and not hidden and not embedded f>>, <<f.model camel>>s<<endfor>>,
 }) => (
   <div>
-    <<@ F /hd f>>
+    <<for Fields not hidden f>>
     <div>
-      <<f A>>:&nbsp;
+      <<f capital>>:&nbsp;
       <<= renderProp(f) >>
     </div>
-    <<@>>
+    <<endfor>>
  
     <div className="btn-group right">
-      <NavLink to={`${baseUrl}/${<<M aA>>.<<P R>>}/edit`}>
+      <NavLink to={`${baseUrl}/${<<Model camel>>.<<PrimaryField raw>>}/edit`}>
         <Button>Modifier</Button>
       </NavLink>
  
       {onClickDelete && (
         <Button onClick={() => Modal.confirm({
-          title: 'Voulez-vous vraiment effacer le <<M A>> ?',
+          title: 'Voulez-vous vraiment effacer le <<Model capital>> ?',
           icon: <DeleteOutlined />,
           okText: 'Oui',
           okType: 'danger',
@@ -47,30 +47,30 @@ const <<M AA>>DetailView = ({
   </div>
 );
  
-<<M AA>>DetailView.propTypes = {
-  <<M aA>>: PropTypes.shape({
-    <<@ F /hd f>>
-    <<f a_a>>: PropTypes.<<= getPropsType(f) >><<? f /nu>>.isRequired<<?>>,
-    <<@>>
+<<Model pascal>>DetailView.propTypes = {
+  <<Model camel>>: PropTypes.shape({
+    <<for Fields not hidden f>>
+    <<f snake>>: PropTypes.<<= getPropsType(f) >><<if f not nullable>>.isRequired<<endif>>,
+    <<endfor>>
   }).isRequired,
-  <<? F tE/hd/pr>>
+  <<if Fields entity and not hidden and not primary>>
  
-  <<@ F tE/hd/em f>>
-  <<f.model aA>>s: PropTypes.objectOf(PropTypes.shape()),
-  <<@>>
-  <<?>>
+  <<for Fields entity and not hidden and not embedded f>>
+  <<f.model camel>>s: PropTypes.objectOf(PropTypes.shape()),
+  <<endfor>>
+  <<endif>>
  
   baseUrl: PropTypes.string.isRequired,
   onClickDelete: PropTypes.func,
 };
  
-export default <<? F tE>>connect(
+export default <<if Fields entity>>connect(
   (state) => ({
-    <<@ F tE/hd/em f>>
-    <<f.model aA>>s: state.data.entities.<<f.model aA>>s,
-    <<@>>
+    <<for Fields entity and not hidden and not embedded f>>
+    <<f.model camel>>s: state.data.entities.<<f.model camel>>s,
+    <<endfor>>
   }),
-)<<?>>(<<M AA>>DetailView);
+)<<endif>>(<<Model pascal>>DetailView);
 
 <<<
 function hasType(type, subtype) {
@@ -118,20 +118,20 @@ function renderProp(field) {
         } else if (field.type === 'datetime') {
             render = `(val) => moment(val).format(DATE_FORMAT)`;
         }
-        return `{map(<<M aA>>.${field.names.snake}, ${render}).join(', ')}`;
+        return `{map(<<Model camel>>.${field.names.snake}, ${render}).join(', ')}`;
     }
     
     if (field.subtype === 'image') {
-        return `<img src={\`\${UPLOADS_URL}/\${<<M aA>>.${field.names.snake}}\`} alt={<<M aA>>.${field.names.snake}} />`;
+        return `<img src={\`\${UPLOADS_URL}/\${<<Model camel>>.${field.names.snake}}\`} alt={<<Model camel>>.${field.names.snake}} />`;
     } else if (field.type === 'file') {
-        return `<a href={\`\${UPLOADS_URL}/\${<<M aA>>.${field.names.snake}}\`} target="_blank" rel="noopener noreferrer">{<<M aA>>.${field.names.snake}}</a>`;
+        return `<a href={\`\${UPLOADS_URL}/\${<<Model camel>>.${field.names.snake}}\`} target="_blank" rel="noopener noreferrer">{<<Model camel>>.${field.names.snake}}</a>`;
     } else if (field.type === 'entity' && !field.embedded) {
-        return `{get(${field.model.names.camel}s, \`\${<<M aA>>.${field.names.snake}}.${field.model.fields.lb[0] ? field.model.fields.lb[0].names.snake : field.model.fields.primary.names.raw}\`)}`;
+        return `{get(${field.model.names.camel}s, \`\${<<Model camel>>.${field.names.snake}}.${field.model.fields.lb[0] ? field.model.fields.lb[0].names.snake : field.model.fields.primary.names.raw}\`)}`;
     } else if (field.type === 'entity' && field.embedded) {
-        return `{<<M aA>>.${field.names.snake}.${field.model.fields.lb[0] ? field.model.fields.lb[0].names.snake : field.model.fields.primary.names.raw}}`;
+        return `{<<Model camel>>.${field.names.snake}.${field.model.fields.lb[0] ? field.model.fields.lb[0].names.snake : field.model.fields.primary.names.raw}}`;
     } else if (field.type === 'datetime') {
-        return `{moment(<<M aA>>.${field.names.snake}).format(DATE_FORMAT)}`;
+        return `{moment(<<Model camel>>.${field.names.snake}).format(DATE_FORMAT)}`;
     }
-    return `{capitalize(<<M aA>>.${field.names.snake})}`;
+    return `{capitalize(<<Model camel>>.${field.names.snake})}`;
 }
 >>>

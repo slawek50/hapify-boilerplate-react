@@ -1,27 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-<<? F tE+tF/hd/pr/in>>
+<<if Fields entity or file and not hidden and not primary and not internal>>
 import { connect } from 'react-redux';
-<<?>>
+<<endif>>
 import { NavLink } from 'react-router-dom';
 <<= getImportLodash() >>
 <<= getImportFieldComponents() >>
-<<? F tF/hd/pr/in>>
+<<if Fields file and not hidden and not primary and not internal>>
 import { InboxOutlined } from '@ant-design/icons';
-<<?>>
+<<endif>>
  
 import getRules from '../../utils/RulesValidator';
  
-<<? F ml/tE/tF>>
+<<if Fields multiple and not entity and not file>>
 import { ArrayFieldAntd } from '../elements';
  
-<<?>>
-<<? F tF/hd/pr/in>>
+<<endif>>
+<<if Fields file and not hidden and not primary and not internal>>
 import { UPLOADS_URL } from '../../configs/Constants';
  
-<<?>>
-const <<M AA>>EditForm = ({
-  onSubmit, initialValues, baseUrl,<<@ F tE/hd/pr/in f>> <<f.model aA>>s,<<@>>
+<<endif>>
+const <<Model pascal>>EditForm = ({
+  onSubmit, initialValues, baseUrl,<<for Fields entity and not hidden and not primary and not internal f>> <<f.model camel>>s,<<endfor>>
 }) => (
   <Form
     onFinish={(v) => onSubmit({ ...initialValues, ...v })}
@@ -30,10 +30,10 @@ const <<M AA>>EditForm = ({
     hideRequiredMark
   >
     <div>
-      <<@ F /hd/pr/in f>>
+      <<for Fields not hidden and not primary and not internal f>>
       <<= getComponent(f) >>
  
-      <<@>>
+      <<endfor>>
     </div>
  
     <div className="btn-group right">
@@ -46,30 +46,30 @@ const <<M AA>>EditForm = ({
   </Form>
 );
  
-<<M AA>>EditForm.propTypes = {
+<<Model pascal>>EditForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   initialValues: PropTypes.shape().isRequired,
   baseUrl: PropTypes.string.isRequired,
-  <<? F tE/hd/pr/in>>
+  <<if Fields entity and not hidden and not primary and not internal>>
  
-  <<@ F tE/hd/pr/in f>>
-  <<f.model aA>>s: PropTypes.objectOf(PropTypes.shape()),
-  <<@>>
-  <<?>>
+  <<for Fields entity and not hidden and not primary and not internal f>>
+  <<f.model camel>>s: PropTypes.objectOf(PropTypes.shape()),
+  <<endfor>>
+  <<endif>>
 };
  
-export default <<? F tE+tF/hd/pr/in>>(connect(
-<<? F tE>>
+export default <<if Fields entity or file and not hidden and not primary and not internal>>(connect(
+<<if Fields entity>>
   (state) => ({
-    <<@ F tE/hd/pr/in f>>
-    <<f.model aA>>s: state.data.entities.<<f.model aA>>s,
-    <<@>>
+    <<for Fields entity and not hidden and not primary and not internal f>>
+    <<f.model camel>>s: state.data.entities.<<f.model camel>>s,
+    <<endfor>>
   }),
-<<??>>
+<<else>>
   null,
-<<?>>
-)(<<M AA>>EditForm));
-<<??>>(<<M AA>>EditForm);<<?>>
+<<endif>>
+)(<<Model pascal>>EditForm));
+<<else>>(<<Model pascal>>EditForm);<<endif>>
 
 <<<
 function hasType(type, subtype) {

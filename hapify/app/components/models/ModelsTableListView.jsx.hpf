@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, NavLink } from 'react-router-dom';
-<<? F tE/hd/pr>>
+<<if Fields entity and not hidden and not primary>>
 import { connect } from 'react-redux';
-<<?>>
-import { capitalize<<? F tE/hd/pr>>, get<<?>><<? F ml/hd>>, map<<?>> } from 'lodash';
-<<? F tD/hd/pr>>
+<<endif>>
+import { capitalize<<if Fields entity and not hidden and not primary>>, get<<endif>><<if Fields multiple and not hidden>>, map<<endif>> } from 'lodash';
+<<if Fields datetime and not hidden and not primary>>
 import moment from 'moment';
-<<?>>
+<<endif>>
 import Modal from 'antd/lib/modal';
 import Button from 'antd/lib/button';
 import Tooltip from 'antd/lib/tooltip';
@@ -17,53 +17,53 @@ import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
  
 import TableListView from '../shared/TableListView';
  
-const <<M AA>>sTableListView = ({
-  history: { push }, <<M aA>>s, baseUrl, onClickDelete<<@ D /em d>>, <<d aA>>s<<@>>,
+const <<Model pascal>>sTableListView = ({
+  history: { push }, <<Model camel>>s, baseUrl, onClickDelete<<for Dependencies not embedded d>>, <<d camel>>s<<endfor>>,
 }) => (
   <TableListView
-    title="Table de <<M A>>s"
+    title="Table de <<Model capital>>s"
     className=""
-    data={<<M aA>>s}
+    data={<<Model camel>>s}
     cols={{
-    <<@ F /hd f>>
-      <<f a_a>>: {
-        label: '<<f A>>',
+    <<for Fields not hidden f>>
+      <<f snake>>: {
+        label: '<<f capital>>',
         className: 'col_sm-12',
         render: <<= renderProp(f) >>,
       },
-    <<@>>
+    <<endfor>>
     }}
     <<= getSearch(root.fields)>>
-    searchLabel="Rechercher un <<M A>>"
+    searchLabel="Rechercher un <<Model capital>>"
     <<= getSort(root.fields)>>
     buttons={(
       <div>
         <NavLink to={`${baseUrl}/new`}>
-          <Button>Créer un <<M A>></Button>
+          <Button>Créer un <<Model capital>></Button>
         </NavLink>
       </div>
     )}
-    rowButtons={(<<M aA>>) => (
+    rowButtons={(<<Model camel>>) => (
       <div className="col-2_sm-12">
         <div className="td td-buttons">
-          {<<M aA>> && (
-            <NavLink to={`${baseUrl}/${<<M aA>>.<<P R>>}/edit`}>
+          {<<Model camel>> && (
+            <NavLink to={`${baseUrl}/${<<Model camel>>.<<PrimaryField raw>>}/edit`}>
               <Tooltip title="Modifier">
                 <Button icon={<EditOutlined />} />
               </Tooltip>
             </NavLink>
           )}
-          {<<M aA>> && (
+          {<<Model camel>> && (
             <Tooltip title="Supprimer">
               <Button
                 icon={<DeleteOutlined />}
                 onClick={() => Modal.confirm({
-                  title: 'Voulez-vous vraiment effacer le <<M A>> ?',
+                  title: 'Voulez-vous vraiment effacer le <<Model capital>> ?',
                   icon: <DeleteOutlined />,
                   okText: 'Oui',
                   okType: 'danger',
                   cancelText: 'Non',
-                  onOk: () => onClickDelete(<<M aA>>.<<P R>>),
+                  onOk: () => onClickDelete(<<Model camel>>.<<PrimaryField raw>>),
                 })}
               />
             </Tooltip>
@@ -71,22 +71,22 @@ const <<M AA>>sTableListView = ({
         </div>
       </div>
     )}
-    onClickRow={(<<M aA>>) => push(`${baseUrl}/${<<M aA>>.<<P R>>}`)}
+    onClickRow={(<<Model camel>>) => push(`${baseUrl}/${<<Model camel>>.<<PrimaryField raw>>}`)}
   />
 );
  
-<<M AA>>sTableListView.propTypes = {
-  <<M aA>>s: PropTypes.objectOf(PropTypes.shape({
-    <<@ F /hd f>>
-    <<f a_a>>: PropTypes.<<= getPropsType(f) >><<? f /nu>>.isRequired<<?>>,
-    <<@>>
+<<Model pascal>>sTableListView.propTypes = {
+  <<Model camel>>s: PropTypes.objectOf(PropTypes.shape({
+    <<for Fields not hidden f>>
+    <<f snake>>: PropTypes.<<= getPropsType(f) >><<if f not nullable>>.isRequired<<endif>>,
+    <<endfor>>
   })).isRequired,
-  <<? F tE/hd/pr>>
+  <<if Fields entity and not hidden and not primary>>
  
-  <<@ D /em d>>
-  <<d aA>>s: PropTypes.objectOf(PropTypes.shape()),
-  <<@>>
-  <<?>>
+  <<for Dependencies not embedded d>>
+  <<d camel>>s: PropTypes.objectOf(PropTypes.shape()),
+  <<endfor>>
+  <<endif>>
  
   baseUrl: PropTypes.string.isRequired,
   onClickDelete: PropTypes.func,
@@ -96,13 +96,13 @@ const <<M AA>>sTableListView = ({
   }).isRequired,
 };
  
-export default <<? F tE>>connect(
+export default <<if Fields entity>>connect(
   (state) => ({
-    <<@ D /em d>>
-    <<d aA>>s: state.data.entities.<<d aA>>s,
-    <<@>>
+    <<for Dependencies not embedded d>>
+    <<d camel>>s: state.data.entities.<<d camel>>s,
+    <<endfor>>
   }),
-)(<<?>>withRouter(<<M AA>>sTableListView)<<? F tE>>)<<?>>;
+)(<<endif>>withRouter(<<Model pascal>>sTableListView)<<if Fields entity>>)<<endif>>;
 
 <<<
 function hasType(type, subtype) {

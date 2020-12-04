@@ -9,9 +9,9 @@ import Home from './home/Home';
  
 import MyAccountContainer from './accounts/MyAccountContainer';
  
-<<@ M /pMHd m>>
-import <<m AA>>sContainer from './<<m aA>>s/<<m AA>>sContainer';
-<<@>>
+<<for Models not mainlyHidden m>>
+import <<m pascal>>sContainer from './<<m camel>>s/<<m pascal>>sContainer';
+<<endfor>>
  
 function requireAuthentication (Component) {
   return () => (
@@ -30,9 +30,9 @@ const Router = () => (
       <Route exact path="/user" render={requireAuthentication(Home)} />
       <Route exact path="/user/account" render={requireAuthentication(MyAccountContainer)} />
  
-      <<@ M /pMHd m>>
-      <Route path="/admin/<<m aA>>s" render={requireAuthentication(<<m AA>>sContainer)} />
-      <<@>>
+      <<for Models not mainlyHidden m>>
+      <Route path="/admin/<<m camel>>s" render={requireAuthentication(<<m pascal>>sContainer)} />
+      <<endfor>>
  
       <Route path="*" render={requireAuthentication(PageNotFound)} />
     </Switch>

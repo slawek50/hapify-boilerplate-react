@@ -59,19 +59,19 @@ const Header = ({
                   <span>Paramètres</span>
                 </NavLink>
               </li>
-              <<@ M /pMHd m>>
+              <<for Models not mainlyHidden m>>
               <li>
                 <NavLink
-                  to="/admin/<<m aA>>s/table"
+                  to="/admin/<<m camel>>s/table"
                   onClick={menuIsOpen === true ? () => setConf('menuIsOpen', false) : null}
                   exact
                   activeClassName="active"
                 >
                   <SelectOutlined />
-                  <span><<m A>></span>
+                  <span><<m capital>></span>
                 </NavLink>
               </li>
-              <<@>>
+              <<endfor>>
             </ul>
           )}
           <div className="user-block">

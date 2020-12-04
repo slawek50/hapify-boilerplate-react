@@ -22,9 +22,9 @@ const storageEngine = storageFilter(createIndexedDBEngine('react-starter-webapp'
   ['data', 'entities', 'accounts'],
   ['data', 'entities', 'options'],
  
-  <<@ M /pMHd m>>
-  ['data', 'entities', '<<m aA>>s'],
-  <<@>>
+  <<for Models not mainlyHidden m>>
+  ['data', 'entities', '<<m camel>>s'],
+  <<endfor>>
 ]);
  
 const finalCreateStore = composeWithDevTools(compose(

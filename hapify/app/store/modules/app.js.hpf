@@ -5,15 +5,15 @@ import { uploadsActionsHandlers } from './uploads';
 import { socketActionsHandlers } from './socket';
 import { globalsActionsHandlers } from './globals';
  
-<<@ M /pMHd m>>
-import { <<m aA>>sActionsHandlers } from './entities/<<m aA>>s';
-<<@>>
+<<for Models not mainlyHidden m>>
+import { <<m camel>>sActionsHandlers } from './entities/<<m camel>>s';
+<<endfor>>
  
 const actionsHandlers = {
  
-  <<@ M /pMHd m>>
-  ...<<m aA>>sActionsHandlers,
-  <<@>>
+  <<for Models not mainlyHidden m>>
+  ...<<m camel>>sActionsHandlers,
+  <<endfor>>
  
   ...optionsActionsHandlers,
   ...uploadsActionsHandlers,

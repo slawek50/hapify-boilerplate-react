@@ -2,17 +2,17 @@ export default {
   entities: {
     options: {},
  
-    <<@ M /pMHd m>>
-    <<m aA>>s: {},
-    <<@>>
+    <<for Models not mainlyHidden m>>
+    <<m camel>>s: {},
+    <<endfor>>
   },
   loaded: {
     appstorage: '',
     options: '',
  
-    <<@ M /pMHd m>>
-    <<m aA>>s: '',
-    <<@>>
+    <<for Models not mainlyHidden m>>
+    <<m camel>>s: '',
+    <<endfor>>
   },
   filters: {
     shared: {
